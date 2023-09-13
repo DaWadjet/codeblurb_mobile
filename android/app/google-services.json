@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757505501074",
+    "project_id": "codeblurb-492f1",
+    "storage_bucket": "codeblurb-492f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757505501074:android:afcd3880857172bec5434b",
+        "android_client_info": {
+          "package_name": "com.example.codeblurb_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1o9jtHCIdskN3Jj0yHWFZl3tDhZZOujY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
