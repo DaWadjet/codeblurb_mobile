@@ -31,7 +31,7 @@ Future<void> main() async {
     ProviderScope(
       overrides: [
         remoteConfigProvider.overrideWithValue(remoteConfig),
-        sharedPrefsProfider.overrideWithValue(sharedPrefs),
+        sharedPrefsProvider.overrideWithValue(sharedPrefs),
       ],
       observers: const [if (!kReleaseMode) Logger()],
       child: const LocalizationProviderWidget(

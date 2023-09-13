@@ -5,5 +5,5 @@ import 'package:shared_preferences/shared_preferences.dart';
 final remoteConfigProvider =
     Provider<FirebaseRemoteConfig>((_) => throw UnimplementedError());
 
-final sharedPrefsProfider =
+final sharedPrefsProvider =
     Provider<SharedPreferences>((_) => throw UnimplementedError());
