@@ -4,7 +4,6 @@ part 'code_solution_request.g.dart';
 
 @JsonSerializable(createFactory: false)
 class CodeSolutionRequest {
-
   CodeSolutionRequest(this.code);
   final String code;
 

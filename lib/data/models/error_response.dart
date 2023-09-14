@@ -4,7 +4,6 @@ part 'error_response.g.dart';
 
 @JsonSerializable(createToJson: false)
 class ErrorResponse {
-
   ErrorResponse(this.errorMessage);
 
   factory ErrorResponse.fromJson(Map<String, dynamic> json) =>

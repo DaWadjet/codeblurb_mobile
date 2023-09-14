@@ -12,8 +12,9 @@ class ShoppingApi {
 
   final Dio _dio;
 
-  Future<Response<Map<String, dynamic>>> addItem(
-      {required int shoppingCartItemId,}) async {
+  Future<Response<Map<String, dynamic>>> addItem({
+    required int shoppingCartItemId,
+  }) async {
     return _dio.post('/shopping/add-item/$shoppingCartItemId');
   }
 
@@ -25,8 +26,9 @@ class ShoppingApi {
     return _dio.get('/shopping/available-shopping-items');
   }
 
-  Future<Response<Map<String, dynamic>>> removeItemFromCart(
-      {required int shoppingCartItemId,}) async {
+  Future<Response<Map<String, dynamic>>> removeItemFromCart({
+    required int shoppingCartItemId,
+  }) async {
     return _dio.delete('/shopping/delete-item/$shoppingCartItemId');
   }
 }
