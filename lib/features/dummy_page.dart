@@ -9,7 +9,7 @@ class DummyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('DummyPage'),
+        child: Text('Bonjour'),
       ),
     );
   }
