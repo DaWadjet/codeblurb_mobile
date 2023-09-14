@@ -16,12 +16,14 @@ class AuthApi {
   final Dio _dio;
 
   Future<Response<Map<String, dynamic>>> register(
-      RegisterRequest request,) async {
+    RegisterRequest request,
+  ) async {
     return _dio.post('/auth/register', data: request.toJson());
   }
 
   Future<Response<Map<String, dynamic>>> refreshToken(
-      RefreshTokenRequest request,) async {
+    RefreshTokenRequest request,
+  ) async {
     return _dio.post('/auth/refresh', data: request.toJson());
   }
 

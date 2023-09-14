@@ -4,7 +4,6 @@ part 'refresh_token_response.g.dart';
 
 @JsonSerializable(createToJson: false)
 class RefreshTokenResponse {
-
   RefreshTokenResponse(this.accessToken, this.refreshToken);
 
   factory RefreshTokenResponse.fromJson(Map<String, dynamic> json) =>

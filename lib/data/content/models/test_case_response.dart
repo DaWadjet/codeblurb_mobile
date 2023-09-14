@@ -4,7 +4,6 @@ part 'test_case_response.g.dart';
 
 @JsonSerializable()
 class TestCaseResponse {
-
   TestCaseResponse(this.input, this.expectedOutput);
 
   factory TestCaseResponse.fromJson(Map<String, dynamic> json) =>
