@@ -4,9 +4,11 @@ part 'incorrect_quiz_solution_response.g.dart';
 
 @JsonSerializable(createToJson: false)
 class IncorrectQuizSolutionResponse {
-
   IncorrectQuizSolutionResponse(
-      this.questionId, this.solutionSent, this.correctSolution,);
+    this.questionId,
+    this.solutionSent,
+    this.correctSolution,
+  );
 
   factory IncorrectQuizSolutionResponse.fromJson(Map<String, dynamic> json) =>
       _$IncorrectQuizSolutionResponseFromJson(json);

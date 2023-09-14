@@ -4,7 +4,6 @@ part 'quiz_solution_request.g.dart';
 
 @JsonSerializable(createFactory: false)
 class QuizSolutionRequest {
-
   QuizSolutionRequest(this.solutions);
   final Map<String, int> solutions;
 
