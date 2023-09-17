@@ -1,4 +1,4 @@
-package com.example.codeblurb_mobile
+package com.wadjet.codeblurb
 
 import io.flutter.embedding.android.FlutterActivity
 
