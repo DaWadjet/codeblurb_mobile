@@ -30,7 +30,7 @@ class PlatformDialog extends StatelessWidget {
               CupertinoDialogAction(
                 onPressed: () {
                   onTap?.call();
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 child: const Text('Ok'),
               ),
@@ -48,7 +48,7 @@ class PlatformDialog extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   onTap?.call();
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 child: const Text('Ok'),
               ),
