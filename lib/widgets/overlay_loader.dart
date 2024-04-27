@@ -14,7 +14,7 @@ class OverlayLoader {
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: context.appColors.white.withOpacity(0.3),
+            color: context.appColors.background.withOpacity(0.3),
           ),
           const Center(
             child: CircularProgressIndicator.adaptive(),

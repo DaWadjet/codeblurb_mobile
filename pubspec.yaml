@@ -65,7 +65,7 @@ flutter:
     - assets/images/
 
   fonts:
-    - family: Montserrat
+    - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Light.ttf
           weight: 300
