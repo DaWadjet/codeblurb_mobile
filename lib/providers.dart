@@ -11,11 +11,12 @@ import 'package:codeblurb_mobile/network/ratings/ratings_api.dart';
 import 'package:codeblurb_mobile/network/ratings/ratings_repository.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_api.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_repository.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'generated/providers.g.dart';
+part 'providers.g.dart';
 
 @Riverpod(keepAlive: true)
 FirebaseRemoteConfig remoteConfig(RemoteConfigRef ref) {
@@ -85,3 +86,7 @@ RatingsApi ratingsApi(RatingsApiRef ref) => RatingsApi(ref.watch(dioProvider));
 @Riverpod(keepAlive: true)
 RatingsRepository ratingsRepository(RatingsRepositoryRef ref) =>
     RatingsRepository(ref.watch(ratingsApiProvider));
+
+@Riverpod(keepAlive: true)
+// ignore: unsupported_provider_value
+AppRouter router(RouterRef ref) => AppRouter();

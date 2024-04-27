@@ -1,22 +1,17 @@
-import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/theme/app_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CodeblurbApp extends StatefulWidget {
+class CodeblurbApp extends ConsumerWidget {
   const CodeblurbApp({super.key});
 
   @override
-  State<CodeblurbApp> createState() => _CodeblurbAppState();
-}
-
-class _CodeblurbAppState extends State<CodeblurbApp> {
-  final _router = AppRouter();
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
     return MaterialApp.router(
-      routerConfig: _router.config(),
+      routerConfig: router.config(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

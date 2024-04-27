@@ -1,5 +1,25 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:codeblurb_mobile/pages/article_content_page.dart';
+import 'package:codeblurb_mobile/pages/change_password_page.dart';
+import 'package:codeblurb_mobile/pages/course_details_page.dart';
+import 'package:codeblurb_mobile/pages/course_ratings_page.dart';
+import 'package:codeblurb_mobile/pages/drag_and_drop_content_page.dart';
+import 'package:codeblurb_mobile/pages/explore_page.dart';
+import 'package:codeblurb_mobile/pages/fill_the_gaps_content_page.dart';
+import 'package:codeblurb_mobile/pages/home_page.dart';
+import 'package:codeblurb_mobile/pages/login_page.dart';
+import 'package:codeblurb_mobile/pages/my_courses_page.dart';
 import 'package:codeblurb_mobile/pages/profile_page.dart';
+import 'package:codeblurb_mobile/pages/purchased_course_details_page.dart';
+import 'package:codeblurb_mobile/pages/quiz_content_page.dart';
+import 'package:codeblurb_mobile/pages/quiz_content_results_page.dart';
+import 'package:codeblurb_mobile/pages/register_page.dart';
+import 'package:codeblurb_mobile/pages/request_new_password_page.dart';
+import 'package:codeblurb_mobile/pages/scratch_content_page.dart';
+import 'package:codeblurb_mobile/pages/shopping_cart_page.dart';
+import 'package:codeblurb_mobile/pages/splash_page.dart';
+import 'package:codeblurb_mobile/pages/tabs_page.dart';
+import 'package:codeblurb_mobile/pages/video_content_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -8,38 +28,22 @@ part 'app_router.gr.dart';
 )
 class AppRouter extends _$AppRouter {
   @override
-  RouteType get defaultRouteType =>
-      const RouteType.material(); //.cupertino, .adaptive ..etc
+  RouteType get defaultRouteType => const RouteType.material();
 
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: SplashRoute.page),
+        AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: RegisterRoute.page),
+        AutoRoute(page: ChangePasswordRoute.page),
         AutoRoute(
-          page: ProfileRouter.page,
-          children: [
-            AutoRoute(page: ProfileRoute.page),
-            AutoRoute(page: ChangePasswordRoute.page),
-          ],
-        ),
-        AutoRoute(
-          page: HomeRouter.page,
+          page: TabsRoute.page,
           children: [
             AutoRoute(page: HomeRoute.page),
-          ],
-        ),
-        AutoRoute(
-          page: ShoppingCartRouter.page,
-          children: [
             AutoRoute(page: ShoppingCartRoute.page),
-          ],
-        ),
-        AutoRoute(
-          page: MyCoursesRouter.page,
-          children: [
             AutoRoute(page: MyCoursesRoute.page),
+            AutoRoute(page: ProfileRoute.page),
           ],
         ),
         AutoRoute(page: ExploreRoute.page),
@@ -53,5 +57,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: FillTheGapsContentRoute.page),
         AutoRoute(page: DragAndDropContentRoute.page),
         AutoRoute(page: ArticleContentRoute.page),
+        AutoRoute(page: RequestNewPasswordRoute.page),
       ];
 }

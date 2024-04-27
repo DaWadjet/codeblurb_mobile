@@ -46,7 +46,7 @@ class ContentApi {
     );
   }
 
-  //TODO add paging params
+  //TODO: add paging params
   ApiResponse getContentBundles() async {
     return _dio.get('/content/content-bundles');
   }
