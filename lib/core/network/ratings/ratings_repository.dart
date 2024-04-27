@@ -1,11 +1,5 @@
 import 'package:codeblurb_mobile/core/network/models/rating_request.dart';
 import 'package:codeblurb_mobile/core/network/ratings/ratings_api.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final ratingsRepoProvider = Provider<RatingsRepository>(
-  (ref) => RatingsRepository(ref.watch(ratingsApiProvider)),
-  name: 'Rating Repository Provider',
-);
 
 class RatingsRepository {
   RatingsRepository(this._ratingsApi);

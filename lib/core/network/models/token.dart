@@ -1,4 +1,4 @@
-import 'package:codeblurb_mobile/data/models/token_type.dart';
+import 'package:codeblurb_mobile/core/network/models/token_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'token.g.dart';

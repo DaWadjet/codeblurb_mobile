@@ -1,5 +1,4 @@
 import 'package:codeblurb_mobile/core/app_constants.dart';
-import 'package:codeblurb_mobile/core/core_providers.dart';
 import 'package:codeblurb_mobile/core/network/auth/auth_api.dart';
 import 'package:codeblurb_mobile/core/network/models/change_password_request.dart';
 import 'package:codeblurb_mobile/core/network/models/forgot_password_request.dart';
@@ -8,16 +7,7 @@ import 'package:codeblurb_mobile/core/network/models/login_response.dart';
 import 'package:codeblurb_mobile/core/network/models/refresh_token_request.dart';
 import 'package:codeblurb_mobile/core/network/models/register_request.dart';
 import 'package:codeblurb_mobile/core/network/models/reset_password_request.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-final authRepoProvider = Provider<AuthRepository>(
-  (ref) => AuthRepository(
-    ref.watch(authApiProvider),
-    ref.watch(sharedPrefsProvider),
-  ),
-  name: 'Auth Repository Provider',
-);
 
 class AuthRepository {
   AuthRepository(this._authApi, this._sharedPreferences);

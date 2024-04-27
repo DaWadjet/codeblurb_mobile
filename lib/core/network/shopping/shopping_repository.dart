@@ -2,12 +2,6 @@ import 'package:codeblurb_mobile/core/network/models/page_shopping_item_response
 import 'package:codeblurb_mobile/core/network/models/shopping_cart_response.dart';
 import 'package:codeblurb_mobile/core/network/models/shopping_item_response.dart';
 import 'package:codeblurb_mobile/core/network/shopping/shopping_api.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final shoppingRepoProvider = Provider<ShoppingRepository>(
-  (ref) => ShoppingRepository(ref.watch(shoppingApiProvider)),
-  name: 'Shopping Repository Provider',
-);
 
 class ShoppingRepository {
   ShoppingRepository(this._shoppingApi);

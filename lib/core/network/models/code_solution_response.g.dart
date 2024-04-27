@@ -6,8 +6,9 @@ part of 'code_solution_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
-    LoginResponse(
+CodeSolutionResponse _$CodeSolutionResponseFromJson(
+        Map<String, dynamic> json) =>
+    CodeSolutionResponse(
       json['results'] as List<dynamic>,
       json['overallResult'] as String,
     );

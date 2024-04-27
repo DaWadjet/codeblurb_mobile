@@ -1,16 +1,8 @@
-import 'package:codeblurb_mobile/core/network/dio.dart';
 import 'package:codeblurb_mobile/core/types.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final shoppingApiProvider = Provider<ShoppingApi>(
-  (ref) => ShoppingApi(ref.watch(dioProvider)),
-  name: 'Shopping API Provider',
-);
 
 class ShoppingApi {
   ShoppingApi(this._dio);
-
   final Dio _dio;
 
   ApiResponse addItem({
