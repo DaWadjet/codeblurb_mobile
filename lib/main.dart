@@ -1,8 +1,8 @@
 import 'package:codeblurb_mobile/codeblurb_app.dart';
-import 'package:codeblurb_mobile/core/l10n/localization_provider.dart';
-import 'package:codeblurb_mobile/core/providers.dart';
-import 'package:codeblurb_mobile/core/utils/logger.dart';
 import 'package:codeblurb_mobile/firebase_options.dart';
+import 'package:codeblurb_mobile/l10n/localization_provider.dart';
+import 'package:codeblurb_mobile/providers.dart';
+import 'package:codeblurb_mobile/utils/logger.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
