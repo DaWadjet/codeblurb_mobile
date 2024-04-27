@@ -1,10 +1,4 @@
-import 'package:codeblurb_mobile/core/network/Progress/Progress_api.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final progressRepoProvider = Provider<ProgressRepository>(
-  (ref) => ProgressRepository(ref.watch(progressApiProvider)),
-  name: 'Progress Repository Provider',
-);
+import 'package:codeblurb_mobile/core/network/progress/progress_api.dart';
 
 class ProgressRepository {
   ProgressRepository(this._progressApi);

@@ -1,12 +1,5 @@
-import 'package:codeblurb_mobile/core/network/dio.dart';
 import 'package:codeblurb_mobile/core/types.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final progressApiProvider = Provider<ProgressApi>(
-  (ref) => ProgressApi(ref.watch(dioProvider)),
-  name: 'Progress API Provider',
-);
 
 class ProgressApi {
   ProgressApi(this._dio);

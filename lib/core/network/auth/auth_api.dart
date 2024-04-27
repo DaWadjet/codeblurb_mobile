@@ -1,4 +1,3 @@
-import 'package:codeblurb_mobile/core/network/dio.dart';
 import 'package:codeblurb_mobile/core/network/models/change_password_request.dart';
 import 'package:codeblurb_mobile/core/network/models/forgot_password_request.dart';
 import 'package:codeblurb_mobile/core/network/models/login_request.dart';
@@ -7,12 +6,6 @@ import 'package:codeblurb_mobile/core/network/models/register_request.dart';
 import 'package:codeblurb_mobile/core/network/models/reset_password_request.dart';
 import 'package:codeblurb_mobile/core/types.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final authApiProvider = Provider<AuthApi>(
-  (ref) => AuthApi(ref.watch(dioProvider)),
-  name: 'Auth API Provider',
-);
 
 class AuthApi {
   AuthApi(this._dio);
