@@ -37,6 +37,7 @@ dependencies:
   url_launcher: ^6.1.13
   flutter_markdown: ^0.6.17+2
   json_annotation: ^4.8.1
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:

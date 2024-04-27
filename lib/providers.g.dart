@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../providers.dart';
+part of 'providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -210,6 +210,20 @@ final ratingsRepositoryProvider = Provider<RatingsRepository>.internal(
 );
 
 typedef RatingsRepositoryRef = ProviderRef<RatingsRepository>;
+String _$routerHash() => r'688fced61a935965a19dc085d5c433adf4771a93';
+
+/// See also [router].
+@ProviderFor(router)
+final routerProvider = Provider<AppRouter>.internal(
+  router,
+  name: r'routerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef RouterRef = ProviderRef<AppRouter>;
 String _$errorHash() => r'c222cd1656587725547dda246bd67c3b081a1e73';
 
 /// See also [Error].

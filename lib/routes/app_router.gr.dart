@@ -63,12 +63,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
-    HomeRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomeRouter(),
-      );
-    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -81,22 +75,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MyCoursesPage(),
       );
     },
-    MyCoursesRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MyCoursesRouter(),
-      );
-    },
     ProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ProfilePage(),
-      );
-    },
-    ProfileRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ProfileRouter(),
       );
     },
     PurchasedCourseDetailsRoute.name: (routeData) {
@@ -141,16 +123,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ShoppingCartPage(),
       );
     },
-    ShoppingCartRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ShoppingCartRouter(),
-      );
-    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashPage(),
+      );
+    },
+    TabsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TabsPage(),
       );
     },
     VideoContentRoute.name: (routeData) {
@@ -275,20 +257,6 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomeRouter]
-class HomeRouter extends PageRouteInfo<void> {
-  const HomeRouter({List<PageRouteInfo>? children})
-      : super(
-          HomeRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
@@ -317,20 +285,6 @@ class MyCoursesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MyCoursesRouter]
-class MyCoursesRouter extends PageRouteInfo<void> {
-  const MyCoursesRouter({List<PageRouteInfo>? children})
-      : super(
-          MyCoursesRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MyCoursesRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})
@@ -340,20 +294,6 @@ class ProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ProfileRouter]
-class ProfileRouter extends PageRouteInfo<void> {
-  const ProfileRouter({List<PageRouteInfo>? children})
-      : super(
-          ProfileRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ProfileRouter';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -457,20 +397,6 @@ class ShoppingCartRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ShoppingCartRouter]
-class ShoppingCartRouter extends PageRouteInfo<void> {
-  const ShoppingCartRouter({List<PageRouteInfo>? children})
-      : super(
-          ShoppingCartRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ShoppingCartRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [SplashPage]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -480,6 +406,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TabsPage]
+class TabsRoute extends PageRouteInfo<void> {
+  const TabsRoute({List<PageRouteInfo>? children})
+      : super(
+          TabsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TabsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
