@@ -1,5 +1,5 @@
-import 'package:codeblurb_mobile/core/routes/app_router.dart';
-import 'package:codeblurb_mobile/core/theme/app_theme.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/theme/app_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +21,8 @@ class _CodeblurbAppState extends State<CodeblurbApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: AppTheme.dark,
-      themeMode: ThemeMode.dark,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       builder: (context, child) => _Unfocus(child: child!),
     );
   }
