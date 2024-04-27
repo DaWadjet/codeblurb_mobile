@@ -1,7 +1,7 @@
 import 'package:codeblurb_mobile/core/app_constants.dart';
 import 'package:codeblurb_mobile/core/core_providers.dart';
-import 'package:codeblurb_mobile/data/auth/models/refresh_token_request.dart';
-import 'package:codeblurb_mobile/data/auth/models/refresh_token_response.dart';
+import 'package:codeblurb_mobile/core/network/models/login_response.dart';
+import 'package:codeblurb_mobile/core/network/models/refresh_token_request.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';

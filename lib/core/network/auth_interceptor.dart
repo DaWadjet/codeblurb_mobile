@@ -42,8 +42,7 @@ class AuthInterceptor extends QueuedInterceptor {
       );
       if (refreshResponse.data == null) return handler.reject(err);
 
-      final tokenResponse =
-          RefreshTokenResponse.fromJson(refreshResponse.data!);
+      final tokenResponse = LoginResponse.fromJson(refreshResponse.data!);
       await Future.wait([
         _preferences.setString(
           AppConstants.accessToken,
