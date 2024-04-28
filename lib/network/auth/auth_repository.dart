@@ -14,8 +14,8 @@ class AuthRepository {
   final AuthApi _authApi;
   final SharedPreferences _sharedPreferences;
 
-  Future<void> resetPassword({required String email}) async {
-    await _authApi.resetPassword(ResetPasswordRequest(email));
+  Future<void> resetPassword({required String password}) async {
+    await _authApi.resetPassword(ResetPasswordRequest(password));
   }
 
   Future<void> register({
@@ -30,10 +30,13 @@ class AuthRepository {
   }
 
   Future<bool> refreshToken() async {
+    final refreshToken =
+        _sharedPreferences.getString(AppConstants.refreshToken);
+    if (refreshToken == null) return false;
     try {
       final response = await _authApi.refreshToken(
         RefreshTokenRequest(
-          _sharedPreferences.getString(AppConstants.refreshToken) ?? '',
+          refreshToken,
         ),
       );
       final refreshResponse = LoginResponse.fromJson(response.data!);

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
@@ -7,8 +9,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class InputField extends HookWidget {
   const InputField({
-    required this.label,
     required this.controller,
+    this.label,
     super.key,
     this.initialValue,
     this.hint,
@@ -31,7 +33,7 @@ class InputField extends HookWidget {
     this.textCapitalization = TextCapitalization.sentences,
   });
 
-  final String label;
+  final String? label;
   final String? initialValue;
   final String? hint;
   final String? errorText;
@@ -59,51 +61,49 @@ class InputField extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: labelStyle,
-        ),
-        const SizedBox(height: 10),
+        if (label != null) ...[
+          Text(
+            label!,
+            style: labelStyle,
+          ),
+          const SizedBox(height: 10),
+        ],
         Focus(
           focusNode: focusNode,
           onFocusChange: onFocusChanged,
-          child: SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: FormBuilderTextField(
-              name: label,
-              controller: controller,
-              textInputAction: textInputAction,
-              keyboardType: keyboardType,
-              autofillHints: autofillHints,
-              readOnly: isDisabled,
-              obscureText: isObscured.value,
-              maxLines: maxLines,
-              validator: validator,
-              textCapitalization:
-                  isSecureField ? TextCapitalization.none : textCapitalization,
-              decoration: InputDecoration(
-                errorText: errorText,
-                hintText: hint,
-                hintStyle: hintStyle,
-                suffixIcon: isSecureField
-                    ? Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: IconButton(
-                          icon: isObscured.value
-                              ? Assets.images.eye
-                                  .svg(color: colors.mutedForeground)
-                              : Assets.images.eyeoff
-                                  .svg(color: colors.mutedForeground),
-                          onPressed: () => isObscured.value = !isObscured.value,
-                        ),
-                      )
-                    : null,
-              ),
-              onChanged: onChanged,
-              onSubmitted: (_) =>
-                  onSubmit != null ? onSubmit!.call() : focusNode.nextFocus(),
+          child: FormBuilderTextField(
+            name: label ?? '',
+            controller: controller,
+            textInputAction: textInputAction,
+            keyboardType: keyboardType,
+            autofillHints: autofillHints,
+            readOnly: isDisabled,
+            obscureText: isObscured.value,
+            maxLines: maxLines,
+            validator: validator,
+            textCapitalization:
+                isSecureField ? TextCapitalization.none : textCapitalization,
+            decoration: InputDecoration(
+              errorText: errorText,
+              hintText: hint,
+              hintStyle: hintStyle,
+              suffixIcon: isSecureField
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: IconButton(
+                        icon: isObscured.value
+                            ? Assets.images.eye
+                                .svg(color: colors.mutedForeground)
+                            : Assets.images.eyeoff
+                                .svg(color: colors.mutedForeground),
+                        onPressed: () => isObscured.value = !isObscured.value,
+                      ),
+                    )
+                  : null,
             ),
+            onChanged: onChanged,
+            onSubmitted: (_) =>
+                onSubmit != null ? onSubmit!.call() : focusNode.nextFocus(),
           ),
         ),
       ],

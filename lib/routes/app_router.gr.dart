@@ -64,9 +64,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const LoginPage(),
+        child: LoginPage(key: args.key),
       );
     },
     MyCoursesRoute.name: (routeData) {
@@ -100,15 +102,19 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     RegisterRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterRouteArgs>(
+          orElse: () => const RegisterRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RegisterPage(),
+        child: RegisterPage(key: args.key),
       );
     },
     RequestNewPasswordRoute.name: (routeData) {
+      final args = routeData.argsAs<RequestNewPasswordRouteArgs>(
+          orElse: () => const RequestNewPasswordRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RequestNewPasswordPage(),
+        child: RequestNewPasswordPage(key: args.key),
       );
     },
     ScratchContentRoute.name: (routeData) {
@@ -258,16 +264,30 @@ class HomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [LoginPage]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
-      : super(
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           LoginRoute.name,
+          args: LoginRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'LoginRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<LoginRouteArgs> page = PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -342,30 +362,61 @@ class QuizContentResultsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [RegisterPage]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
-      : super(
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           RegisterRoute.name,
+          args: RegisterRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'RegisterRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<RegisterRouteArgs> page =
+      PageInfo<RegisterRouteArgs>(name);
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
 /// [RequestNewPasswordPage]
-class RequestNewPasswordRoute extends PageRouteInfo<void> {
-  const RequestNewPasswordRoute({List<PageRouteInfo>? children})
-      : super(
+class RequestNewPasswordRoute
+    extends PageRouteInfo<RequestNewPasswordRouteArgs> {
+  RequestNewPasswordRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           RequestNewPasswordRoute.name,
+          args: RequestNewPasswordRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'RequestNewPasswordRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<RequestNewPasswordRouteArgs> page =
+      PageInfo<RequestNewPasswordRouteArgs>(name);
+}
+
+class RequestNewPasswordRouteArgs {
+  const RequestNewPasswordRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'RequestNewPasswordRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

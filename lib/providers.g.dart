@@ -252,5 +252,20 @@ final sessionErrorProvider = NotifierProvider<SessionError, void>.internal(
 );
 
 typedef _$SessionError = Notifier<void>;
+String _$toastNotifierHash() => r'050a75030d990403c5d8645a106b3d760362862a';
+
+/// See also [ToastNotifier].
+@ProviderFor(ToastNotifier)
+final toastNotifierProvider = NotifierProvider<ToastNotifier, String>.internal(
+  ToastNotifier.new,
+  name: r'toastNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$toastNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ToastNotifier = Notifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

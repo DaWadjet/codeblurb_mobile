@@ -4,24 +4,27 @@ import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'login_provider.g.dart';
+part 'register_provider.g.dart';
 
 @riverpod
-class LoginNotifier extends _$LoginNotifier {
+class RegisterNotifier extends _$RegisterNotifier {
   @override
   AsyncValue<bool?> build() {
     return const AsyncData(null);
   }
 
-  Future<void> login({
+  Future<void> register({
+    required String email,
     required String username,
     required String password,
   }) async {
     state = const AsyncLoading();
     try {
-      await ref
-          .read(authRepositoryProvider)
-          .login(username: username, password: password);
+      await ref.read(authRepositoryProvider).register(
+            username: username,
+            password: password,
+            email: email,
+          );
       unawaited(ref.read(routerProvider).push(const TabsRoute()));
       state = const AsyncData(false);
     } catch (e, stackTrace) {

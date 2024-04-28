@@ -42,6 +42,22 @@ class SessionError extends _$SessionError {
 }
 
 @Riverpod(keepAlive: true)
+class ToastNotifier extends _$ToastNotifier {
+  @override
+  String build() {
+    return '';
+  }
+
+  // ignore: use_setters_to_change_properties
+  void showToast(String message) {
+    state = message;
+  }
+
+  @override
+  bool updateShouldNotify(void previous, void next) => true;
+}
+
+@Riverpod(keepAlive: true)
 ShoppingApi shoppingApi(ShoppingApiRef ref) =>
     ShoppingApi(ref.watch(dioProvider));
 

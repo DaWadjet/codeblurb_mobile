@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
-import 'package:codeblurb_mobile/hooks/use_colors.dart';
-import 'package:codeblurb_mobile/pages/login/login_provider.dart';
-import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/pages/request_new_password/request_new_password_provider.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:codeblurb_mobile/widgets/form_page_wrapper.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
@@ -14,26 +12,26 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class LoginPage extends HookConsumerWidget {
-  LoginPage({super.key});
+class RequestNewPasswordPage extends HookConsumerWidget {
+  RequestNewPasswordPage({super.key});
+
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = useColors();
-    final state = ref.watch(loginNotifierProvider);
+    final state = ref.watch(requestNewPasswordNotifierProvider);
     final usernameController = useTextEditingController();
-    final passwordController = useTextEditingController();
 
     final bottomPadding = context.bottomPadding;
 
-    final onLogin = useMemoized(
+    final onSendRequest = useMemoized(
       () => () {
         if (state.isLoading) return;
         if (_formKey.currentState?.saveAndValidate() ?? false) {
-          ref.read(loginNotifierProvider.notifier).login(
+          ref
+              .read(requestNewPasswordNotifierProvider.notifier)
+              .requestPasswordResetEmail(
                 username: usernameController.text,
-                password: passwordController.text,
               );
         }
       },
@@ -48,46 +46,28 @@ class LoginPage extends HookConsumerWidget {
             padding: EdgeInsets.symmetric(vertical: 48),
             child: CodeblurbLogo(),
           ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 60),
-            child: Text(
-              'Welcome back!',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.w600,
-              ),
+          const Text(
+            'Enter your username below to receive a password reset email!',
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InputField(
-                key: const Key('input_username'),
-                controller: usernameController,
-                label: 'Username',
-                keyboardType: TextInputType.name,
-                textCapitalization: TextCapitalization.none,
-                validator: Validators.required,
-                textInputAction: TextInputAction.next,
-                autofillHints: const [
-                  AutofillHints.username,
-                ],
-              ),
-              const SizedBox(height: 16),
-              InputField(
-                key: const Key('input_password'),
-                controller: passwordController,
-                isSecureField: true,
-                label: 'Password',
-                validator: Validators.password,
-                autofillHints: const [
-                  AutofillHints.password,
-                ],
-                onSubmit: onLogin,
-              ),
-              const SizedBox(height: 16),
+          const SizedBox(height: 10),
+          InputField(
+            key: const Key('input_username'),
+            controller: usernameController,
+            hint: 'Username',
+            keyboardType: TextInputType.name,
+            textCapitalization: TextCapitalization.none,
+            validator: Validators.required,
+            onSubmit: onSendRequest,
+            autofillHints: const [
+              AutofillHints.username,
             ],
           ),
+          const SizedBox(height: 10),
           const Spacer(),
           Column(
             children: [
@@ -99,14 +79,14 @@ class LoginPage extends HookConsumerWidget {
                     horizontal: 24,
                   ),
                   child: ElevatedButton(
-                    onPressed: onLogin,
+                    onPressed: onSendRequest,
                     child: state.isLoading
                         ? const Loader(
                             size: 32,
                             withPrimaryColor: true,
                           )
                         : const Text(
-                            'Login',
+                            'Send Reset Email',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -125,24 +105,13 @@ class LoginPage extends HookConsumerWidget {
                   ),
                   child: OutlinedButton(
                     child: const Text(
-                      "Don't have an account?",
+                      'Back',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onPressed: () => context.router.push(RegisterRoute()),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () => context.router.push(RequestNewPasswordRoute()),
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                    color: colors.mutedForeground,
-                    decoration: TextDecoration.underline,
+                    onPressed: () => context.router.maybePop(),
                   ),
                 ),
               ),
@@ -150,7 +119,6 @@ class LoginPage extends HookConsumerWidget {
           ),
           SizedBox(height: bottomPadding + 20),
         ],
-        // .animate(interval: 100.ms).fadeIn(duration: 200.ms),
       ),
     );
   }

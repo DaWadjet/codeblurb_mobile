@@ -208,7 +208,7 @@ abstract class AppTheme {
           unselectedItemColor: colorPalette.mutedForeground,
         ),
         splashColor: colorPalette.accent,
-        hintColor: colorPalette.border,
+        hintColor: colorPalette.mutedForeground,
         colorScheme: ColorScheme(
           brightness: brightness,
           primary: colorPalette.primary,

@@ -17,7 +17,7 @@ class ProfileNotifier extends _$ProfileNotifier {
     try {
       unawaited(ref.read(authRepositoryProvider).logout());
     } finally {
-      unawaited(ref.read(routerProvider).push(const LoginRoute()));
+      unawaited(ref.read(routerProvider).push(LoginRoute()));
     }
   }
 
@@ -25,7 +25,7 @@ class ProfileNotifier extends _$ProfileNotifier {
     try {
       unawaited(ref.read(authRepositoryProvider).forceLogout());
     } finally {
-      unawaited(ref.read(routerProvider).push(const LoginRoute()));
+      unawaited(ref.read(routerProvider).push(LoginRoute()));
     }
   }
 }
