@@ -1,8 +1,11 @@
+import 'package:codeblurb_mobile/generated/assets.gen.dart';
+import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class InputField extends StatefulWidget {
+class InputField extends HookWidget {
   const InputField({
     required this.label,
     required this.controller,
@@ -14,17 +17,14 @@ class InputField extends StatefulWidget {
     this.onChanged,
     this.onFocusChanged,
     this.validator,
-    this.prefix,
-    this.suffixIcon,
     this.isSecureField = false,
     this.maxLines = 1,
     this.textInputAction = TextInputAction.done,
     this.keyboardType,
     this.autofillHints,
     this.hintStyle,
-    this.additionalInstructions,
-    this.cursorColor,
     this.labelStyle = const TextStyle(
+      fontSize: 16,
       fontWeight: FontWeight.w500,
     ),
     this.onSubmit,
@@ -32,7 +32,6 @@ class InputField extends StatefulWidget {
   });
 
   final String label;
-  final Color? cursorColor;
   final String? initialValue;
   final String? hint;
   final String? errorText;
@@ -42,8 +41,6 @@ class InputField extends StatefulWidget {
   final ValueChanged<bool>? onFocusChanged;
   final ValueChanged<String?>? onChanged;
   final Validator<String>? validator;
-  final Widget? prefix;
-  final Widget? suffixIcon;
   final bool isSecureField;
   final int maxLines;
   final TextInputAction textInputAction;
@@ -53,83 +50,60 @@ class InputField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final TextStyle labelStyle;
 
-  final Widget? additionalInstructions;
-
-  @override
-  State<InputField> createState() => _InputFieldState();
-}
-
-class _InputFieldState extends State<InputField> {
-  late bool _isObscured = widget.isSecureField;
-
-  void _toggleVisibility() => setState(() => _isObscured = !_isObscured);
-  final _focusNode = FocusNode();
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller;
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final focusNode = useFocusNode();
+    final colors = useColors();
+    final isObscured = useState(isSecureField);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.only(
-            left: widget.additionalInstructions != null ? 0 : 8,
-          ),
-          child: Text(
-            widget.label,
-            style: widget.labelStyle,
-          ),
+        Text(
+          label,
+          style: labelStyle,
         ),
-        widget.additionalInstructions ?? const SizedBox(),
-        const SizedBox(height: 6),
+        const SizedBox(height: 10),
         Focus(
-          focusNode: _focusNode,
-          onFocusChange: widget.onFocusChanged,
-          child: FormBuilderTextField(
-            name: widget.label,
-            controller: _controller,
-            textInputAction: widget.textInputAction,
-            keyboardType: widget.keyboardType,
-            autofillHints: widget.autofillHints,
-            readOnly: widget.isDisabled,
-            obscureText: _isObscured,
-            maxLines: widget.maxLines,
-            validator: widget.validator,
-            textCapitalization: widget.isSecureField
-                ? TextCapitalization.none
-                : widget.textCapitalization,
-            decoration: InputDecoration(
-              errorText: widget.errorText,
-              hintText: widget.hint,
-              hintStyle: widget.hintStyle,
-              prefixIcon: widget.prefix,
-              prefixIconConstraints: const BoxConstraints(maxHeight: 48),
-              suffixIcon: widget.suffixIcon,
-              suffix: widget.isSecureField
-                  ? GestureDetector(
-                      onTap: _toggleVisibility,
-                      child: Text(
-                        _isObscured ? 'show' : 'hide',
-                      ),
-                    )
-                  : null,
+          focusNode: focusNode,
+          onFocusChange: onFocusChanged,
+          child: SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: FormBuilderTextField(
+              name: label,
+              controller: controller,
+              textInputAction: textInputAction,
+              keyboardType: keyboardType,
+              autofillHints: autofillHints,
+              readOnly: isDisabled,
+              obscureText: isObscured.value,
+              maxLines: maxLines,
+              validator: validator,
+              textCapitalization:
+                  isSecureField ? TextCapitalization.none : textCapitalization,
+              decoration: InputDecoration(
+                errorText: errorText,
+                hintText: hint,
+                hintStyle: hintStyle,
+                suffixIcon: isSecureField
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: IconButton(
+                          icon: isObscured.value
+                              ? Assets.images.eye
+                                  .svg(color: colors.mutedForeground)
+                              : Assets.images.eyeoff
+                                  .svg(color: colors.mutedForeground),
+                          onPressed: () => isObscured.value = !isObscured.value,
+                        ),
+                      )
+                    : null,
+              ),
+              onChanged: onChanged,
+              onSubmitted: (_) =>
+                  onSubmit != null ? onSubmit!.call() : focusNode.nextFocus(),
             ),
-            onChanged: widget.onChanged,
-            onSubmitted: (_) => widget.onSubmit != null
-                ? widget.onSubmit!.call()
-                : _focusNode.nextFocus(),
           ),
         ),
       ],

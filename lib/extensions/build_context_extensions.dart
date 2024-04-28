@@ -7,11 +7,11 @@ extension BuildContextX on BuildContext {
   AppStyles get textStyles => Theme.of(this).extension<AppStyles>()!;
 
   double get bottomPadding {
-    final padding = MediaQuery.paddingOf(this).bottom;
+    final padding = MediaQuery.viewPaddingOf(this).bottom;
     return padding == 0 ? 12 : padding;
   }
 
-  double get topPadding => MediaQuery.paddingOf(this).top;
+  double get topPadding => MediaQuery.viewPaddingOf(this).top;
 
   Future<T?> showBottomSheet<T>({
     required Widget content,
