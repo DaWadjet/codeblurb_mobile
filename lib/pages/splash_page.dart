@@ -61,13 +61,13 @@ class SplashPage extends HookConsumerWidget {
             Assets.images.terminal.svg(
               // ignore: deprecated_member_use_from_same_package
               color: colors.primary,
-              width: 48,
-              height: 48,
+              width: 60,
+              height: 60,
             ),
             const Text(
               'CodeBlurb',
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 40,
                 letterSpacing: -0.5,
                 fontWeight: FontWeight.w600,
               ),
@@ -80,7 +80,7 @@ class SplashPage extends HookConsumerWidget {
             )
             .scale(
               duration: 800.ms,
-              begin: const Offset(0.92, 0.92),
+              begin: const Offset(0.96, 0.96),
             )
             .then()
             .fadeOut(duration: 200.ms),

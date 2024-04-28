@@ -15,7 +15,31 @@ abstract class AppTheme {
         fontFamily: FontFamily.inter,
         cardColor: colorPalette.card,
         canvasColor: colorPalette.background,
+        iconButtonTheme: IconButtonThemeData(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            padding: MaterialStateProperty.all(
+              const EdgeInsets.all(12),
+            ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return colorPalette.accent.withOpacity(0.15);
+                }
+                return colorPalette.accent.withOpacity(0.05);
+              },
+            ),
+          ),
+        ),
         inputDecorationTheme: InputDecorationTheme(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
           errorStyle: TextStyle(
             color: colorPalette.destructive,
             fontSize: 16,
