@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
-import 'package:codeblurb_mobile/hooks/use_colors.dart';
-import 'package:codeblurb_mobile/pages/login/login_provider.dart';
+import 'package:codeblurb_mobile/pages/register/register_provider.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:codeblurb_mobile/widgets/form_page_wrapper.dart';
@@ -14,31 +13,37 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class LoginPage extends HookConsumerWidget {
-  LoginPage({super.key});
+class RegisterPage extends HookConsumerWidget {
+  RegisterPage({super.key});
+
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = useColors();
-    final state = ref.watch(loginNotifierProvider);
+    final state = ref.watch(registerNotifierProvider);
+
     final usernameController = useTextEditingController();
     final passwordController = useTextEditingController();
+    final confirmPasswordController = useTextEditingController();
+    final emailController = useTextEditingController();
 
     final bottomPadding = context.bottomPadding;
 
-    final onLogin = useMemoized(
+    final onRegister = useMemoized(
       () => () {
         if (state.isLoading) return;
         if (_formKey.currentState?.saveAndValidate() ?? false) {
-          ref.read(loginNotifierProvider.notifier).login(
+          ref.read(registerNotifierProvider.notifier).register(
                 username: usernameController.text,
                 password: passwordController.text,
+                email: emailController.text,
               );
         }
       },
       [ref, state.isLoading],
     );
+
+    final passwordValue = useState('');
 
     return FormPageWrapper(
       formKey: _formKey,
@@ -47,16 +52,6 @@ class LoginPage extends HookConsumerWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 48),
             child: CodeblurbLogo(),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 60),
-            child: Text(
-              'Welcome back!',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,15 +70,43 @@ class LoginPage extends HookConsumerWidget {
               ),
               const SizedBox(height: 16),
               InputField(
+                key: const Key('input_email'),
+                controller: emailController,
+                label: 'Email Address',
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.none,
+                validator: Validators.email,
+                textInputAction: TextInputAction.next,
+                autofillHints: const [
+                  AutofillHints.email,
+                ],
+              ),
+              const SizedBox(height: 16),
+              InputField(
                 key: const Key('input_password'),
                 controller: passwordController,
                 isSecureField: true,
                 label: 'Password',
                 validator: Validators.password,
+                onChanged: (value) => passwordValue.value = value ?? '',
                 autofillHints: const [
                   AutofillHints.password,
                 ],
-                onSubmit: onLogin,
+              ),
+              const SizedBox(height: 16),
+              InputField(
+                key: const Key('input_confirm_password'),
+                controller: confirmPasswordController,
+                isSecureField: true,
+                label: 'Confirm Password',
+                textInputAction: TextInputAction.next,
+                validator: Validators.confirmPassword(
+                  passwordValue.value,
+                ),
+                autofillHints: const [
+                  AutofillHints.password,
+                ],
+                onSubmit: onRegister,
               ),
               const SizedBox(height: 16),
             ],
@@ -99,14 +122,14 @@ class LoginPage extends HookConsumerWidget {
                     horizontal: 24,
                   ),
                   child: ElevatedButton(
-                    onPressed: onLogin,
+                    onPressed: onRegister,
                     child: state.isLoading
                         ? const Loader(
                             size: 32,
                             withPrimaryColor: true,
                           )
                         : const Text(
-                            'Login',
+                            'Register',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -125,24 +148,13 @@ class LoginPage extends HookConsumerWidget {
                   ),
                   child: OutlinedButton(
                     child: const Text(
-                      "Don't have an account?",
+                      'Already a member?',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onPressed: () => context.router.push(RegisterRoute()),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () => context.router.push(RequestNewPasswordRoute()),
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                    color: colors.mutedForeground,
-                    decoration: TextDecoration.underline,
+                    onPressed: () => context.router.push(LoginRoute()),
                   ),
                 ),
               ),
@@ -150,7 +162,6 @@ class LoginPage extends HookConsumerWidget {
           ),
           SizedBox(height: bottomPadding + 20),
         ],
-        // .animate(interval: 100.ms).fadeIn(duration: 200.ms),
       ),
     );
   }
