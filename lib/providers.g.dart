@@ -224,19 +224,33 @@ final routerProvider = Provider<AppRouter>.internal(
 );
 
 typedef RouterRef = ProviderRef<AppRouter>;
-String _$errorHash() => r'c222cd1656587725547dda246bd67c3b081a1e73';
+String _$refreshTokenHash() => r'5cb2ed0bfe33efbd48766abba445e306de624907';
 
-/// See also [Error].
-@ProviderFor(Error)
-final errorProvider = NotifierProvider<Error, void>.internal(
-  Error.new,
-  name: r'errorProvider',
+/// See also [refreshToken].
+@ProviderFor(refreshToken)
+final refreshTokenProvider = AutoDisposeFutureProvider<bool>.internal(
+  refreshToken,
+  name: r'refreshTokenProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$errorHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$refreshTokenHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Error = Notifier<void>;
+typedef RefreshTokenRef = AutoDisposeFutureProviderRef<bool>;
+String _$sessionErrorHash() => r'b1dada6da232e62fef5a10e1e084d64cd04f3e2a';
+
+/// See also [SessionError].
+@ProviderFor(SessionError)
+final sessionErrorProvider = NotifierProvider<SessionError, void>.internal(
+  SessionError.new,
+  name: r'sessionErrorProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$sessionErrorHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SessionError = Notifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

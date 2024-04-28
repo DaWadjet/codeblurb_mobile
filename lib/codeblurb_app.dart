@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:codeblurb_mobile/providers.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/theme/app_theme.dart';
+import 'package:codeblurb_mobile/widgets/platform_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +14,21 @@ class CodeblurbApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    ref.listen(sessionErrorProvider, (previous, next) {
+      showDialog<void>(
+        context: context,
+        builder: (_) => PlatformDialog(
+          title: 'Session expired',
+          onTap: () async {
+            await ref.read(authRepositoryProvider).logout();
+            if (!context.mounted) return;
+            unawaited(
+              ref.read(routerProvider).replaceAll([const LoginRoute()]),
+            );
+          },
+        ),
+      );
+    });
     return MaterialApp.router(
       routerConfig: router.config(),
       debugShowCheckedModeBanner: false,
