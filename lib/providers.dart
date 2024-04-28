@@ -29,7 +29,7 @@ SharedPreferences sharedPrefs(SharedPrefsRef ref) {
 }
 
 @Riverpod(keepAlive: true)
-class Error extends _$Error {
+class SessionError extends _$SessionError {
   @override
   void build() {}
 
@@ -90,3 +90,10 @@ RatingsRepository ratingsRepository(RatingsRepositoryRef ref) =>
 @Riverpod(keepAlive: true)
 // ignore: unsupported_provider_value
 AppRouter router(RouterRef ref) => AppRouter();
+
+@riverpod
+Future<bool> refreshToken(RefreshTokenRef ref) => ref
+    .watch(
+      authRepositoryProvider,
+    )
+    .refreshToken();

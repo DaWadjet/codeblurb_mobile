@@ -21,7 +21,7 @@ Dio dio(DioRef ref) {
       if (!kReleaseMode) PrettyDioLogger(requestBody: true),
       AuthInterceptor(
         ref.watch(sharedPrefsProvider),
-        onUnauthorized: ref.read(errorProvider.notifier).onError,
+        onUnauthorized: ref.read(sessionErrorProvider.notifier).onError,
       ),
       QueuedInterceptorsWrapper(
         onError: (e, handler) {

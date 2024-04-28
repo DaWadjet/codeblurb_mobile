@@ -29,17 +29,23 @@ class AuthRepository {
     await login(username: username, password: password);
   }
 
-  Future<void> refreshToken() async {
-    final response = await _authApi.refreshToken(
-      RefreshTokenRequest(
-        _sharedPreferences.getString(AppConstants.refreshToken) ?? '',
-      ),
-    );
-    final refreshResponse = LoginResponse.fromJson(response.data!);
-    await _saveTokens(
-      access: refreshResponse.accessToken,
-      refresh: refreshResponse.refreshToken,
-    );
+  Future<bool> refreshToken() async {
+    try {
+      final response = await _authApi.refreshToken(
+        RefreshTokenRequest(
+          _sharedPreferences.getString(AppConstants.refreshToken) ?? '',
+        ),
+      );
+      final refreshResponse = LoginResponse.fromJson(response.data!);
+      await _saveTokens(
+        access: refreshResponse.accessToken,
+        refresh: refreshResponse.refreshToken,
+      );
+      return true;
+    } catch (e) {
+      await _clearTokens();
+      return false;
+    }
   }
 
   Future<void> logout() async {

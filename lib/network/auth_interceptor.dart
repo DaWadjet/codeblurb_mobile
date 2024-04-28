@@ -37,7 +37,7 @@ class AuthInterceptor extends QueuedInterceptor {
           PrettyDioLogger(requestBody: true),
         ]);
       final refreshResponse = await dio.post<Map<String, dynamic>>(
-        '${reqOptions.baseUrl}/auth/refresh/',
+        '${reqOptions.baseUrl}auth/refresh/',
         data: RefreshTokenRequest(refreshToken).toJson(),
       );
       if (refreshResponse.data == null) return handler.reject(err);
