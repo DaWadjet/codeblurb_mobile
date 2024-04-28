@@ -1,13 +1,8 @@
-import 'package:codeblurb_mobile/theme/colors/codeblurb_colors.dart';
 import 'package:codeblurb_mobile/theme/text_styles/app_styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextX on BuildContext {
-  ColorPalette get appColors => Theme.of(this).brightness == Brightness.light
-      ? LightColors()
-      : DarkColors();
-
   AppStyles get textStyles => Theme.of(this).extension<AppStyles>()!;
 
   double get bottomPadding {

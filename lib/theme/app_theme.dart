@@ -104,7 +104,36 @@ abstract class AppTheme {
     scaffoldBackgroundColor: _darkColors.background,
     dividerColor: _darkColors.border,
     disabledColor: _darkColors.muted,
-    highlightColor: _darkColors.accentForeground,
+    highlightColor: _darkColors.mutedForeground.withOpacity(0.15),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: _darkColors.background,
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      selectedLabelStyle: TextStyle(
+        color: _darkColors.primary,
+        fontSize: 12,
+        height: 2.25,
+        fontWeight: FontWeight.w500,
+      ),
+      unselectedLabelStyle: TextStyle(
+        color: _darkColors.mutedForeground,
+        fontSize: 12,
+        height: 2.25,
+        fontWeight: FontWeight.w500,
+      ),
+      showSelectedLabels: true,
+      selectedIconTheme: IconThemeData(
+        color: _darkColors.primary,
+        size: 24,
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: _darkColors.mutedForeground,
+        size: 24,
+      ),
+      showUnselectedLabels: true,
+      selectedItemColor: _darkColors.primary,
+      unselectedItemColor: _darkColors.mutedForeground,
+    ),
     splashColor: _darkColors.accent,
     hintColor: _darkColors.border,
     colorScheme: ColorScheme.dark(
