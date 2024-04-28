@@ -1,4 +1,5 @@
 import 'package:codeblurb_mobile/app_constants.dart';
+import 'package:codeblurb_mobile/network/models/error_response.dart';
 import 'package:codeblurb_mobile/network/models/login_response.dart';
 import 'package:codeblurb_mobile/network/models/refresh_token_request.dart';
 import 'package:codeblurb_mobile/providers.dart';
@@ -25,6 +26,9 @@ Dio dio(DioRef ref) {
       ),
       QueuedInterceptorsWrapper(
         onError: (e, handler) {
+          ref
+              .read(toastNotifierProvider.notifier)
+              .showToast((e.error! as ErrorResponse).errorMessage);
           FirebaseCrashlytics.instance.recordError(e.error, e.stackTrace);
           return handler.reject(e);
         },

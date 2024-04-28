@@ -12,6 +12,21 @@ abstract class AppTheme {
   ) =>
       ThemeData(
         brightness: brightness,
+        appBarTheme: AppBarTheme(
+          backgroundColor: colorPalette.background,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: colorPalette.foreground,
+          ),
+          actionsIconTheme: IconThemeData(
+            color: colorPalette.foreground,
+          ),
+          titleTextStyle: TextStyle(
+            color: colorPalette.foreground,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         fontFamily: FontFamily.inter,
         cardColor: colorPalette.card,
         canvasColor: colorPalette.background,

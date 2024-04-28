@@ -6,20 +6,29 @@ class FormPageWrapper extends StatelessWidget {
   const FormPageWrapper({
     required this.child,
     required this.formKey,
+    this.title,
     super.key,
   });
 
   final Widget child;
   final GlobalKey<FormBuilderState> formKey;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     final maxHeight = MediaQuery.of(context).size.height;
-    final topPadding = context.topPadding;
     final bottomPadding = context.bottomPadding;
+    final topPadding = context.topPadding;
 
     return Scaffold(
+      extendBodyBehindAppBar: title == null,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: title != null ? Text(title!) : const SizedBox.shrink(),
+      ),
+      extendBody: true,
       body: SafeArea(
+        top: title != null,
         child: SizedBox(
           height: double.infinity,
           child: SingleChildScrollView(
@@ -30,7 +39,9 @@ class FormPageWrapper extends StatelessWidget {
                   key: formKey,
                   child: AutofillGroup(
                     child: SizedBox(
-                      height: maxHeight - topPadding - bottomPadding,
+                      height: maxHeight -
+                          bottomPadding -
+                          (title == null ? 0 : kToolbarHeight + topPadding),
                       child: child,
                     ),
                   ),
