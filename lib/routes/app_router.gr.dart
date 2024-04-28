@@ -22,9 +22,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ChangePasswordRoute.name: (routeData) {
+      final args = routeData.argsAs<ChangePasswordRouteArgs>(
+          orElse: () => const ChangePasswordRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ChangePasswordPage(),
+        child: ChangePasswordPage(key: args.key),
       );
     },
     CourseDetailsRoute.name: (routeData) {
@@ -166,16 +168,31 @@ class ArticleContentRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ChangePasswordPage]
-class ChangePasswordRoute extends PageRouteInfo<void> {
-  const ChangePasswordRoute({List<PageRouteInfo>? children})
-      : super(
+class ChangePasswordRoute extends PageRouteInfo<ChangePasswordRouteArgs> {
+  ChangePasswordRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           ChangePasswordRoute.name,
+          args: ChangePasswordRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'ChangePasswordRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ChangePasswordRouteArgs> page =
+      PageInfo<ChangePasswordRouteArgs>(name);
+}
+
+class ChangePasswordRouteArgs {
+  const ChangePasswordRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ChangePasswordRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

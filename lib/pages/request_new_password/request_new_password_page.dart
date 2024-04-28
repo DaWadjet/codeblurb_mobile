@@ -23,6 +23,7 @@ class RequestNewPasswordPage extends HookConsumerWidget {
     final usernameController = useTextEditingController();
 
     final bottomPadding = context.bottomPadding;
+    final topPadding = context.topPadding;
 
     final onSendRequest = useMemoized(
       () => () {
@@ -42,6 +43,9 @@ class RequestNewPasswordPage extends HookConsumerWidget {
       formKey: _formKey,
       child: Column(
         children: [
+          SizedBox(
+            height: topPadding,
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 48),
             child: CodeblurbLogo(),

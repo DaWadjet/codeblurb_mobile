@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/pages/profile/profile_provider.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -31,6 +32,12 @@ class ProfilePage extends ConsumerWidget {
               ref.read(profileNotifierProvider.notifier).forceLogout();
             },
             child: const Text('forceLogout'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              context.router.push(ChangePasswordRoute());
+            },
+            child: const Text('changePassword'),
           ),
           const Center(
             child: Text('ProfilePage'),

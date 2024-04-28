@@ -54,4 +54,17 @@ abstract class Validators {
       ],
     );
   }
+
+  static Validator differentPassword(String value) {
+    return FormBuilderValidators.compose(
+      [
+        required,
+        password,
+        FormBuilderValidators.notEqual(
+          value,
+          errorText: 'New password must be different',
+        ),
+      ],
+    );
+  }
 }

@@ -28,6 +28,7 @@ class RegisterPage extends HookConsumerWidget {
     final emailController = useTextEditingController();
 
     final bottomPadding = context.bottomPadding;
+    final topPadding = context.topPadding;
 
     final onRegister = useMemoized(
       () => () {
@@ -49,6 +50,9 @@ class RegisterPage extends HookConsumerWidget {
       formKey: _formKey,
       child: Column(
         children: [
+          SizedBox(
+            height: topPadding,
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 48),
             child: CodeblurbLogo(),

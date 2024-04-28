@@ -26,6 +26,7 @@ class LoginPage extends HookConsumerWidget {
     final passwordController = useTextEditingController();
 
     final bottomPadding = context.bottomPadding;
+    final topPadding = context.topPadding;
 
     final onLogin = useMemoized(
       () => () {
@@ -44,6 +45,9 @@ class LoginPage extends HookConsumerWidget {
       formKey: _formKey,
       child: Column(
         children: [
+          SizedBox(
+            height: topPadding,
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 48),
             child: CodeblurbLogo(),
