@@ -1,4 +1,3 @@
-import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:flutter/material.dart';
 
 class OverlayLoader {
@@ -14,7 +13,7 @@ class OverlayLoader {
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: context.appColors.background.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.background.withOpacity(0.2),
           ),
           const Center(
             child: CircularProgressIndicator.adaptive(),

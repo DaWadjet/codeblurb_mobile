@@ -41,6 +41,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/eyeoff.svg
   SvgGenImage get eyeoff => const SvgGenImage('assets/images/eyeoff.svg');
 
+  /// File path: assets/images/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/images/home.svg');
+
   /// File path: assets/images/hourglass.svg
   SvgGenImage get hourglass => const SvgGenImage('assets/images/hourglass.svg');
 
@@ -49,6 +52,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/loader.svg
   SvgGenImage get loader => const SvgGenImage('assets/images/loader.svg');
+
+  /// File path: assets/images/my-courses.svg
+  SvgGenImage get myCourses =>
+      const SvgGenImage('assets/images/my-courses.svg');
 
   /// File path: assets/images/play.svg
   SvgGenImage get play => const SvgGenImage('assets/images/play.svg');
@@ -73,6 +80,9 @@ class $AssetsImagesGen {
   SvgGenImage get updatedAt =>
       const SvgGenImage('assets/images/updated-at.svg');
 
+  /// File path: assets/images/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/images/user.svg');
+
   /// File path: assets/images/users.svg
   SvgGenImage get users => const SvgGenImage('assets/images/users.svg');
 
@@ -96,9 +106,11 @@ class $AssetsImagesGen {
         code,
         eye,
         eyeoff,
+        home,
         hourglass,
         info,
         loader,
+        myCourses,
         play,
         quiz,
         send,
@@ -106,6 +118,7 @@ class $AssetsImagesGen {
         star,
         terminal,
         updatedAt,
+        user,
         users,
         video,
         wandSparkles,
