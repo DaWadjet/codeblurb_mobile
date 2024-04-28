@@ -6,148 +6,202 @@ final _lightColors = LightColors();
 final _darkColors = DarkColors();
 
 abstract class AppTheme {
-  static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    fontFamily: FontFamily.inter,
-    cardColor: _lightColors.card,
-    canvasColor: _lightColors.background,
-    inputDecorationTheme: InputDecorationTheme(
-      errorStyle: TextStyle(
-        color: _lightColors.destructive,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
-          color: _lightColors.destructive,
-          width: 2,
+  static ThemeData _generateThemeData(
+    ColorPalette colorPalette,
+    Brightness brightness,
+  ) =>
+      ThemeData(
+        brightness: brightness,
+        fontFamily: FontFamily.inter,
+        cardColor: colorPalette.card,
+        canvasColor: colorPalette.background,
+        inputDecorationTheme: InputDecorationTheme(
+          errorStyle: TextStyle(
+            color: colorPalette.destructive,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: colorPalette.destructive,
+              width: 2,
+            ),
+          ),
+          activeIndicatorBorder: BorderSide(
+            color: colorPalette.ring,
+            width: 2,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: colorPalette.ring,
+              width: 2,
+            ),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: colorPalette.border,
+              width: 1.5,
+            ),
+          ),
         ),
-      ),
-      activeIndicatorBorder: BorderSide(
-        color: _lightColors.ring,
-        width: 2,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
-          color: _lightColors.ring,
-          width: 2,
+        scaffoldBackgroundColor: colorPalette.background,
+        dividerColor: colorPalette.border,
+        disabledColor: colorPalette.muted,
+        highlightColor: colorPalette.mutedForeground.withOpacity(0.15),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            textStyle: MaterialStateProperty.all(
+              const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorPalette.mutedForeground;
+                }
+                if (states.contains(MaterialState.pressed) ||
+                    states.contains(MaterialState.hovered)) {
+                  return colorPalette.primary.withOpacity(0.9);
+                }
+                return colorPalette.primary;
+              },
+            ),
+            side: MaterialStateProperty.resolveWith<BorderSide>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return BorderSide(
+                    color: colorPalette.muted,
+                  );
+                }
+                return BorderSide(
+                  color: colorPalette.primary.withOpacity(0.9),
+                );
+              },
+            ),
+          ),
         ),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
-          color: _lightColors.border,
-          width: 1.5,
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            textStyle: MaterialStateProperty.all(
+              const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorPalette.mutedForeground;
+                }
+                if (states.contains(MaterialState.pressed) ||
+                    states.contains(MaterialState.hovered)) {
+                  return colorPalette.primary.withOpacity(0.9);
+                }
+                return colorPalette.primary;
+              },
+            ),
+          ),
         ),
-      ),
-    ),
-    scaffoldBackgroundColor: _lightColors.background,
-    dividerColor: _lightColors.border,
-    disabledColor: _lightColors.muted,
-    highlightColor: _lightColors.accentForeground,
-    splashColor: _lightColors.accent,
-    hintColor: _lightColors.border,
-    colorScheme: ColorScheme.light(
-      primary: _lightColors.primary,
-      background: _lightColors.background,
-      error: _lightColors.destructive,
-      onError: _lightColors.destructiveForeground,
-      onPrimary: _lightColors.primaryForeground,
-      onSecondary: _lightColors.secondaryForeground,
-      onBackground: _lightColors.foreground,
-      surface: _lightColors.card,
-      onSurface: _lightColors.cardForeground,
-      secondary: _lightColors.secondary,
-      outline: _lightColors.border,
-    ),
-  );
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            elevation: MaterialStateProperty.all(0),
+            textStyle: MaterialStateProperty.all(
+              const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorPalette.muted;
+                }
+                if (states.contains(MaterialState.pressed) ||
+                    states.contains(MaterialState.hovered)) {
+                  return colorPalette.primary.withOpacity(0.9);
+                }
+                return colorPalette.primary;
+              },
+            ),
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorPalette.mutedForeground;
+                }
 
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    fontFamily: FontFamily.inter,
-    cardColor: _darkColors.card,
-    canvasColor: _darkColors.background,
-    inputDecorationTheme: InputDecorationTheme(
-      errorStyle: TextStyle(
-        color: _darkColors.destructive,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
-          color: _darkColors.destructive,
-          width: 2,
+                return colorPalette.primaryForeground;
+              },
+            ),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
         ),
-      ),
-      activeIndicatorBorder: BorderSide(
-        color: _darkColors.ring,
-        width: 2,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
-          color: _darkColors.ring,
-          width: 2,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: colorPalette.background,
+          type: BottomNavigationBarType.fixed,
+          elevation: 0,
+          selectedLabelStyle: TextStyle(
+            color: colorPalette.primary,
+            fontSize: 12,
+            height: 2.25,
+            fontWeight: FontWeight.w500,
+          ),
+          unselectedLabelStyle: TextStyle(
+            color: colorPalette.mutedForeground,
+            fontSize: 12,
+            height: 2.25,
+            fontWeight: FontWeight.w500,
+          ),
+          showSelectedLabels: true,
+          selectedIconTheme: IconThemeData(
+            color: colorPalette.primary,
+            size: 24,
+          ),
+          unselectedIconTheme: IconThemeData(
+            color: colorPalette.mutedForeground,
+            size: 24,
+          ),
+          showUnselectedLabels: true,
+          selectedItemColor: colorPalette.primary,
+          unselectedItemColor: colorPalette.mutedForeground,
         ),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(
-          color: _darkColors.border,
-          width: 1.5,
+        splashColor: colorPalette.accent,
+        hintColor: colorPalette.border,
+        colorScheme: ColorScheme(
+          brightness: brightness,
+          primary: colorPalette.primary,
+          background: colorPalette.background,
+          error: colorPalette.destructive,
+          onError: colorPalette.destructiveForeground,
+          onPrimary: colorPalette.primaryForeground,
+          onSecondary: colorPalette.secondaryForeground,
+          onBackground: colorPalette.foreground,
+          surface: colorPalette.card,
+          onSurface: colorPalette.cardForeground,
+          secondary: colorPalette.secondary,
+          outline: colorPalette.border,
         ),
-      ),
-    ),
-    scaffoldBackgroundColor: _darkColors.background,
-    dividerColor: _darkColors.border,
-    disabledColor: _darkColors.muted,
-    highlightColor: _darkColors.mutedForeground.withOpacity(0.15),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: _darkColors.background,
-      type: BottomNavigationBarType.fixed,
-      elevation: 0,
-      selectedLabelStyle: TextStyle(
-        color: _darkColors.primary,
-        fontSize: 12,
-        height: 2.25,
-        fontWeight: FontWeight.w500,
-      ),
-      unselectedLabelStyle: TextStyle(
-        color: _darkColors.mutedForeground,
-        fontSize: 12,
-        height: 2.25,
-        fontWeight: FontWeight.w500,
-      ),
-      showSelectedLabels: true,
-      selectedIconTheme: IconThemeData(
-        color: _darkColors.primary,
-        size: 24,
-      ),
-      unselectedIconTheme: IconThemeData(
-        color: _darkColors.mutedForeground,
-        size: 24,
-      ),
-      showUnselectedLabels: true,
-      selectedItemColor: _darkColors.primary,
-      unselectedItemColor: _darkColors.mutedForeground,
-    ),
-    splashColor: _darkColors.accent,
-    hintColor: _darkColors.border,
-    colorScheme: ColorScheme.dark(
-      primary: _darkColors.primary,
-      background: _darkColors.background,
-      error: _darkColors.destructive,
-      onError: _darkColors.destructiveForeground,
-      onPrimary: _darkColors.primaryForeground,
-      onSecondary: _darkColors.secondaryForeground,
-      onBackground: _darkColors.foreground,
-      surface: _darkColors.card,
-      onSurface: _darkColors.cardForeground,
-      secondary: _darkColors.secondary,
-      outline: _darkColors.border,
-    ),
-  );
+      );
+
+  static ThemeData lightTheme =
+      _generateThemeData(_lightColors, Brightness.light);
+  static ThemeData darkTheme = _generateThemeData(_darkColors, Brightness.dark);
 }
