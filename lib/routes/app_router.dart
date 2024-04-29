@@ -7,6 +7,7 @@ import 'package:codeblurb_mobile/pages/drag_and_drop_content_page.dart';
 import 'package:codeblurb_mobile/pages/explore_page.dart';
 import 'package:codeblurb_mobile/pages/fill_the_gaps_content_page.dart';
 import 'package:codeblurb_mobile/pages/home_page.dart';
+import 'package:codeblurb_mobile/pages/logged_in/logged_in_page.dart';
 import 'package:codeblurb_mobile/pages/login/login_page.dart';
 import 'package:codeblurb_mobile/pages/my_courses_page.dart';
 import 'package:codeblurb_mobile/pages/profile/profile_page.dart';
@@ -37,27 +38,33 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: RegisterRoute.page),
-        AutoRoute(page: ChangePasswordRoute.page),
+        AutoRoute(page: RequestNewPasswordRoute.page),
         AutoRoute(
-          page: TabsRoute.page,
+          page: LoggedInRoute.page,
           children: [
-            AutoRoute(page: HomeRoute.page),
-            AutoRoute(page: ShoppingCartRoute.page),
-            AutoRoute(page: MyCoursesRoute.page),
-            AutoRoute(page: ProfileRoute.page),
+            AutoRoute(page: ChangePasswordRoute.page),
+            AutoRoute(
+              page: TabsRoute.page,
+              initial: true,
+              children: [
+                AutoRoute(page: HomeRoute.page),
+                AutoRoute(page: ShoppingCartRoute.page),
+                AutoRoute(page: MyCoursesRoute.page),
+                AutoRoute(page: ProfileRoute.page),
+              ],
+            ),
+            AutoRoute(page: ExploreRoute.page),
+            AutoRoute(page: CourseDetailsRoute.page),
+            AutoRoute(page: PurchasedCourseDetailsRoute.page),
+            AutoRoute(page: CourseRatingsRoute.page),
+            AutoRoute(page: VideoContentRoute.page),
+            AutoRoute(page: QuizContentRoute.page),
+            AutoRoute(page: QuizContentResultsRoute.page),
+            AutoRoute(page: ScratchContentRoute.page),
+            AutoRoute(page: FillTheGapsContentRoute.page),
+            AutoRoute(page: DragAndDropContentRoute.page),
+            AutoRoute(page: ArticleContentRoute.page),
           ],
         ),
-        AutoRoute(page: ExploreRoute.page),
-        AutoRoute(page: CourseDetailsRoute.page),
-        AutoRoute(page: PurchasedCourseDetailsRoute.page),
-        AutoRoute(page: CourseRatingsRoute.page),
-        AutoRoute(page: VideoContentRoute.page),
-        AutoRoute(page: QuizContentRoute.page),
-        AutoRoute(page: QuizContentResultsRoute.page),
-        AutoRoute(page: ScratchContentRoute.page),
-        AutoRoute(page: FillTheGapsContentRoute.page),
-        AutoRoute(page: DragAndDropContentRoute.page),
-        AutoRoute(page: ArticleContentRoute.page),
-        AutoRoute(page: RequestNewPasswordRoute.page),
       ];
 }

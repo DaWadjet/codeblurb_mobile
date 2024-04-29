@@ -25,6 +25,7 @@ class ChangePasswordNotifier extends _$ChangePasswordNotifier {
       ref
           .read(toastNotifierProvider.notifier)
           .showToast('Password changed successfully!');
+      unawaited(ref.read(routerProvider).maybePop());
       state = const AsyncData(false);
     } catch (e, stackTrace) {
       state = AsyncError(e, stackTrace);

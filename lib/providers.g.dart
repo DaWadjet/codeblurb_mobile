@@ -224,7 +224,7 @@ final routerProvider = Provider<AppRouter>.internal(
 );
 
 typedef RouterRef = ProviderRef<AppRouter>;
-String _$refreshTokenHash() => r'5cb2ed0bfe33efbd48766abba445e306de624907';
+String _$refreshTokenHash() => r'9a6315f7f6eb0a4f19fbe3f3770e1a35ebb31cca';
 
 /// See also [refreshToken].
 @ProviderFor(refreshToken)
@@ -238,6 +238,55 @@ final refreshTokenProvider = AutoDisposeFutureProvider<bool>.internal(
 );
 
 typedef RefreshTokenRef = AutoDisposeFutureProviderRef<bool>;
+String _$paymentsQueryHash() => r'16f4023e9fd012179a3e5031ae67d16b5211b77c';
+
+/// See also [paymentsQuery].
+@ProviderFor(paymentsQuery)
+final paymentsQueryProvider =
+    AutoDisposeFutureProvider<PreviousPaymentsResponse>.internal(
+  paymentsQuery,
+  name: r'paymentsQueryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$paymentsQueryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef PaymentsQueryRef
+    = AutoDisposeFutureProviderRef<PreviousPaymentsResponse>;
+String _$shoppingCartQueryHash() => r'56600c093a6025e44a802a28b508922a18c8c924';
+
+/// See also [shoppingCartQuery].
+@ProviderFor(shoppingCartQuery)
+final shoppingCartQueryProvider =
+    AutoDisposeFutureProvider<ShoppingCartResponse>.internal(
+  shoppingCartQuery,
+  name: r'shoppingCartQueryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$shoppingCartQueryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ShoppingCartQueryRef
+    = AutoDisposeFutureProviderRef<ShoppingCartResponse>;
+String _$profileQueryHash() => r'4b35ca66c6df5b3a54b3e51ce9270102ace47987';
+
+/// See also [profileQuery].
+@ProviderFor(profileQuery)
+final profileQueryProvider =
+    AutoDisposeFutureProvider<ProfileResponse>.internal(
+  profileQuery,
+  name: r'profileQueryProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$profileQueryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ProfileQueryRef = AutoDisposeFutureProviderRef<ProfileResponse>;
 String _$sessionErrorHash() => r'b1dada6da232e62fef5a10e1e084d64cd04f3e2a';
 
 /// See also [SessionError].
@@ -267,5 +316,19 @@ final toastNotifierProvider = NotifierProvider<ToastNotifier, String>.internal(
 );
 
 typedef _$ToastNotifier = Notifier<String>;
+String _$isLoggedInHash() => r'3d8d3cb590cf4eab365219924fc29da7c550d708';
+
+/// See also [IsLoggedIn].
+@ProviderFor(IsLoggedIn)
+final isLoggedInProvider = NotifierProvider<IsLoggedIn, bool>.internal(
+  IsLoggedIn.new,
+  name: r'isLoggedInProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$isLoggedInHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$IsLoggedIn = Notifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

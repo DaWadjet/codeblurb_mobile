@@ -22,7 +22,9 @@ class LoginNotifier extends _$LoginNotifier {
       await ref
           .read(authRepositoryProvider)
           .login(username: username, password: password);
-      unawaited(ref.read(routerProvider).push(const TabsRoute()));
+      ref.read(isLoggedInProvider.notifier).setLoggedIn(value: true);
+      unawaited(ref.read(routerProvider).replaceAll([const LoggedInRoute()]));
+
       state = const AsyncData(false);
     } catch (e, stackTrace) {
       state = AsyncError(e, stackTrace);
