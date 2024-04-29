@@ -8,12 +8,7 @@ import 'package:codeblurb_mobile/network/models/quiz_question_solution_request_i
 import 'package:codeblurb_mobile/network/models/quiz_solution_request.dart';
 import 'package:codeblurb_mobile/network/models/quiz_solution_response.dart';
 import 'package:codeblurb_mobile/network/models/separated_content_bundle_response.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final contentRepoProvider = Provider<ContentRepository>(
-  (ref) => ContentRepository(ref.watch(contentApiProvider)),
-  name: 'Content Repository Provider',
-);
+import 'package:codeblurb_mobile/utils/page_props.dart';
 
 class ContentRepository {
   ContentRepository(this._contentApi);
@@ -58,8 +53,11 @@ class ContentRepository {
     );
   }
 
-  Future<PagedMinimalContentBundleResponse> getContentBundles() async {
-    final response = await _contentApi.getContentBundles();
+  Future<PagedMinimalContentBundleResponse> getContentBundles(
+    PageProps props,
+  ) async {
+    final response =
+        await _contentApi.getContentBundles(props.toQueryParameters());
     return PagedMinimalContentBundleResponse.fromJson(response.data!);
   }
 

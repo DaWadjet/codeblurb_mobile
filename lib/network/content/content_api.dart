@@ -1,15 +1,8 @@
-import 'package:codeblurb_mobile/network/dio.dart';
 import 'package:codeblurb_mobile/network/models/code_quiz_solution_request.dart';
 import 'package:codeblurb_mobile/network/models/code_solution_request.dart';
 import 'package:codeblurb_mobile/network/models/quiz_solution_request.dart';
 import 'package:codeblurb_mobile/types.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final contentApiProvider = Provider<ContentApi>(
-  (ref) => ContentApi(ref.watch(dioProvider)),
-  name: 'Content API Provider',
-);
 
 class ContentApi {
   ContentApi(this._dio);
@@ -46,9 +39,13 @@ class ContentApi {
     );
   }
 
-  //TODO: add paging params
-  ApiResponse getContentBundles() async {
-    return _dio.get('/content/content-bundles');
+  ApiResponse getContentBundles(
+    Map<String, dynamic>? queryParams,
+  ) async {
+    return _dio.get(
+      '/content/content-bundles',
+      queryParameters: queryParams,
+    );
   }
 
   ApiResponse getContentBundle(int contentId) async {

@@ -123,6 +123,8 @@ class ProfilePage extends HookConsumerWidget {
                         child: Assets.images.chevronDown.svg(
                           width: 24,
                           height: 24,
+                          // ignore: deprecated_member_use_from_same_package
+                          color: colors.foreground,
                         ),
                       ),
                     ],

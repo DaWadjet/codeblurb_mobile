@@ -64,6 +64,35 @@ final shoppingRepositoryProvider = Provider<ShoppingRepository>.internal(
 );
 
 typedef ShoppingRepositoryRef = ProviderRef<ShoppingRepository>;
+String _$contentApiHash() => r'05a25b03dbffa605568d7f91c905e76b981a15d2';
+
+/// See also [contentApi].
+@ProviderFor(contentApi)
+final contentApiProvider = Provider<ContentApi>.internal(
+  contentApi,
+  name: r'contentApiProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$contentApiHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ContentApiRef = ProviderRef<ContentApi>;
+String _$contentRepositoryHash() => r'41f57f4c87de30946cca190cd2e836d29f594773';
+
+/// See also [contentRepository].
+@ProviderFor(contentRepository)
+final contentRepositoryProvider = Provider<ContentRepository>.internal(
+  contentRepository,
+  name: r'contentRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$contentRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ContentRepositoryRef = ProviderRef<ContentRepository>;
 String _$authApiHash() => r'7087a226a5585e163fede468b6633bb8068b73b9';
 
 /// See also [authApi].
@@ -270,6 +299,300 @@ final profileQueryProvider =
 );
 
 typedef ProfileQueryRef = AutoDisposeFutureProviderRef<ProfileResponse>;
+String _$availableShoppingItemsQueryHash() =>
+    r'17364f7815b68fb8658738a2d2c637907f615113';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [availableShoppingItemsQuery].
+@ProviderFor(availableShoppingItemsQuery)
+const availableShoppingItemsQueryProvider = AvailableShoppingItemsQueryFamily();
+
+/// See also [availableShoppingItemsQuery].
+class AvailableShoppingItemsQueryFamily
+    extends Family<AsyncValue<PagedShoppingItemsResponse>> {
+  /// See also [availableShoppingItemsQuery].
+  const AvailableShoppingItemsQueryFamily();
+
+  /// See also [availableShoppingItemsQuery].
+  AvailableShoppingItemsQueryProvider call({
+    PageProps? pageProps,
+  }) {
+    return AvailableShoppingItemsQueryProvider(
+      pageProps: pageProps,
+    );
+  }
+
+  @override
+  AvailableShoppingItemsQueryProvider getProviderOverride(
+    covariant AvailableShoppingItemsQueryProvider provider,
+  ) {
+    return call(
+      pageProps: provider.pageProps,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'availableShoppingItemsQueryProvider';
+}
+
+/// See also [availableShoppingItemsQuery].
+class AvailableShoppingItemsQueryProvider
+    extends AutoDisposeFutureProvider<PagedShoppingItemsResponse> {
+  /// See also [availableShoppingItemsQuery].
+  AvailableShoppingItemsQueryProvider({
+    PageProps? pageProps,
+  }) : this._internal(
+          (ref) => availableShoppingItemsQuery(
+            ref as AvailableShoppingItemsQueryRef,
+            pageProps: pageProps,
+          ),
+          from: availableShoppingItemsQueryProvider,
+          name: r'availableShoppingItemsQueryProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$availableShoppingItemsQueryHash,
+          dependencies: AvailableShoppingItemsQueryFamily._dependencies,
+          allTransitiveDependencies:
+              AvailableShoppingItemsQueryFamily._allTransitiveDependencies,
+          pageProps: pageProps,
+        );
+
+  AvailableShoppingItemsQueryProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.pageProps,
+  }) : super.internal();
+
+  final PageProps? pageProps;
+
+  @override
+  Override overrideWith(
+    FutureOr<PagedShoppingItemsResponse> Function(
+            AvailableShoppingItemsQueryRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: AvailableShoppingItemsQueryProvider._internal(
+        (ref) => create(ref as AvailableShoppingItemsQueryRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        pageProps: pageProps,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<PagedShoppingItemsResponse> createElement() {
+    return _AvailableShoppingItemsQueryProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is AvailableShoppingItemsQueryProvider &&
+        other.pageProps == pageProps;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageProps.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin AvailableShoppingItemsQueryRef
+    on AutoDisposeFutureProviderRef<PagedShoppingItemsResponse> {
+  /// The parameter `pageProps` of this provider.
+  PageProps? get pageProps;
+}
+
+class _AvailableShoppingItemsQueryProviderElement
+    extends AutoDisposeFutureProviderElement<PagedShoppingItemsResponse>
+    with AvailableShoppingItemsQueryRef {
+  _AvailableShoppingItemsQueryProviderElement(super.provider);
+
+  @override
+  PageProps? get pageProps =>
+      (origin as AvailableShoppingItemsQueryProvider).pageProps;
+}
+
+String _$contentBundlesQueryHash() =>
+    r'da6b0d57aa062ea43108acc137ec971f7f7b11be';
+
+/// See also [contentBundlesQuery].
+@ProviderFor(contentBundlesQuery)
+const contentBundlesQueryProvider = ContentBundlesQueryFamily();
+
+/// See also [contentBundlesQuery].
+class ContentBundlesQueryFamily
+    extends Family<AsyncValue<PagedMinimalContentBundleResponse>> {
+  /// See also [contentBundlesQuery].
+  const ContentBundlesQueryFamily();
+
+  /// See also [contentBundlesQuery].
+  ContentBundlesQueryProvider call({
+    PageProps? pageProps,
+  }) {
+    return ContentBundlesQueryProvider(
+      pageProps: pageProps,
+    );
+  }
+
+  @override
+  ContentBundlesQueryProvider getProviderOverride(
+    covariant ContentBundlesQueryProvider provider,
+  ) {
+    return call(
+      pageProps: provider.pageProps,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'contentBundlesQueryProvider';
+}
+
+/// See also [contentBundlesQuery].
+class ContentBundlesQueryProvider
+    extends AutoDisposeFutureProvider<PagedMinimalContentBundleResponse> {
+  /// See also [contentBundlesQuery].
+  ContentBundlesQueryProvider({
+    PageProps? pageProps,
+  }) : this._internal(
+          (ref) => contentBundlesQuery(
+            ref as ContentBundlesQueryRef,
+            pageProps: pageProps,
+          ),
+          from: contentBundlesQueryProvider,
+          name: r'contentBundlesQueryProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$contentBundlesQueryHash,
+          dependencies: ContentBundlesQueryFamily._dependencies,
+          allTransitiveDependencies:
+              ContentBundlesQueryFamily._allTransitiveDependencies,
+          pageProps: pageProps,
+        );
+
+  ContentBundlesQueryProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.pageProps,
+  }) : super.internal();
+
+  final PageProps? pageProps;
+
+  @override
+  Override overrideWith(
+    FutureOr<PagedMinimalContentBundleResponse> Function(
+            ContentBundlesQueryRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ContentBundlesQueryProvider._internal(
+        (ref) => create(ref as ContentBundlesQueryRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        pageProps: pageProps,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<PagedMinimalContentBundleResponse>
+      createElement() {
+    return _ContentBundlesQueryProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ContentBundlesQueryProvider && other.pageProps == pageProps;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageProps.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ContentBundlesQueryRef
+    on AutoDisposeFutureProviderRef<PagedMinimalContentBundleResponse> {
+  /// The parameter `pageProps` of this provider.
+  PageProps? get pageProps;
+}
+
+class _ContentBundlesQueryProviderElement
+    extends AutoDisposeFutureProviderElement<PagedMinimalContentBundleResponse>
+    with ContentBundlesQueryRef {
+  _ContentBundlesQueryProviderElement(super.provider);
+
+  @override
+  PageProps? get pageProps => (origin as ContentBundlesQueryProvider).pageProps;
+}
+
 String _$sessionErrorHash() => r'b1dada6da232e62fef5a10e1e084d64cd04f3e2a';
 
 /// See also [SessionError].
