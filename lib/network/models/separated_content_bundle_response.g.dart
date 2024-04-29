@@ -30,7 +30,7 @@ SeparatedContentBundleResponse _$SeparatedContentBundleResponseFromJson(
     );
 
 const _$SkillLevelEnumMap = {
-  SkillLevel.begnner: 'BEGINNER',
+  SkillLevel.beginner: 'BEGINNER',
   SkillLevel.intermediate: 'INTERMEDIATE',
-  SkillLevel.failed: 'ADVANCED',
+  SkillLevel.advanced: 'ADVANCED',
 };

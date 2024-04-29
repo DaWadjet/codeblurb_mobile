@@ -39,6 +39,7 @@ dependencies:
   flutter_markdown: ^0.6.17+2
   json_annotation: ^4.8.1
   flutter_hooks: ^0.20.5
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

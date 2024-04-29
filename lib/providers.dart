@@ -5,7 +5,6 @@ import 'package:codeblurb_mobile/network/auth/auth_repository.dart';
 import 'package:codeblurb_mobile/network/dio.dart';
 import 'package:codeblurb_mobile/network/models/previous_payments_response.dart';
 import 'package:codeblurb_mobile/network/models/profile_response.dart';
-import 'package:codeblurb_mobile/network/models/shopping_cart_response.dart';
 import 'package:codeblurb_mobile/network/payment/payment_api.dart';
 import 'package:codeblurb_mobile/network/payment/payment_repository.dart';
 import 'package:codeblurb_mobile/network/profile/profile_api.dart';
@@ -18,6 +17,7 @@ import 'package:codeblurb_mobile/network/shopping/shopping_api.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_repository.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +61,46 @@ class ToastNotifier extends _$ToastNotifier {
 
   @override
   bool updateShouldNotify(void previous, void next) => true;
+}
+
+@Riverpod(keepAlive: true)
+class AlertDialogNotifier extends _$AlertDialogNotifier {
+  @override
+  AlertDialogProps build() {
+    return const AlertDialogProps(
+      title: '',
+      message: '',
+      onConfirm: null,
+    );
+  }
+
+  // ignore: use_setters_to_change_properties
+  void showAreYouSureDialog({
+    required String title,
+    required String message,
+    VoidCallback? onConfirm,
+  }) {
+    state = AlertDialogProps(
+      title: title,
+      message: message,
+      onConfirm: onConfirm,
+    );
+  }
+
+  @override
+  bool updateShouldNotify(void previous, void next) => true;
+}
+
+class AlertDialogProps {
+  const AlertDialogProps({
+    required this.title,
+    required this.message,
+    required this.onConfirm,
+  });
+
+  final String title;
+  final String message;
+  final VoidCallback? onConfirm;
 }
 
 @Riverpod(keepAlive: true)
@@ -134,16 +174,6 @@ Future<PreviousPaymentsResponse> paymentsQuery(PaymentsQueryRef ref) {
         paymentRepositoryProvider,
       )
       .getPayments();
-}
-
-@riverpod
-Future<ShoppingCartResponse> shoppingCartQuery(ShoppingCartQueryRef ref) {
-  loggedInGuard(ref);
-  return ref
-      .watch(
-        shoppingRepositoryProvider,
-      )
-      .getCart();
 }
 
 @riverpod

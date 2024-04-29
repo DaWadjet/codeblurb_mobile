@@ -25,12 +25,10 @@ class ProfilePage extends HookConsumerWidget {
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
         child: profileQuery.when(
-          loading: () => const Expanded(
+          loading: () => const Center(
             key: ValueKey('loading'),
-            child: Center(
-              child: Loader(
-                size: 48,
-              ),
+            child: Loader(
+              size: 48,
             ),
           ),
           data: (data) => Padding(
