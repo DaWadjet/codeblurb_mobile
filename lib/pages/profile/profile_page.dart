@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/pages/profile/profile_provider.dart';
+import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,11 +13,15 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(profileNotifierProvider);
 
+    final profileQuery = ref.watch(profileQueryProvider);
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile'),
+      ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          state.when(
+          profileQuery.when(
             data: (data) => Text('Data: $data'),
             loading: () => const CircularProgressIndicator(),
             error: (error, stackTrace) => Text('Error: $error'),
@@ -46,4 +51,10 @@ class ProfilePage extends ConsumerWidget {
       ),
     );
   }
+}
+
+String getMonogram(String username) {
+  final splitted = username.split(' ');
+  if (splitted.length == 1) return splitted[0].substring(0, 2).toUpperCase();
+  return (splitted[0][0] + splitted[1][0]).toUpperCase();
 }

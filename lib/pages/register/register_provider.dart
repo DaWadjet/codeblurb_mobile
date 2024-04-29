@@ -25,7 +25,9 @@ class RegisterNotifier extends _$RegisterNotifier {
             password: password,
             email: email,
           );
-      unawaited(ref.read(routerProvider).push(const TabsRoute()));
+      ref.read(isLoggedInProvider.notifier).setLoggedIn(value: true);
+      unawaited(ref.read(routerProvider).replaceAll([const LoggedInRoute()]));
+
       state = const AsyncData(false);
     } catch (e, stackTrace) {
       state = AsyncError(e, stackTrace);

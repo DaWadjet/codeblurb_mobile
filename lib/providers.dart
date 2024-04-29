@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:codeblurb_mobile/network/auth/auth_api.dart';
 import 'package:codeblurb_mobile/network/auth/auth_repository.dart';
 import 'package:codeblurb_mobile/network/dio.dart';
+import 'package:codeblurb_mobile/network/models/previous_payments_response.dart';
+import 'package:codeblurb_mobile/network/models/profile_response.dart';
+import 'package:codeblurb_mobile/network/models/shopping_cart_response.dart';
 import 'package:codeblurb_mobile/network/payment/payment_api.dart';
 import 'package:codeblurb_mobile/network/payment/payment_repository.dart';
 import 'package:codeblurb_mobile/network/profile/profile_api.dart';
@@ -13,6 +18,7 @@ import 'package:codeblurb_mobile/network/shopping/shopping_api.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_repository.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -108,8 +114,71 @@ RatingsRepository ratingsRepository(RatingsRepositoryRef ref) =>
 AppRouter router(RouterRef ref) => AppRouter();
 
 @riverpod
-Future<bool> refreshToken(RefreshTokenRef ref) => ref
-    .watch(
-      authRepositoryProvider,
-    )
-    .refreshToken();
+Future<bool> refreshToken(RefreshTokenRef ref) async {
+  final isSuccess = await ref
+      .watch(
+        authRepositoryProvider,
+      )
+      .refreshToken();
+  if (isSuccess) {
+    ref.read(isLoggedInProvider.notifier).setLoggedIn(value: true);
+  }
+  return isSuccess;
+}
+
+@riverpod
+Future<PreviousPaymentsResponse> paymentsQuery(PaymentsQueryRef ref) {
+  loggedInGuard(ref);
+  return ref
+      .watch(
+        paymentRepositoryProvider,
+      )
+      .getPayments();
+}
+
+@riverpod
+Future<ShoppingCartResponse> shoppingCartQuery(ShoppingCartQueryRef ref) {
+  loggedInGuard(ref);
+  return ref
+      .watch(
+        shoppingRepositoryProvider,
+      )
+      .getCart();
+}
+
+@riverpod
+Future<ProfileResponse> profileQuery(ProfileQueryRef ref) {
+  loggedInGuard(ref);
+  return ref.watch(profileRepositoryProvider).getProfile();
+}
+
+@Riverpod(keepAlive: true)
+class IsLoggedIn extends _$IsLoggedIn {
+  @override
+  bool build() => false;
+
+  void setLoggedIn({required bool value, bool force = false}) {
+    if (value) {
+      state = true;
+    } else {
+      if (force) {
+        ref.read(authRepositoryProvider).forceLogout();
+      } else {
+        ref.read(authRepositoryProvider).logout();
+      }
+      unawaited(
+        ref.read(routerProvider).replaceAll([LoginRoute()]),
+      );
+      ref.invalidateSelf();
+    }
+  }
+
+  @override
+  bool updateShouldNotify(bool previous, bool next) => true;
+}
+
+void loggedInGuard(Ref ref) {
+  if (!ref.watch(isLoggedInProvider)) {
+    throw Exception('Only usable when logged in!');
+  }
+}

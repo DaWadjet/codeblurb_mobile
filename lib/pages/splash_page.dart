@@ -32,7 +32,7 @@ class SplashPage extends HookConsumerWidget {
     ref.listen(refreshTokenProvider, (previous, next) {
       if (next.hasValue) {
         if (next.value!) {
-          route.value = const TabsRoute();
+          route.value = const LoggedInRoute();
         } else {
           route.value = LoginRoute();
         }
@@ -44,7 +44,7 @@ class SplashPage extends HookConsumerWidget {
         debugPrint(route.value.toString());
         debugPrint(isAnimationFinished.value.toString());
         if (route.value != null && isAnimationFinished.value) {
-          context.replaceRoute(route.value!);
+          context.router.replaceAll([route.value!]);
         }
         return null;
       },

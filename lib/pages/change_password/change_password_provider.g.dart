@@ -7,7 +7,7 @@ part of 'change_password_provider.dart';
 // **************************************************************************
 
 String _$changePasswordNotifierHash() =>
-    r'a9516f2f94f56b057bfc1aa49ea4fa40909fdab3';
+    r'f9f513219959ed5f1720eb79e5adbd35d7a0dd44';
 
 /// See also [ChangePasswordNotifier].
 @ProviderFor(ChangePasswordNotifier)

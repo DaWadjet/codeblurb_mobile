@@ -18,7 +18,7 @@ MinimalContentBundleResponse _$MinimalContentBundleResponseFromJson(
       json['title'] as String,
       json['imageUrl'] as String?,
       $enumDecode(_$SkillLevelEnumMap, json['skillLevel']),
-      (json['progress'] as num).toDouble(),
+      (json['progress'] as num?)?.toDouble(),
       DateTime.parse(json['releaseDate'] as String),
       RatingsResponse.fromJson(json['ratings'] as Map<String, dynamic>),
     );
