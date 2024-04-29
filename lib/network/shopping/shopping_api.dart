@@ -15,9 +15,13 @@ class ShoppingApi {
     return _dio.get('/shopping/shopping-cart');
   }
 
-//TODO add paging and filtering
-  ApiResponse getAvailableShoppingItems() async {
-    return _dio.get('/shopping/available-shopping-items');
+  ApiResponse getAvailableShoppingItems(
+    Map<String, dynamic>? queryParams,
+  ) async {
+    return _dio.get(
+      '/shopping/available-shopping-items',
+      queryParameters: queryParams,
+    );
   }
 
   ApiResponse getShoppingItem(int itemId) async {

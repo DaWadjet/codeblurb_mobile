@@ -2,6 +2,7 @@ import 'package:codeblurb_mobile/network/models/page_shopping_item_response.dart
 import 'package:codeblurb_mobile/network/models/shopping_cart_response.dart';
 import 'package:codeblurb_mobile/network/models/shopping_item_response.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_api.dart';
+import 'package:codeblurb_mobile/utils/page_props.dart';
 
 class ShoppingRepository {
   ShoppingRepository(this._shoppingApi);
@@ -25,9 +26,11 @@ class ShoppingRepository {
     return ShoppingItemResponse.fromJson(response.data!);
   }
 
-//TODO wire in paging logic
-  Future<PagedShoppingItemsResponse> getAvailableShoppingItems() async {
-    final response = await _shoppingApi.getAvailableShoppingItems();
+  Future<PagedShoppingItemsResponse> getAvailableShoppingItems(
+    PageProps? params,
+  ) async {
+    final response = await _shoppingApi
+        .getAvailableShoppingItems(params?.toQueryParameters());
     return PagedShoppingItemsResponse.fromJson(response.data!);
   }
 

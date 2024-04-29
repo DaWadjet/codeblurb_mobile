@@ -1,27 +1,10 @@
-import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+// ignore_for_file: strict_raw_type
+
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 typedef Validator<T> = String? Function(T? value);
 
 abstract class Validators {
-  static void onFocusChanged(
-    BuildContext context,
-    bool isFocused,
-    String fieldName,
-  ) {
-    if (isFocused) {
-      final field = FormBuilder.of(context)?.fields[fieldName];
-      final value = field?.value;
-      field
-        ?..reset()
-        ..didChange(value);
-    } else {
-      context.isFormFieldValid(fieldName);
-    }
-  }
-
   static final Validator required = FormBuilderValidators.required(
     errorText: 'This field is required',
   );
@@ -35,6 +18,7 @@ abstract class Validators {
   static final password = FormBuilderValidators.compose(
     [
       required,
+      // ignore: inference_failure_on_function_invocation
       FormBuilderValidators.minLength(
         8,
         errorText: 'Password must be at least 8 characters',

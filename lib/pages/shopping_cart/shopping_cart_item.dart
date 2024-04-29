@@ -120,6 +120,8 @@ class ShoppingCartItem extends HookConsumerWidget {
                         ? const Loader()
                         : Assets.images.x.svg(
                             width: 24,
+                            // ignore: deprecated_member_use_from_same_package
+                            color: colors.foreground,
                           ),
                     onPressed: () {
                       ref

@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:codeblurb_mobile/network/auth/auth_api.dart';
 import 'package:codeblurb_mobile/network/auth/auth_repository.dart';
+import 'package:codeblurb_mobile/network/content/content_api.dart';
+import 'package:codeblurb_mobile/network/content/content_repository.dart';
 import 'package:codeblurb_mobile/network/dio.dart';
+import 'package:codeblurb_mobile/network/models/page_minimal_content_bundle_response.dart';
+import 'package:codeblurb_mobile/network/models/page_shopping_item_response.dart';
 import 'package:codeblurb_mobile/network/models/previous_payments_response.dart';
 import 'package:codeblurb_mobile/network/models/profile_response.dart';
 import 'package:codeblurb_mobile/network/payment/payment_api.dart';
@@ -16,6 +20,8 @@ import 'package:codeblurb_mobile/network/ratings/ratings_repository.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_api.dart';
 import 'package:codeblurb_mobile/network/shopping/shopping_repository.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/utils/page_props.dart';
+import 'package:codeblurb_mobile/utils/sort_by.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +29,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'providers.g.dart';
+
+void loggedInGuard(Ref ref) {
+  if (!ref.watch(isLoggedInProvider)) {
+    throw Exception('Only usable when logged in!');
+  }
+}
 
 @Riverpod(keepAlive: true)
 FirebaseRemoteConfig remoteConfig(RemoteConfigRef ref) {
@@ -112,6 +124,13 @@ ShoppingRepository shoppingRepository(ShoppingRepositoryRef ref) =>
     ShoppingRepository(ref.watch(shoppingApiProvider));
 
 @Riverpod(keepAlive: true)
+ContentApi contentApi(ContentApiRef ref) => ContentApi(ref.watch(dioProvider));
+
+@Riverpod(keepAlive: true)
+ContentRepository contentRepository(ContentRepositoryRef ref) =>
+    ContentRepository(ref.watch(contentApiProvider));
+
+@Riverpod(keepAlive: true)
 AuthApi authApi(AuthApiRef ref) => AuthApi(ref.watch(dioProvider));
 
 @Riverpod(keepAlive: true)
@@ -182,6 +201,32 @@ Future<ProfileResponse> profileQuery(ProfileQueryRef ref) {
   return ref.watch(profileRepositoryProvider).getProfile();
 }
 
+@riverpod
+Future<PagedShoppingItemsResponse> availableShoppingItemsQuery(
+  AvailableShoppingItemsQueryRef ref, {
+  PageProps? pageProps,
+}) {
+  loggedInGuard(ref);
+  return ref
+      .watch(
+        shoppingRepositoryProvider,
+      )
+      .getAvailableShoppingItems(pageProps ?? SortBy.none());
+}
+
+@riverpod
+Future<PagedMinimalContentBundleResponse> contentBundlesQuery(
+  ContentBundlesQueryRef ref, {
+  PageProps? pageProps,
+}) {
+  loggedInGuard(ref);
+  return ref
+      .watch(
+        contentRepositoryProvider,
+      )
+      .getContentBundles(pageProps ?? SortBy.none());
+}
+
 @Riverpod(keepAlive: true)
 class IsLoggedIn extends _$IsLoggedIn {
   @override
@@ -205,10 +250,4 @@ class IsLoggedIn extends _$IsLoggedIn {
 
   @override
   bool updateShouldNotify(bool previous, bool next) => true;
-}
-
-void loggedInGuard(Ref ref) {
-  if (!ref.watch(isLoggedInProvider)) {
-    throw Exception('Only usable when logged in!');
-  }
 }

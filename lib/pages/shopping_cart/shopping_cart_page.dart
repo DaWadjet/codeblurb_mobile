@@ -25,11 +25,10 @@ class ShoppingCartPage extends HookConsumerWidget {
       body: Stack(
         children: [
           AdaptivePullToRefresh(
-            onRefresh: ref.read(shoppingCartNotifierProvider.notifier).refresh,
+            onRefresh: ref.watch(shoppingCartNotifierProvider.notifier).refresh,
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: cart.whenOrNull(
-                skipError: true,
+              child: cart.when(
                 data: (data) {
                   if (data.shoppingItems.isEmpty) {
                     return Padding(
@@ -41,13 +40,21 @@ class ShoppingCartPage extends HookConsumerWidget {
                     );
                   }
                   return Column(
-                    children: data.shoppingItems
-                        .map(
-                          (item) => ShoppingCartItem(item: item),
-                        )
-                        .toList(),
+                    children: [
+                      ...data.shoppingItems.map(
+                        (item) => ShoppingCartItem(item: item),
+                      ),
+                      const SizedBox(height: 100),
+                    ],
                   );
                 },
+                error: (e, stackTrace) => Padding(
+                  padding: EdgeInsets.only(top: fullHeight / 3),
+                  child: const Center(
+                    key: ValueKey('error'),
+                    child: Text('An error occurred\nPlease try again later'),
+                  ),
+                ),
                 loading: () => Padding(
                   padding: EdgeInsets.only(top: fullHeight / 3),
                   child: const Center(
