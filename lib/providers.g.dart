@@ -255,23 +255,6 @@ final paymentsQueryProvider =
 
 typedef PaymentsQueryRef
     = AutoDisposeFutureProviderRef<PreviousPaymentsResponse>;
-String _$shoppingCartQueryHash() => r'56600c093a6025e44a802a28b508922a18c8c924';
-
-/// See also [shoppingCartQuery].
-@ProviderFor(shoppingCartQuery)
-final shoppingCartQueryProvider =
-    AutoDisposeFutureProvider<ShoppingCartResponse>.internal(
-  shoppingCartQuery,
-  name: r'shoppingCartQueryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$shoppingCartQueryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef ShoppingCartQueryRef
-    = AutoDisposeFutureProviderRef<ShoppingCartResponse>;
 String _$profileQueryHash() => r'4b35ca66c6df5b3a54b3e51ce9270102ace47987';
 
 /// See also [profileQuery].
@@ -316,6 +299,23 @@ final toastNotifierProvider = NotifierProvider<ToastNotifier, String>.internal(
 );
 
 typedef _$ToastNotifier = Notifier<String>;
+String _$alertDialogNotifierHash() =>
+    r'9a7db83d7dd43c8ebbe89236b8ca757ff19b561e';
+
+/// See also [AlertDialogNotifier].
+@ProviderFor(AlertDialogNotifier)
+final alertDialogNotifierProvider =
+    NotifierProvider<AlertDialogNotifier, AlertDialogProps>.internal(
+  AlertDialogNotifier.new,
+  name: r'alertDialogNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$alertDialogNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AlertDialogNotifier = Notifier<AlertDialogProps>;
 String _$isLoggedInHash() => r'3d8d3cb590cf4eab365219924fc29da7c550d708';
 
 /// See also [IsLoggedIn].

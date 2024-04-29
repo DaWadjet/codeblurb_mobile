@@ -17,7 +17,7 @@ import 'package:codeblurb_mobile/pages/quiz_content_results_page.dart';
 import 'package:codeblurb_mobile/pages/register/register_page.dart';
 import 'package:codeblurb_mobile/pages/request_new_password/request_new_password_page.dart';
 import 'package:codeblurb_mobile/pages/scratch_content_page.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart_page.dart';
+import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:codeblurb_mobile/pages/splash_page.dart';
 import 'package:codeblurb_mobile/pages/tabs_page.dart';
 import 'package:codeblurb_mobile/pages/video_content_page.dart';

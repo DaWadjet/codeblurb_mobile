@@ -2,9 +2,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 enum SkillLevel {
   @JsonValue('BEGINNER')
-  begnner,
+  beginner('Beginner'),
   @JsonValue('INTERMEDIATE')
-  intermediate,
+  intermediate('Intermediate'),
   @JsonValue('ADVANCED')
-  failed,
+  advanced('Advanced');
+
+  const SkillLevel(this.value);
+  final String value;
 }
