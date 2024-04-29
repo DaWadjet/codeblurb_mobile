@@ -28,7 +28,23 @@ abstract class AppTheme {
           ),
         ),
         fontFamily: FontFamily.inter,
-        cardColor: colorPalette.card,
+        dividerTheme: DividerThemeData(
+          color: colorPalette.border,
+          thickness: 1.5,
+          indent: 12,
+          endIndent: 12,
+        ),
+        cardTheme: CardTheme(
+          color: colorPalette.card,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: colorPalette.border,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
         canvasColor: colorPalette.background,
         iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
@@ -198,29 +214,29 @@ abstract class AppTheme {
           type: BottomNavigationBarType.fixed,
           elevation: 0,
           selectedLabelStyle: TextStyle(
-            color: colorPalette.primary,
+            color: colorPalette.foreground,
             fontSize: 12,
-            height: 2.25,
+            height: 2,
             fontWeight: FontWeight.w500,
           ),
           unselectedLabelStyle: TextStyle(
-            color: colorPalette.mutedForeground,
+            color: colorPalette.foreground.withOpacity(0.3),
             fontSize: 12,
-            height: 2.25,
+            height: 2,
             fontWeight: FontWeight.w500,
           ),
           showSelectedLabels: true,
           selectedIconTheme: IconThemeData(
-            color: colorPalette.primary,
+            color: colorPalette.foreground,
             size: 24,
           ),
           unselectedIconTheme: IconThemeData(
-            color: colorPalette.mutedForeground,
+            color: colorPalette.foreground.withOpacity(0.3),
             size: 24,
           ),
           showUnselectedLabels: true,
-          selectedItemColor: colorPalette.primary,
-          unselectedItemColor: colorPalette.mutedForeground,
+          selectedItemColor: colorPalette.foreground,
+          unselectedItemColor: colorPalette.foreground.withOpacity(0.3),
         ),
         splashColor: colorPalette.accent,
         hintColor: colorPalette.mutedForeground,

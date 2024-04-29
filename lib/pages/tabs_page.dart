@@ -15,9 +15,9 @@ class TabsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = useColors();
     final shoppingCartQuery = ref.watch(shoppingCartQueryProvider);
-
+    final colors = useColors();
+    final bottomNavbarColors = Theme.of(context).bottomNavigationBarTheme;
     return AutoTabsScaffold(
       routes: const [
         HomeRoute(),
@@ -34,16 +34,16 @@ class TabsPage extends HookConsumerWidget {
               label: 'Home',
               icon: Assets.images.home.svg(
                 color: tabsRouter.activeIndex == 0
-                    ? colors.primary
-                    : colors.mutedForeground,
+                    ? bottomNavbarColors.selectedIconTheme?.color
+                    : bottomNavbarColors.unselectedIconTheme?.color,
               ),
             ),
             BottomNavigationBarItem(
               label: 'My Courses',
               icon: Assets.images.myCourses.svg(
                 color: tabsRouter.activeIndex == 1
-                    ? colors.primary
-                    : colors.mutedForeground,
+                    ? bottomNavbarColors.selectedIconTheme?.color
+                    : bottomNavbarColors.unselectedIconTheme?.color,
               ),
             ),
             BottomNavigationBarItem(
@@ -53,12 +53,12 @@ class TabsPage extends HookConsumerWidget {
                 children: [
                   Assets.images.shoppingCart.svg(
                     color: tabsRouter.activeIndex == 2
-                        ? colors.primary
-                        : colors.mutedForeground,
+                        ? bottomNavbarColors.selectedIconTheme?.color
+                        : bottomNavbarColors.unselectedIconTheme?.color,
                   ),
                   shoppingCartQuery.whenOrNull(
                         data: (data) {
-                          if (data?.shoppingItems.isEmpty ?? true) {
+                          if (data.shoppingItems.isEmpty) {
                             return const SizedBox();
                           }
                           return Positioned(
@@ -67,13 +67,17 @@ class TabsPage extends HookConsumerWidget {
                             child: Container(
                               padding: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
-                                color: colors.foreground,
+                                color: tabsRouter.activeIndex == 2
+                                    ? bottomNavbarColors
+                                        .selectedIconTheme?.color
+                                    : bottomNavbarColors
+                                        .unselectedIconTheme?.color,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               height: 16,
                               width: 16,
                               child: Text(
-                                data!.shoppingItems.length > 9
+                                data.shoppingItems.length > 9
                                     ? '9+'
                                     : data.shoppingItems.length.toString(),
                                 style: TextStyle(
@@ -95,8 +99,8 @@ class TabsPage extends HookConsumerWidget {
               label: 'Profile',
               icon: Assets.images.user.svg(
                 color: tabsRouter.activeIndex == 3
-                    ? colors.primary
-                    : colors.mutedForeground,
+                    ? bottomNavbarColors.selectedIconTheme?.color
+                    : bottomNavbarColors.unselectedIconTheme?.color,
               ),
             ),
           ],
