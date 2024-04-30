@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class CourseDetailsPage extends StatelessWidget {
-  const CourseDetailsPage({super.key});
+  const CourseDetailsPage({
+    required this.courseId,
+    super.key,
+  });
+
+  final int courseId;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('CourseDetailsPage'),
+        child: Text('CourseDetailsPage $courseId'),
       ),
     );
   }

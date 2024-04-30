@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/skill_level.dart';
+import 'package:codeblurb_mobile/pages/my_courses/my_courses_list_item.dart';
 import 'package:codeblurb_mobile/pages/my_courses/my_courses_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/utils/sort_by.dart';
@@ -250,8 +251,8 @@ class MyCoursesPage extends HookConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  final page = index ~/ 10;
-                  final itemIndex = index % 10;
+                  final page = index ~/ 2;
+                  final itemIndex = index % 2;
                   return ref
                       .watch(
                         contentBundlesQueryProvider(
@@ -269,29 +270,13 @@ class MyCoursesPage extends HookConsumerWidget {
                           return null;
                         },
                         data: (data) {
-                          if (data.numberOfElements <= itemIndex) {
+                          if (page >= data.totalPages ||
+                              itemIndex >= data.content.length) {
                             return null;
                           }
                           final content = data.content[itemIndex];
 
-                          return ListTile(
-                            title: Text(
-                              content.title,
-                              style: TextStyle(
-                                color: colors.foreground,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            subtitle: Text(
-                              content.description,
-                              style: TextStyle(
-                                color: colors.foreground,
-                                fontSize: 16,
-                              ),
-                            ),
-                            onTap: () {},
-                          );
+                          return MyCoursesListItem(content: content);
                         },
                       );
                 },

@@ -225,7 +225,7 @@ Future<PagedMinimalContentBundleResponse> contentBundlesQuery(
       .watch(
         contentRepositoryProvider,
       )
-      .getContentBundles(pageProps ?? SortBy.none());
+      .getContentBundles((pageProps ?? SortBy.none()).copyWith(size: 2));
 }
 
 @Riverpod(keepAlive: true)
