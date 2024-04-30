@@ -29,7 +29,7 @@ extension BuildContextX on BuildContext {
     );
   }
 
-  String formatDate(String? pattern, DateTime date) {
+  String formatDate(DateTime date, [String pattern = 'yyyy/MM/dd']) {
     return DateFormat(pattern, locale.languageCode).format(date);
   }
 

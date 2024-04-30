@@ -458,7 +458,7 @@ class _AvailableShoppingItemsQueryProviderElement
 }
 
 String _$contentBundlesQueryHash() =>
-    r'da6b0d57aa062ea43108acc137ec971f7f7b11be';
+    r'4d8508b044eadf689a48d313133a554b33b6efa7';
 
 /// See also [contentBundlesQuery].
 @ProviderFor(contentBundlesQuery)

@@ -6,7 +6,7 @@ part of 'my_courses_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$myCoursesNotifierHash() => r'c93a64cd4e0dd064af8905ab98bfe70fdac556a6';
+String _$myCoursesNotifierHash() => r'4c83eaf995017b7e039b9dfb4b5d91615125f8f9';
 
 /// See also [MyCoursesNotifier].
 @ProviderFor(MyCoursesNotifier)

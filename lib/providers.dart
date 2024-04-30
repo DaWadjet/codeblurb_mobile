@@ -220,6 +220,7 @@ Future<PagedMinimalContentBundleResponse> contentBundlesQuery(
   PageProps? pageProps,
 }) {
   loggedInGuard(ref);
+  ref.cacheFor(const Duration(minutes: 1));
   return ref
       .watch(
         contentRepositoryProvider,
@@ -250,4 +251,14 @@ class IsLoggedIn extends _$IsLoggedIn {
 
   @override
   bool updateShouldNotify(bool previous, bool next) => true;
+}
+
+extension on AutoDisposeRef<Object?> {
+  void cacheFor(Duration duration) {
+    final keepAliveLink = keepAlive();
+    Timer(
+      duration,
+      keepAliveLink.close,
+    );
+  }
 }

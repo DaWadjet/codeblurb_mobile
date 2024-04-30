@@ -6,6 +6,7 @@ import 'package:codeblurb_mobile/pages/my_courses/my_courses_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/utils/sort_by.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
+import 'package:codeblurb_mobile/widgets/input_field.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -27,197 +28,275 @@ class MyCoursesPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filter = useState(SortBy.none());
-    final skillLevels = useState<List<SkillLevel>>([SkillLevel.advanced]);
-    final myCourses = ref.watch(contentBundlesQueryProvider());
+    final skillLevels = useState<List<SkillLevel>>([]);
+    final controller = useTextEditingController();
+    final debouncedSearchValue =
+        useDebounced(controller.text, const Duration(seconds: 1));
+
+    final pageProps = useMemoized(
+      () => filter.value.copyWith(
+        skills: skillLevels.value.map((e) => e.value).toList(),
+        title: debouncedSearchValue ?? '',
+      ),
+      [filter.value, skillLevels.value, debouncedSearchValue],
+    );
+
     final fullHeight = MediaQuery.of(context).size.height;
     final colors = useColors();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Courses'),
         forceMaterialTransparency: true,
       ),
       body: AdaptivePullToRefresh(
-        onRefresh: ref.watch(myCoursesNotifierProvider.notifier).onRefresh,
+        onRefresh: () =>
+            ref.watch(myCoursesNotifierProvider.notifier).onRefresh(pageProps),
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: myCourses.when(
-            data: (data) {
-              if (data.content.isEmpty) {
-                return Padding(
-                  padding: EdgeInsets.only(top: fullHeight / 3),
-                  key: const ValueKey('empty'),
-                  child: const Center(
-                    child: Text('You have not purchased any courses yet'),
-                  ),
-                );
-              }
-              return Column(
-                children: [
-                  DropdownSearch<String>(
-                    popupProps: PopupProps.modalBottomSheet(
-                      showSelectedItems: true,
-                      itemBuilder: (context, item, isSelected) {
-                        return TextButton(
-                          onPressed: () {},
-                          child: Row(
-                            children: [
-                              isSelected
-                                  ? Assets.images.circleCheck.svg(
-                                      width: 20,
-                                      height: 20,
-                                      // ignore: deprecated_member_use_from_same_package
-                                      color: colors.foreground,
-                                    )
-                                  : const SizedBox(
-                                      width: 16,
-                                    ),
-                              const SizedBox(width: 16),
-                              Text(
-                                item,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: isSelected
-                                      ? colors.foreground
-                                      : colors.foreground.withOpacity(0.6),
+          child: Column(
+            children: [
+              InputField(
+                controller: controller,
+                hint: 'Search',
+              ),
+              const SizedBox(width: 16),
+              DropdownSearch<String>(
+                popupProps: PopupProps.modalBottomSheet(
+                  showSelectedItems: true,
+                  itemBuilder: (context, item, isSelected) {
+                    return TextButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          isSelected
+                              ? Assets.images.circleCheck.svg(
+                                  width: 20,
+                                  height: 20,
+                                  // ignore: deprecated_member_use_from_same_package
+                                  color: colors.foreground,
+                                )
+                              : const SizedBox(
+                                  width: 16,
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      containerBuilder: (context, popupWidget) {
-                        return Container(
-                          padding: const EdgeInsets.all(16),
-                          height: 320,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: colors.muted,
-                            border: Border.all(
-                              color: colors.muted,
-                              width: 1.5,
+                          const SizedBox(width: 16),
+                          Text(
+                            item,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: isSelected
+                                  ? colors.foreground
+                                  : colors.foreground.withOpacity(0.6),
                             ),
                           ),
-                          child: popupWidget,
-                        );
-                      },
-                    ),
-                    items: sortOptions.map((e) => e.label).toList(),
-                    dropdownDecoratorProps: DropDownDecoratorProps(
-                      dropdownSearchDecoration: InputDecoration(
-                        labelText: 'Sort by',
-                        labelStyle: TextStyle(
-                          color: colors.foreground,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                        ],
+                      ),
+                    );
+                  },
+                  containerBuilder: (context, popupWidget) {
+                    return Container(
+                      padding: const EdgeInsets.all(16),
+                      height: 320,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: colors.border,
+                        border: Border.all(
+                          color: colors.border,
+                          width: 1.5,
                         ),
                       ),
+                      child: popupWidget,
+                    );
+                  },
+                ),
+                selectedItem: filter.value.label,
+                items: sortOptions.map((e) => e.label).toList(),
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    onChanged: (value) {
-                      filter.value = sortOptions.firstWhere(
-                        (element) => element.label == value,
-                      );
-                    },
-                    selectedItem: filter.value.label,
-                  ),
-                  DropdownSearch.multiSelection(
-                    // popupProps: PopupProps.modalBottomSheet(
-                    //   showSelectedItems: true,
-                    //   itemBuilder: (context, item, isSelected) {
-                    //     return TextButton(
-                    //       onPressed: () {},
-                    //       child: Row(
-                    //         children: [
-                    //           isSelected
-                    //               ? Assets.images.circleCheck.svg(
-                    //                   width: 20,
-                    //                   height: 20,
-                    //                   // ignore: deprecated_member_use_from_same_package
-                    //                   color: colors.foreground,
-                    //                 )
-                    //               : const SizedBox(
-                    //                   width: 16,
-                    //                 ),
-                    //           const SizedBox(width: 16),
-                    //           Text(
-                    //             item,
-                    //             style: TextStyle(
-                    //               fontSize: 18,
-                    //               fontWeight: FontWeight.w600,
-                    //               color: isSelected
-                    //                   ? colors.foreground
-                    //                   : colors.foreground.withOpacity(0.6),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     );
-                    //   },
-                    //   containerBuilder: (context, popupWidget) {
-                    //     return Container(
-                    //       padding: const EdgeInsets.all(16),
-                    //       height: 320,
-                    //       decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(12),
-                    //         color: colors.muted,
-                    //         border: Border.all(
-                    //           color: colors.muted,
-                    //           width: 1.5,
-                    //         ),
-                    //       ),
-                    //       child: popupWidget,
-                    //     );
-                    //   },
-                    // ),
-
-                    items: SkillLevel.values,
-                    itemAsString: (item) => item.value,
-                    dropdownDecoratorProps: DropDownDecoratorProps(
-                      dropdownSearchDecoration: InputDecoration(
-                        label: const Text('Skill Level'),
-                        labelStyle: TextStyle(
-                          color: colors.foreground,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
                     ),
-                    onChanged: (value) {
-                      final newValues = value.map((e) {
-                        return SkillLevel.values.firstWhere(
-                          (element) => element == e,
-                        );
-                      }).toList();
-                      if (newValues.length == SkillLevel.values.length) {
-                        skillLevels.value = [];
-                      } else {
-                        skillLevels.value = newValues;
-                      }
-                    },
-                    selectedItems: skillLevels.value,
                   ),
-                  ...data.content.map(
-                    (item) => Text(item.title),
+                ),
+                onChanged: (value) {
+                  filter.value = sortOptions.firstWhere(
+                    (element) => element.label == value,
+                  );
+                },
+                dropdownButtonProps: DropdownButtonProps(
+                  icon: Assets.images.chevronDown.svg(
+                    width: 20,
+                    height: 20,
+                    // ignore: deprecated_member_use_from_same_package
+                    color: colors.foreground,
                   ),
-                ],
-              );
-            },
-            error: (e, stackTrace) => Padding(
-              padding: EdgeInsets.only(top: fullHeight / 3),
-              child: const Center(
-                key: ValueKey('error'),
-                child: Text('An error occurred\nPlease try again later'),
-              ),
-            ),
-            loading: () => Padding(
-              padding: EdgeInsets.only(top: fullHeight / 3),
-              child: const Center(
-                key: ValueKey('loading'),
-                child: Loader(
-                  size: 48,
+                ),
+                dropdownBuilder: (context, selectedItem) => Text(
+                  selectedItem ?? 'None',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(height: 16),
+              DropdownSearch.multiSelection(
+                popupProps:
+                    PopupPropsMultiSelection<SkillLevel>.modalBottomSheet(
+                  containerBuilder: (context, popupWidget) {
+                    return Container(
+                      padding: const EdgeInsets.all(16),
+                      height: 250,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: colors.border,
+                        border: Border.all(
+                          color: colors.border,
+                          width: 1.5,
+                        ),
+                      ),
+                      child: popupWidget,
+                    );
+                  },
+                  itemBuilder: (context, item, isSelected) {
+                    return Text(
+                      item.value,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: isSelected
+                            ? colors.foreground
+                            : colors.foreground.withOpacity(0.6),
+                      ),
+                    );
+                  },
+                ),
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+                dropdownButtonProps: DropdownButtonProps(
+                  icon: Assets.images.chevronDown.svg(
+                    width: 20,
+                    height: 20,
+                    // ignore: deprecated_member_use_from_same_package
+                    color: colors.foreground,
+                  ),
+                ),
+                dropdownBuilder: (context, selectedItems) {
+                  if (selectedItems.isEmpty) {
+                    return const Text(
+                      'All levels',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    );
+                  }
+                  return Wrap(
+                    spacing: 8,
+                    children: selectedItems
+                        .map(
+                          (e) => Chip(
+                            padding: EdgeInsets.zero,
+                            label: Text(
+                              e.value,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            backgroundColor: colors.accent,
+                            onDeleted: () {
+                              skillLevels.value = skillLevels.value
+                                  .where((element) => element != e)
+                                  .toList();
+                            },
+                          ),
+                        )
+                        .toList(),
+                  );
+                },
+                items: SkillLevel.values,
+                itemAsString: (item) => item.value,
+                onChanged: (value) {
+                  if (value.length == SkillLevel.values.length) {
+                    skillLevels.value = [];
+                    return;
+                  }
+                  final newValues = value.map((e) {
+                    return SkillLevel.values.firstWhere(
+                      (element) => element == e,
+                    );
+                  }).toList();
+                  if (newValues.length == SkillLevel.values.length) {
+                    skillLevels.value = [];
+                  } else {
+                    skillLevels.value = newValues;
+                  }
+                },
+                selectedItems: skillLevels.value,
+              ),
+              const SizedBox(height: 16),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final page = index ~/ 10;
+                  final itemIndex = index % 10;
+                  return ref
+                      .watch(
+                        contentBundlesQueryProvider(
+                          pageProps: pageProps.copyWith(page: page),
+                        ),
+                      )
+                      .when(
+                        error: (error, stackTrace) => null,
+                        loading: () {
+                          if (itemIndex == 0) {
+                            return const Loader(
+                              size: 48,
+                            );
+                          }
+                          return null;
+                        },
+                        data: (data) {
+                          if (data.numberOfElements <= itemIndex) {
+                            return null;
+                          }
+                          final content = data.content[itemIndex];
+
+                          return ListTile(
+                            title: Text(
+                              content.title,
+                              style: TextStyle(
+                                color: colors.foreground,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            subtitle: Text(
+                              content.description,
+                              style: TextStyle(
+                                color: colors.foreground,
+                                fontSize: 16,
+                              ),
+                            ),
+                            onTap: () {},
+                          );
+                        },
+                      );
+                },
+              ),
+            ],
           ),
         ),
       ),
