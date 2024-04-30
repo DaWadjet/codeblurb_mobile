@@ -14,6 +14,7 @@ class PagedMinimalContentBundleResponse {
     this.totalPages,
     this.size,
     this.numberOfElements,
+    this.totalElements,
     this.content,
   );
 
@@ -28,5 +29,6 @@ class PagedMinimalContentBundleResponse {
   final int totalPages;
   final int size;
   final int numberOfElements;
+  final int totalElements;
   final List<MinimalContentBundleResponse> content;
 }

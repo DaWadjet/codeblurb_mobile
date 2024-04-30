@@ -26,84 +26,106 @@ class TabsPage extends HookConsumerWidget {
         ProfileRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavigationBar(
-          currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
-          items: [
-            BottomNavigationBarItem(
-              label: 'Home',
-              icon: Assets.images.home.svg(
-                color: tabsRouter.activeIndex == 0
-                    ? bottomNavbarColors.selectedIconTheme?.color
-                    : bottomNavbarColors.unselectedIconTheme?.color,
+        return Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: colors.border,
+                width: 1.5,
               ),
             ),
-            BottomNavigationBarItem(
-              label: 'My Courses',
-              icon: Assets.images.myCourses.svg(
-                color: tabsRouter.activeIndex == 1
-                    ? bottomNavbarColors.selectedIconTheme?.color
-                    : bottomNavbarColors.unselectedIconTheme?.color,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: 'Cart',
-              icon: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Assets.images.shoppingCart.svg(
-                    color: tabsRouter.activeIndex == 2
+          ),
+          child: BottomNavigationBar(
+            currentIndex: tabsRouter.activeIndex,
+            onTap: tabsRouter.setActiveIndex,
+            items: [
+              BottomNavigationBarItem(
+                label: 'Home',
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Assets.images.home.svg(
+                    color: tabsRouter.activeIndex == 0
                         ? bottomNavbarColors.selectedIconTheme?.color
                         : bottomNavbarColors.unselectedIconTheme?.color,
                   ),
-                  shoppingCartQuery.whenOrNull(
-                        data: (data) {
-                          if (data.shoppingItems.isEmpty) {
-                            return const SizedBox();
-                          }
-                          return Positioned(
-                            right: -5,
-                            top: -5,
-                            child: Container(
-                              padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                color: tabsRouter.activeIndex == 2
-                                    ? bottomNavbarColors
-                                        .selectedIconTheme?.color
-                                    : bottomNavbarColors
-                                        .unselectedIconTheme?.color,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              height: 16,
-                              width: 16,
-                              child: Text(
-                                data.shoppingItems.length > 9
-                                    ? '9+'
-                                    : data.shoppingItems.length.toString(),
-                                style: TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.bold,
-                                  color: colors.background,
+                ),
+              ),
+              BottomNavigationBarItem(
+                label: 'My Courses',
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Assets.images.myCourses.svg(
+                    color: tabsRouter.activeIndex == 1
+                        ? bottomNavbarColors.selectedIconTheme?.color
+                        : bottomNavbarColors.unselectedIconTheme?.color,
+                  ),
+                ),
+              ),
+              BottomNavigationBarItem(
+                label: 'Cart',
+                icon: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: Assets.images.shoppingCart.svg(
+                        color: tabsRouter.activeIndex == 2
+                            ? bottomNavbarColors.selectedIconTheme?.color
+                            : bottomNavbarColors.unselectedIconTheme?.color,
+                      ),
+                    ),
+                    shoppingCartQuery.whenOrNull(
+                          data: (data) {
+                            if (data.shoppingItems.isEmpty) {
+                              return const SizedBox();
+                            }
+                            return Positioned(
+                              right: -8,
+                              top: -4,
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  color: tabsRouter.activeIndex == 2
+                                      ? bottomNavbarColors
+                                          .selectedIconTheme?.color
+                                      : bottomNavbarColors
+                                          .unselectedIconTheme?.color,
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ).animate().fadeIn(),
-                          );
-                        },
-                      ) ??
-                      const SizedBox(),
-                ],
+                                height: 16,
+                                width: 16,
+                                child: Text(
+                                  data.shoppingItems.length > 9
+                                      ? '9+'
+                                      : data.shoppingItems.length.toString(),
+                                  style: TextStyle(
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.bold,
+                                    color: colors.background,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ).animate().fadeIn(),
+                            );
+                          },
+                        ) ??
+                        const SizedBox(),
+                  ],
+                ),
               ),
-            ),
-            BottomNavigationBarItem(
-              label: 'Profile',
-              icon: Assets.images.user.svg(
-                color: tabsRouter.activeIndex == 3
-                    ? bottomNavbarColors.selectedIconTheme?.color
-                    : bottomNavbarColors.unselectedIconTheme?.color,
+              BottomNavigationBarItem(
+                label: 'Profile',
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Assets.images.user.svg(
+                    color: tabsRouter.activeIndex == 3
+                        ? bottomNavbarColors.selectedIconTheme?.color
+                        : bottomNavbarColors.unselectedIconTheme?.color,
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

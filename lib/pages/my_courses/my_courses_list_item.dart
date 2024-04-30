@@ -53,7 +53,7 @@ class MyCoursesListItem extends HookWidget {
                           Text(
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            '${content.title}asdg uash lu lasdg as',
+                            content.title,
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w600,
@@ -63,7 +63,7 @@ class MyCoursesListItem extends HookWidget {
                           Text(
                             'Java - ${content.skillLevel.value}',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 12,
                               color: colors.mutedForeground,
                             ),
                           ),

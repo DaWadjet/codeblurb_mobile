@@ -15,6 +15,7 @@ PagedMinimalContentBundleResponse _$PagedMinimalContentBundleResponseFromJson(
       json['totalPages'] as int,
       json['size'] as int,
       json['numberOfElements'] as int,
+      json['totalElements'] as int,
       (json['content'] as List<dynamic>)
           .map((e) =>
               MinimalContentBundleResponse.fromJson(e as Map<String, dynamic>))

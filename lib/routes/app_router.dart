@@ -21,6 +21,7 @@ import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:codeblurb_mobile/pages/splash_page.dart';
 import 'package:codeblurb_mobile/pages/tabs_page.dart';
 import 'package:codeblurb_mobile/pages/video_content_page.dart';
+import 'package:codeblurb_mobile/utils/page_props.dart';
 import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
