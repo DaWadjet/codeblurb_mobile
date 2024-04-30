@@ -25,8 +25,16 @@ class ShoppingCartItem extends HookConsumerWidget {
     final loadingState = ref.watch(shoppingCartNotifierProvider);
 
     final colors = useColors();
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: colors.background,
+        border: Border(
+          bottom: BorderSide(
+            color: colors.border,
+          ),
+        ),
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Material(

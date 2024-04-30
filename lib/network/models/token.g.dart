@@ -14,6 +14,6 @@ Token _$TokenFromJson(Map<String, dynamic> json) => Token(
     );
 
 const _$TokenTypeEnumMap = {
-  TokenType.access: 'accessToken',
-  TokenType.refresh: 'refreshToken',
+  TokenType.access: 'accesstoken',
+  TokenType.refresh: 'refreshtoken',
 };

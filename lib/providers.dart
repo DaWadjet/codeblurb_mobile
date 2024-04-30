@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:codeblurb_mobile/app_constants.dart';
 import 'package:codeblurb_mobile/network/auth/auth_api.dart';
 import 'package:codeblurb_mobile/network/auth/auth_repository.dart';
+import 'package:codeblurb_mobile/network/auth/utils.dart';
 import 'package:codeblurb_mobile/network/content/content_api.dart';
 import 'package:codeblurb_mobile/network/content/content_repository.dart';
 import 'package:codeblurb_mobile/network/dio.dart';
@@ -232,6 +234,17 @@ Future<PagedMinimalContentBundleResponse> contentBundlesQuery(
 class IsLoggedIn extends _$IsLoggedIn {
   @override
   bool build() => false;
+
+  String getUsername() {
+    final token =
+        ref.read(sharedPrefsProvider).getString(AppConstants.accessToken);
+    if (token == null) {
+      throw Exception('Token not found');
+    }
+    final decodedToken = decode(token: token);
+
+    return decodedToken.customerName;
+  }
 
   void setLoggedIn({required bool value, bool force = false}) {
     if (value) {

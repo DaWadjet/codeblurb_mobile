@@ -639,7 +639,7 @@ final alertDialogNotifierProvider =
 );
 
 typedef _$AlertDialogNotifier = Notifier<AlertDialogProps>;
-String _$isLoggedInHash() => r'3d8d3cb590cf4eab365219924fc29da7c550d708';
+String _$isLoggedInHash() => r'7c9f19e038f0f08a20fcd7bc090b91eee68974e9';
 
 /// See also [IsLoggedIn].
 @ProviderFor(IsLoggedIn)

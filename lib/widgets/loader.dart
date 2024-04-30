@@ -8,11 +8,11 @@ class Loader extends HookWidget {
   const Loader({
     super.key,
     this.size = 24,
-    this.withPrimaryColor = false,
+    this.withBackgroundColor = false,
   });
 
   final double size;
-  final bool withPrimaryColor;
+  final bool withBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class Loader extends HookWidget {
           width: size,
           height: size,
           // ignore: deprecated_member_use_from_same_package
-          color: withPrimaryColor ? colors.background : colors.foreground,
+          color: withBackgroundColor ? colors.background : colors.foreground,
         )
         .animate(onPlay: (controller) => controller.repeat())
         .rotate(duration: 1.seconds);
