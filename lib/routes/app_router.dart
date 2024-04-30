@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/pages/article_content_page.dart';
 import 'package:codeblurb_mobile/pages/change_password/change_password_page.dart';
-import 'package:codeblurb_mobile/pages/course_details_page.dart';
+import 'package:codeblurb_mobile/pages/course_details/course_details_page.dart';
 import 'package:codeblurb_mobile/pages/course_ratings_page.dart';
 import 'package:codeblurb_mobile/pages/drag_and_drop_content_page.dart';
 import 'package:codeblurb_mobile/pages/explore_page.dart';
