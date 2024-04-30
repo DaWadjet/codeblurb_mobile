@@ -113,6 +113,7 @@ class ShoppingCartItem extends HookConsumerWidget {
                                   PriceTag(
                                     originalPrice: item.price,
                                   ),
+                                  const SizedBox(width: 8),
                                 ],
                               ),
                             ],
@@ -144,7 +145,8 @@ class ShoppingCartItem extends HookConsumerWidget {
                                       'By pressing Ok, you will remove this item from your cart.',
                                   onConfirm: () => ref
                                       .read(
-                                          shoppingCartNotifierProvider.notifier)
+                                        shoppingCartNotifierProvider.notifier,
+                                      )
                                       .removeItemFromCart(item.id),
                                 );
                           },

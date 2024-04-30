@@ -52,9 +52,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ExploreRoute.name: (routeData) {
+      final args = routeData.argsAs<ExploreRouteArgs>(
+          orElse: () => const ExploreRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ExplorePage(),
+        child: ExplorePage(
+          key: args.key,
+          filterProps: args.filterProps,
+        ),
       );
     },
     FillTheGapsContentRoute.name: (routeData) {
@@ -277,16 +282,40 @@ class DragAndDropContentRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ExplorePage]
-class ExploreRoute extends PageRouteInfo<void> {
-  const ExploreRoute({List<PageRouteInfo>? children})
-      : super(
+class ExploreRoute extends PageRouteInfo<ExploreRouteArgs> {
+  ExploreRoute({
+    Key? key,
+    PageProps? filterProps,
+    List<PageRouteInfo>? children,
+  }) : super(
           ExploreRoute.name,
+          args: ExploreRouteArgs(
+            key: key,
+            filterProps: filterProps,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ExploreRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ExploreRouteArgs> page =
+      PageInfo<ExploreRouteArgs>(name);
+}
+
+class ExploreRouteArgs {
+  const ExploreRouteArgs({
+    this.key,
+    this.filterProps,
+  });
+
+  final Key? key;
+
+  final PageProps? filterProps;
+
+  @override
+  String toString() {
+    return 'ExploreRouteArgs{key: $key, filterProps: $filterProps}';
+  }
 }
 
 /// generated route for

@@ -5,11 +5,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'home_provider.g.dart';
 
 final topRatedQueryProvider = availableShoppingItemsQueryProvider(
-  pageProps: SortBy.highestRated(),
+  pageProps: SortBy.highestRated().copyWith(size: 3),
 );
 
 final mostPopularQueryProvider = availableShoppingItemsQueryProvider(
-  pageProps: SortBy.mostPopular(),
+  pageProps: SortBy.mostPopular().copyWith(size: 3),
 );
 
 @riverpod

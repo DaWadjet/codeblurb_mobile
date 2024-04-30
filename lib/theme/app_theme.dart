@@ -228,11 +228,9 @@ abstract class AppTheme {
           showSelectedLabels: true,
           selectedIconTheme: IconThemeData(
             color: colorPalette.foreground,
-            size: 24,
           ),
           unselectedIconTheme: IconThemeData(
             color: colorPalette.foreground.withOpacity(0.5),
-            size: 24,
           ),
           showUnselectedLabels: true,
           selectedItemColor: colorPalette.foreground,
