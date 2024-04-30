@@ -95,7 +95,9 @@ class ProfilePage extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      context.formatDate('YYYY/MM/DD', data.registeredAt),
+                      context.formatDate(
+                        data.registeredAt,
+                      ),
                       style: const TextStyle(
                         fontSize: 16,
                       ),
