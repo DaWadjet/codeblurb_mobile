@@ -1,19 +1,16 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
+import 'package:codeblurb_mobile/hooks/use_content_type.dart';
+import 'package:codeblurb_mobile/network/models/seen_status.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
-import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
 import 'package:codeblurb_mobile/widgets/course_section_item.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
-import 'package:codeblurb_mobile/widgets/price_tag.dart';
 import 'package:codeblurb_mobile/widgets/rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -21,8 +18,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-class CourseDetailsPage extends HookConsumerWidget {
-  const CourseDetailsPage({
+class PurchasedCourseDetailsPage extends HookConsumerWidget {
+  const PurchasedCourseDetailsPage({
     required this.courseId,
     super.key,
   });
@@ -35,7 +32,7 @@ class CourseDetailsPage extends HookConsumerWidget {
     final bottomPadding = context.bottomPadding;
     final fullHeight = MediaQuery.of(context).size.height;
 
-    final courseQuery = ref.watch(shoppingItemDetailsQueryProvider(courseId));
+    final courseQuery = ref.watch(contentBundleQueryProvider(courseId));
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +43,7 @@ class CourseDetailsPage extends HookConsumerWidget {
         children: [
           AdaptivePullToRefresh(
             onRefresh: () =>
-                ref.read(shoppingItemDetailsQueryProvider(courseId).future),
+                ref.read(contentBundleQueryProvider(courseId).future),
             child: Padding(
               padding: const EdgeInsets.only(
                 bottom: 16,
@@ -55,7 +52,52 @@ class CourseDetailsPage extends HookConsumerWidget {
               ),
               child: courseQuery.when(
                 data: (course) {
-                  final totalHours = (course.contentBundle.includedContent.fold(
+                  final sections = [
+                    ...course.includedCodings.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        codingContentType: e.codingContentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
+                    ),
+                    ...course.includedQuizzes.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
+                    ),
+                    ...course.includedVideos.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
+                    ),
+                    ...course.includedArticles.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
+                    ),
+                  ]..sort(
+                      (a, b) => a.order.compareTo(b.order),
+                    );
+                  final totalHours = (sections.fold(
                         0,
                         (previousValue, element) =>
                             previousValue + element.estimatedTime,
@@ -71,7 +113,7 @@ class CourseDetailsPage extends HookConsumerWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.network(
-                          course.contentBundle.imageUrl ?? dummyUrl,
+                          course.imageUrl ?? dummyUrl,
                           fit: BoxFit.cover,
                           height: 200,
                           width: double.infinity,
@@ -81,7 +123,7 @@ class CourseDetailsPage extends HookConsumerWidget {
                         height: 16,
                       ),
                       Text(
-                        course.contentBundle.title,
+                        course.title,
                         style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w600,
@@ -101,7 +143,7 @@ class CourseDetailsPage extends HookConsumerWidget {
                         height: 16,
                       ),
                       Text(
-                        course.contentBundle.description,
+                        course.description,
                         style: const TextStyle(
                           fontSize: 16,
                         ),
@@ -222,7 +264,7 @@ class CourseDetailsPage extends HookConsumerWidget {
                                       height: 4,
                                     ),
                                     Text(
-                                      course.contentBundle.skillLevel.value,
+                                      course.skillLevel.value,
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: colors.mutedForeground,
@@ -244,7 +286,7 @@ class CourseDetailsPage extends HookConsumerWidget {
                                     ),
                                     Text(
                                       context.formatDate(
-                                        course.contentBundle.releaseDate,
+                                        course.releaseDate,
                                         'yy/MM/dd',
                                       ),
                                       style: TextStyle(
@@ -273,20 +315,15 @@ class CourseDetailsPage extends HookConsumerWidget {
                         height: 16,
                       ),
                       Column(
-                        children: course.contentBundle.includedContent
+                        children: sections
                             .map(
                               (e) => Padding(
                                 padding: const EdgeInsets.only(
                                   bottom: 16,
                                 ),
                                 child: CourseSectionItem(
-                                  section: Section(
-                                    name: e.name,
-                                    shortDescription: e.shortDescription,
-                                    estimatedTime: e.estimatedTime,
-                                    contentType: e.contentType,
-                                    status: e.status,
-                                  ),
+                                  section: e,
+                                  canNavigate: true,
                                 ),
                               ),
                             )
@@ -317,117 +354,135 @@ class CourseDetailsPage extends HookConsumerWidget {
             right: 0,
             child: courseQuery.maybeWhen(
               orElse: () => const SizedBox(),
-              data: (data) => ColoredBox(
-                key: const ValueKey('price'),
-                color: colors.background,
-                child: Column(
-                  children: [
-                    const Divider(),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        children: [
-                          PriceTag(
-                            discount: true,
-                            originalPrice: data.price,
-                            isBig: true,
-                          ),
-                          const Spacer(),
-                          HookConsumer(
-                            builder: (context, ref, _) {
-                              final cart = ref.watch(shoppingCartQueryProvider);
-                              final cartProviderState =
-                                  ref.watch(shoppingCartNotifierProvider);
-
-                              final isItemInCart = useMemoized(
-                                () {
-                                  return cart.maybeWhen(
-                                    data: (data) => data.shoppingItems.any(
-                                      (element) => element.id == courseId,
-                                    ),
-                                    orElse: () => false,
-                                  );
-                                },
-                                [cart],
-                              );
-                              return SizedBox(
-                                height: 48,
-                                width: 156,
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    if (cartProviderState.isLoading) return;
-                                    if (isItemInCart) {
-                                      await context.router.push(
-                                        const ShoppingCartRoute(),
-                                      );
-                                    } else {
-                                      unawaited(
-                                        ref
-                                            .read(
-                                              shoppingCartNotifierProvider
-                                                  .notifier,
-                                            )
-                                            .addItemToCart(courseId),
-                                      );
-                                    }
-                                  },
-                                  child: isItemInCart
-                                      ? const Text(
-                                          'View Cart',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        )
-                                      : cartProviderState.maybeWhen(
-                                          data: (data) {
-                                            if (data == courseId) {
-                                              return const Loader(
-                                                size: 32,
-                                                withBackgroundColor: true,
-                                              );
-                                            } else {
-                                              return const Text(
-                                                'Add To Cart',
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              );
-                                            }
-                                          },
-                                          orElse: () => const Text(
-                                            'Add To Cart',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+              data: (course) {
+                late final Section? nextUp;
+                try {
+                  final sections = [
+                    ...course.includedCodings.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        codingContentType: e.codingContentType,
+                        status: e.status,
+                        order: e.order ?? 0,
                       ),
                     ),
-                    SizedBox(
-                      height: bottomPadding + 16,
+                    ...course.includedQuizzes.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
                     ),
-                  ],
-                ),
-              )
-                  .animate()
-                  .slideY(
-                    curve: Curves.easeInOut,
-                    begin: 1,
-                    end: 0,
-                  )
-                  .animate()
-                  .fadeIn(),
+                    ...course.includedVideos.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
+                    ),
+                    ...course.includedArticles.map(
+                      (e) => Section(
+                        name: e.name,
+                        shortDescription: e.shortDescription,
+                        estimatedTime: e.estimatedTime,
+                        contentType: e.contentType,
+                        status: e.status,
+                        order: e.order ?? 0,
+                      ),
+                    ),
+                  ]..sort(
+                      (a, b) => a.order.compareTo(b.order),
+                    );
+
+                  nextUp = sections.firstWhere(
+                    (element) => element.status == SeenStatus.notSeen,
+                  );
+                } catch (e) {
+                  nextUp = null;
+                }
+                if (nextUp == null) {
+                  return const SizedBox();
+                }
+                return ColoredBox(
+                  key: const ValueKey('nextUp'),
+                  color: colors.background,
+                  child: Column(
+                    children: [
+                      const Divider(),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Next Up',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  nextUp.name,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: colors.mutedForeground,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            SizedBox(
+                              height: 48,
+                              child: HookBuilder(
+                                builder: (context) {
+                                  final (route, _) = useContentType(
+                                    contentType: nextUp!.contentType,
+                                    codingContentType: nextUp.codingContentType,
+                                  );
+
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      if (route != null) {
+                                        context.router.push(route);
+                                      }
+                                    },
+                                    child: const Text('Start'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: bottomPadding + 16,
+                      ),
+                    ],
+                  ),
+                )
+                    .animate()
+                    .slideY(
+                      curve: Curves.easeInOut,
+                      begin: 1,
+                      end: 0,
+                    )
+                    .animate()
+                    .fadeIn();
+              },
             ),
           ),
         ],

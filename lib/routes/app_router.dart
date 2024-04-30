@@ -11,7 +11,7 @@ import 'package:codeblurb_mobile/pages/logged_in/logged_in_page.dart';
 import 'package:codeblurb_mobile/pages/login/login_page.dart';
 import 'package:codeblurb_mobile/pages/my_courses/my_courses_page.dart';
 import 'package:codeblurb_mobile/pages/profile/profile_page.dart';
-import 'package:codeblurb_mobile/pages/purchased_course_details_page.dart';
+import 'package:codeblurb_mobile/pages/purchased_course_details/purchased_course_details_page.dart';
 import 'package:codeblurb_mobile/pages/quiz_content_page.dart';
 import 'package:codeblurb_mobile/pages/quiz_content_results_page.dart';
 import 'package:codeblurb_mobile/pages/register/register_page.dart';

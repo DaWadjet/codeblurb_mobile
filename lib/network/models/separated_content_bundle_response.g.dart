@@ -27,6 +27,10 @@ SeparatedContentBundleResponse _$SeparatedContentBundleResponseFromJson(
       (json['includedVideos'] as List<dynamic>)
           .map((e) => VideoContentResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      (json['includedArticles'] as List<dynamic>)
+          .map(
+              (e) => ArticleContentResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 const _$SkillLevelEnumMap = {
