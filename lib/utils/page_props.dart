@@ -19,7 +19,7 @@ class PageProps with _$PageProps {
     final queryParams = <String, dynamic>{
       'title': title,
     };
-
+    queryParams['page'] = page.toString();
     queryParams['pageSize'] = size.toString();
 
     if (sort != null) {

@@ -30,9 +30,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CourseDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<CourseDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CourseDetailsPage(),
+        child: CourseDetailsPage(
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     CourseRatingsRoute.name: (routeData) {
@@ -92,9 +96,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     PurchasedCourseDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<PurchasedCourseDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const PurchasedCourseDetailsPage(),
+        child: PurchasedCourseDetailsPage(
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     QuizContentRoute.name: (routeData) {
@@ -203,16 +211,40 @@ class ChangePasswordRouteArgs {
 
 /// generated route for
 /// [CourseDetailsPage]
-class CourseDetailsRoute extends PageRouteInfo<void> {
-  const CourseDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class CourseDetailsRoute extends PageRouteInfo<CourseDetailsRouteArgs> {
+  CourseDetailsRoute({
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           CourseDetailsRoute.name,
+          args: CourseDetailsRouteArgs(
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CourseDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CourseDetailsRouteArgs> page =
+      PageInfo<CourseDetailsRouteArgs>(name);
+}
+
+class CourseDetailsRouteArgs {
+  const CourseDetailsRouteArgs({
+    required this.courseId,
+    this.key,
+  });
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CourseDetailsRouteArgs{courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -357,16 +389,41 @@ class ProfileRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [PurchasedCourseDetailsPage]
-class PurchasedCourseDetailsRoute extends PageRouteInfo<void> {
-  const PurchasedCourseDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class PurchasedCourseDetailsRoute
+    extends PageRouteInfo<PurchasedCourseDetailsRouteArgs> {
+  PurchasedCourseDetailsRoute({
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           PurchasedCourseDetailsRoute.name,
+          args: PurchasedCourseDetailsRouteArgs(
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'PurchasedCourseDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<PurchasedCourseDetailsRouteArgs> page =
+      PageInfo<PurchasedCourseDetailsRouteArgs>(name);
+}
+
+class PurchasedCourseDetailsRouteArgs {
+  const PurchasedCourseDetailsRouteArgs({
+    required this.courseId,
+    this.key,
+  });
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PurchasedCourseDetailsRouteArgs{courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
