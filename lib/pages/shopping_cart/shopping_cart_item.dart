@@ -94,17 +94,19 @@ class ShoppingCartItem extends HookConsumerWidget {
                               ),
                               const SizedBox(height: 4),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
                                     item.ratings.averageRating
                                         .toStringAsFixed(1),
                                     style: const TextStyle(
                                       fontSize: 18,
+                                      height: 1,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   const SizedBox(width: 4),
-                                  Assets.images.star.svg(
+                                  Assets.images.starFilled.svg(
                                     // ignore: deprecated_member_use_from_same_package
                                     color: Colors.amber,
                                     width: 16,
@@ -114,6 +116,7 @@ class ShoppingCartItem extends HookConsumerWidget {
                                     '(${item.ratings.numberOfRatings})',
                                     style: TextStyle(
                                       fontSize: 14,
+                                      height: 1,
                                       color: colors.mutedForeground,
                                     ),
                                   ),

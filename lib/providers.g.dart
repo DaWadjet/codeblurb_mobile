@@ -457,6 +457,277 @@ class _AvailableShoppingItemsQueryProviderElement
       (origin as AvailableShoppingItemsQueryProvider).pageProps;
 }
 
+String _$contentBundleQueryHash() =>
+    r'461daeb0715c632545858d44fefc5e284208a316';
+
+/// See also [contentBundleQuery].
+@ProviderFor(contentBundleQuery)
+const contentBundleQueryProvider = ContentBundleQueryFamily();
+
+/// See also [contentBundleQuery].
+class ContentBundleQueryFamily
+    extends Family<AsyncValue<SeparatedContentBundleResponse>> {
+  /// See also [contentBundleQuery].
+  const ContentBundleQueryFamily();
+
+  /// See also [contentBundleQuery].
+  ContentBundleQueryProvider call(
+    int contentId,
+  ) {
+    return ContentBundleQueryProvider(
+      contentId,
+    );
+  }
+
+  @override
+  ContentBundleQueryProvider getProviderOverride(
+    covariant ContentBundleQueryProvider provider,
+  ) {
+    return call(
+      provider.contentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'contentBundleQueryProvider';
+}
+
+/// See also [contentBundleQuery].
+class ContentBundleQueryProvider
+    extends AutoDisposeFutureProvider<SeparatedContentBundleResponse> {
+  /// See also [contentBundleQuery].
+  ContentBundleQueryProvider(
+    int contentId,
+  ) : this._internal(
+          (ref) => contentBundleQuery(
+            ref as ContentBundleQueryRef,
+            contentId,
+          ),
+          from: contentBundleQueryProvider,
+          name: r'contentBundleQueryProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$contentBundleQueryHash,
+          dependencies: ContentBundleQueryFamily._dependencies,
+          allTransitiveDependencies:
+              ContentBundleQueryFamily._allTransitiveDependencies,
+          contentId: contentId,
+        );
+
+  ContentBundleQueryProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.contentId,
+  }) : super.internal();
+
+  final int contentId;
+
+  @override
+  Override overrideWith(
+    FutureOr<SeparatedContentBundleResponse> Function(
+            ContentBundleQueryRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ContentBundleQueryProvider._internal(
+        (ref) => create(ref as ContentBundleQueryRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        contentId: contentId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<SeparatedContentBundleResponse>
+      createElement() {
+    return _ContentBundleQueryProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ContentBundleQueryProvider && other.contentId == contentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, contentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ContentBundleQueryRef
+    on AutoDisposeFutureProviderRef<SeparatedContentBundleResponse> {
+  /// The parameter `contentId` of this provider.
+  int get contentId;
+}
+
+class _ContentBundleQueryProviderElement
+    extends AutoDisposeFutureProviderElement<SeparatedContentBundleResponse>
+    with ContentBundleQueryRef {
+  _ContentBundleQueryProviderElement(super.provider);
+
+  @override
+  int get contentId => (origin as ContentBundleQueryProvider).contentId;
+}
+
+String _$shoppingItemDetailsQueryHash() =>
+    r'76aade8997f59ef7aaf0659479c67315b182b8d1';
+
+/// See also [shoppingItemDetailsQuery].
+@ProviderFor(shoppingItemDetailsQuery)
+const shoppingItemDetailsQueryProvider = ShoppingItemDetailsQueryFamily();
+
+/// See also [shoppingItemDetailsQuery].
+class ShoppingItemDetailsQueryFamily
+    extends Family<AsyncValue<ShoppingItemResponse>> {
+  /// See also [shoppingItemDetailsQuery].
+  const ShoppingItemDetailsQueryFamily();
+
+  /// See also [shoppingItemDetailsQuery].
+  ShoppingItemDetailsQueryProvider call(
+    int id,
+  ) {
+    return ShoppingItemDetailsQueryProvider(
+      id,
+    );
+  }
+
+  @override
+  ShoppingItemDetailsQueryProvider getProviderOverride(
+    covariant ShoppingItemDetailsQueryProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'shoppingItemDetailsQueryProvider';
+}
+
+/// See also [shoppingItemDetailsQuery].
+class ShoppingItemDetailsQueryProvider
+    extends AutoDisposeFutureProvider<ShoppingItemResponse> {
+  /// See also [shoppingItemDetailsQuery].
+  ShoppingItemDetailsQueryProvider(
+    int id,
+  ) : this._internal(
+          (ref) => shoppingItemDetailsQuery(
+            ref as ShoppingItemDetailsQueryRef,
+            id,
+          ),
+          from: shoppingItemDetailsQueryProvider,
+          name: r'shoppingItemDetailsQueryProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$shoppingItemDetailsQueryHash,
+          dependencies: ShoppingItemDetailsQueryFamily._dependencies,
+          allTransitiveDependencies:
+              ShoppingItemDetailsQueryFamily._allTransitiveDependencies,
+          id: id,
+        );
+
+  ShoppingItemDetailsQueryProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
+  final int id;
+
+  @override
+  Override overrideWith(
+    FutureOr<ShoppingItemResponse> Function(
+            ShoppingItemDetailsQueryRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ShoppingItemDetailsQueryProvider._internal(
+        (ref) => create(ref as ShoppingItemDetailsQueryRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<ShoppingItemResponse> createElement() {
+    return _ShoppingItemDetailsQueryProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ShoppingItemDetailsQueryProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ShoppingItemDetailsQueryRef
+    on AutoDisposeFutureProviderRef<ShoppingItemResponse> {
+  /// The parameter `id` of this provider.
+  int get id;
+}
+
+class _ShoppingItemDetailsQueryProviderElement
+    extends AutoDisposeFutureProviderElement<ShoppingItemResponse>
+    with ShoppingItemDetailsQueryRef {
+  _ShoppingItemDetailsQueryProviderElement(super.provider);
+
+  @override
+  int get id => (origin as ShoppingItemDetailsQueryProvider).id;
+}
+
 String _$contentBundlesQueryHash() =>
     r'45c2efe157e22ed5bcac9de80966cf0765ad70ad';
 

@@ -106,10 +106,10 @@ class ShoppingCartPage extends HookConsumerWidget {
                                       ),
                                       Text(
                                         '\$${data.shoppingItems.fold(
-                                          0.toDouble(),
-                                          (previousValue, element) =>
-                                              previousValue + element.price,
-                                        )}',
+                                              0.toDouble(),
+                                              (previousValue, element) =>
+                                                  previousValue + element.price,
+                                            ).toStringAsFixed(2)}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 22,
@@ -132,7 +132,14 @@ class ShoppingCartPage extends HookConsumerWidget {
                             ),
                           ],
                         ),
-                      ).animate().slideY().fadeIn(),
+                      )
+                        .animate()
+                        .slideY(
+                          curve: Curves.easeInOut,
+                          begin: 1,
+                          end: 0,
+                        )
+                        .fadeIn(),
               ),
             ),
           ),

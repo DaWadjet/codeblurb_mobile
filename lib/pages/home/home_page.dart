@@ -50,7 +50,8 @@ class HomePage extends HookConsumerWidget {
               onRefresh: ref.watch(homeNotifierProvider.notifier).onRefresh,
               child: isLoading
                   ? Padding(
-                      padding: EdgeInsets.only(top: fullHeight / 3),
+                      padding:
+                          EdgeInsets.only(top: fullHeight / 3 + kToolbarHeight),
                       child: const Center(
                         key: ValueKey('loading'),
                         child: Loader(
@@ -60,7 +61,8 @@ class HomePage extends HookConsumerWidget {
                     )
                   : hasError
                       ? Padding(
-                          padding: EdgeInsets.only(top: fullHeight / 3),
+                          padding: EdgeInsets.only(
+                              top: fullHeight / 3 + kToolbarHeight),
                           child: const Center(
                             key: ValueKey('error'),
                             child: Text(
@@ -118,7 +120,7 @@ class HomePage extends HookConsumerWidget {
                                 }
                               },
                             ),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 36),
                             mostPopularQuery.maybeWhen(
                               orElse: () => const SizedBox(),
                               data: (data) {
@@ -166,7 +168,7 @@ class HomePage extends HookConsumerWidget {
                                 }
                               },
                             ),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 36),
                             topRatedQuery.maybeWhen(
                               orElse: () => const SizedBox(),
                               data: (data) {
