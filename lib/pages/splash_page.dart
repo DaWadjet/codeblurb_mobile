@@ -41,8 +41,6 @@ class SplashPage extends HookConsumerWidget {
 
     useEffect(
       () {
-        debugPrint(route.value.toString());
-        debugPrint(isAnimationFinished.value.toString());
         if (route.value != null && isAnimationFinished.value) {
           context.router.replaceAll([route.value!]);
         }

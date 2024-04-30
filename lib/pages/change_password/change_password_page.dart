@@ -110,7 +110,7 @@ class ChangePasswordPage extends HookConsumerWidget {
                 child: state.isLoading
                     ? const Loader(
                         size: 32,
-                        withPrimaryColor: true,
+                        withBackgroundColor: true,
                       )
                     : const Text(
                         'Change Password',

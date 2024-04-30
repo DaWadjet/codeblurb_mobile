@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 enum TokenType {
-  @JsonValue('accessToken')
+  @JsonValue('accesstoken')
   access,
-  @JsonValue('refreshToken')
+  @JsonValue('refreshtoken')
   refresh
 }
