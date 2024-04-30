@@ -1,3 +1,4 @@
+import 'package:codeblurb_mobile/network/models/article_content_response.dart';
 import 'package:codeblurb_mobile/network/models/coding_content_response.dart';
 import 'package:codeblurb_mobile/network/models/quiz_content_response.dart';
 import 'package:codeblurb_mobile/network/models/ratings_response.dart';
@@ -22,6 +23,7 @@ class SeparatedContentBundleResponse {
     this.includedCodings,
     this.includedQuizzes,
     this.includedVideos,
+    this.includedArticles,
   );
 
   factory SeparatedContentBundleResponse.fromJson(Map<String, dynamic> json) =>
@@ -30,6 +32,7 @@ class SeparatedContentBundleResponse {
   final List<CodingContentResponse> includedCodings;
   final List<QuizContentResponse> includedQuizzes;
   final List<VideoContentResponse> includedVideos;
+  final List<ArticleContentResponse> includedArticles;
   final int id;
   final String description;
   final String title;

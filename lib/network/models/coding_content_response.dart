@@ -32,7 +32,7 @@ class CodingContentResponse {
   final int estimatedTime;
   final String shortDescription;
   final int? order;
-  final String description;
+  final String? description;
   final CodingContentType codingContentType;
   final List<String> codeSnippets;
   final List<String> codeSkeleton;
