@@ -7,10 +7,10 @@ class ProgressApi {
   final Dio _dio;
 
   ApiResponse markAsSeen(int contentId) async {
-    return _dio.patch('/seen/$contentId');
+    return _dio.patch('/content/progress/seen/$contentId');
   }
 
   ApiResponse markAsCompleted(int contentId) async {
-    return _dio.patch('/completed/$contentId');
+    return _dio.patch('/content/progress/completed/$contentId');
   }
 }

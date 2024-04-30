@@ -73,6 +73,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/star.svg
   SvgGenImage get star => const SvgGenImage('assets/images/star.svg');
 
+  /// File path: assets/images/star_filled.svg
+  SvgGenImage get starFilled =>
+      const SvgGenImage('assets/images/star_filled.svg');
+
   /// File path: assets/images/terminal.svg
   SvgGenImage get terminal => const SvgGenImage('assets/images/terminal.svg');
 
@@ -116,6 +120,7 @@ class $AssetsImagesGen {
         send,
         shoppingCart,
         star,
+        starFilled,
         terminal,
         updatedAt,
         user,

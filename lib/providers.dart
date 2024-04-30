@@ -11,6 +11,8 @@ import 'package:codeblurb_mobile/network/models/page_minimal_content_bundle_resp
 import 'package:codeblurb_mobile/network/models/page_shopping_item_response.dart';
 import 'package:codeblurb_mobile/network/models/previous_payments_response.dart';
 import 'package:codeblurb_mobile/network/models/profile_response.dart';
+import 'package:codeblurb_mobile/network/models/separated_content_bundle_response.dart';
+import 'package:codeblurb_mobile/network/models/shopping_item_response.dart';
 import 'package:codeblurb_mobile/network/payment/payment_api.dart';
 import 'package:codeblurb_mobile/network/payment/payment_repository.dart';
 import 'package:codeblurb_mobile/network/profile/profile_api.dart';
@@ -214,6 +216,36 @@ Future<PagedShoppingItemsResponse> availableShoppingItemsQuery(
         shoppingRepositoryProvider,
       )
       .getAvailableShoppingItems(pageProps ?? SortBy.none());
+}
+
+@riverpod
+Future<SeparatedContentBundleResponse> contentBundleQuery(
+  ContentBundleQueryRef ref,
+  int contentId,
+) {
+  loggedInGuard(ref);
+  ref.cacheFor(const Duration(minutes: 1));
+
+  return ref
+      .watch(
+        contentRepositoryProvider,
+      )
+      .getContentBundle(contentId);
+}
+
+@riverpod
+Future<ShoppingItemResponse> shoppingItemDetailsQuery(
+  ShoppingItemDetailsQueryRef ref,
+  int id,
+) {
+  loggedInGuard(ref);
+  ref.cacheFor(const Duration(minutes: 1));
+
+  return ref
+      .watch(
+        shoppingRepositoryProvider,
+      )
+      .getShoppingItem(id);
 }
 
 @riverpod

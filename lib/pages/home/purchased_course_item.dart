@@ -115,7 +115,7 @@ class PurchasedCourseItem extends HookConsumerWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 2),
-                                            Assets.images.star.svg(
+                                            Assets.images.starFilled.svg(
                                               // ignore: deprecated_member_use_from_same_package
                                               color: Colors.amber,
                                               width: 12,

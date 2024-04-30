@@ -53,7 +53,7 @@ class ShoppingCourseItem extends HookConsumerWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -74,8 +74,9 @@ class ShoppingCourseItem extends HookConsumerWidget {
                                     color: colors.mutedForeground,
                                   ),
                                 ),
-                                const SizedBox(height: 4),
+                                const SizedBox(height: 6),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
                                       content
@@ -83,11 +84,12 @@ class ShoppingCourseItem extends HookConsumerWidget {
                                           .toStringAsFixed(1),
                                       style: const TextStyle(
                                         fontSize: 16,
+                                        height: 1,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     const SizedBox(width: 4),
-                                    Assets.images.star.svg(
+                                    Assets.images.starFilled.svg(
                                       // ignore: deprecated_member_use_from_same_package
                                       color: Colors.amber,
                                       width: 16,
@@ -97,6 +99,7 @@ class ShoppingCourseItem extends HookConsumerWidget {
                                       '(${content.contentBundle.ratings.numberOfRatings})',
                                       style: TextStyle(
                                         fontSize: 14,
+                                        height: 1,
                                         color: colors.mutedForeground,
                                       ),
                                     ),

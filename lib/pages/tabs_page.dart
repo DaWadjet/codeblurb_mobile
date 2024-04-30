@@ -99,7 +99,8 @@ class TabsPage extends HookConsumerWidget {
                                       ? '9+'
                                       : data.shoppingItems.length.toString(),
                                   style: TextStyle(
-                                    fontSize: 8,
+                                    fontSize: 10,
+                                    height: 1.25,
                                     fontWeight: FontWeight.bold,
                                     color: colors.background,
                                   ),
