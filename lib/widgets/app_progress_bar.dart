@@ -5,10 +5,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class AppProgressBar extends HookWidget {
   const AppProgressBar({
     required this.progress,
+    this.withText = true,
+    this.height = 8,
     super.key,
   });
 
   final double progress;
+  final bool withText;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class AppProgressBar extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 8,
+              height: height,
               child: LinearProgressIndicator(
                 borderRadius: BorderRadius.circular(8),
                 value: value,
@@ -31,18 +35,20 @@ class AppProgressBar extends HookWidget {
                 valueColor: AlwaysStoppedAnimation(colors.accentForeground),
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              percentage == 0
-                  ? 'Start learning'
-                  : percentage < 100
-                      ? '${percentage.toStringAsFixed(0)}% completed'
-                      : 'Completed',
-              style: TextStyle(
-                fontSize: 12,
-                color: colors.mutedForeground,
+            if (withText) ...[
+              const SizedBox(height: 4),
+              Text(
+                percentage == 0
+                    ? 'Start learning'
+                    : percentage < 100
+                        ? '${percentage.toStringAsFixed(0)}% completed'
+                        : 'Completed',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: colors.mutedForeground,
+                ),
               ),
-            ),
+            ],
           ],
         );
       },
