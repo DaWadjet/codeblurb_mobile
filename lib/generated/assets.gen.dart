@@ -41,6 +41,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/eyeoff.svg
   SvgGenImage get eyeoff => const SvgGenImage('assets/images/eyeoff.svg');
 
+  /// File path: assets/images/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/images/filter.svg');
+
   /// File path: assets/images/home.svg
   SvgGenImage get home => const SvgGenImage('assets/images/home.svg');
 
@@ -69,6 +72,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/shopping-cart.svg
   SvgGenImage get shoppingCart =>
       const SvgGenImage('assets/images/shopping-cart.svg');
+
+  /// File path: assets/images/sort.svg
+  SvgGenImage get sort => const SvgGenImage('assets/images/sort.svg');
 
   /// File path: assets/images/star.svg
   SvgGenImage get star => const SvgGenImage('assets/images/star.svg');
@@ -110,6 +116,7 @@ class $AssetsImagesGen {
         code,
         eye,
         eyeoff,
+        filter,
         home,
         hourglass,
         info,
@@ -119,6 +126,7 @@ class $AssetsImagesGen {
         quiz,
         send,
         shoppingCart,
+        sort,
         star,
         starFilled,
         terminal,

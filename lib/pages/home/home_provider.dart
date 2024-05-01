@@ -6,15 +6,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'home_provider.g.dart';
 
 final topRatedQueryProvider = availableShoppingItemsQueryProvider(
-  pageProps: SortBy.highestRated().copyWith(size: 3),
+  pageProps: SortBy.highestRated(),
 );
 
 final mostPopularQueryProvider = availableShoppingItemsQueryProvider(
-  pageProps: SortBy.mostPopular().copyWith(size: 3),
+  pageProps: SortBy.mostPopular(),
 );
 
 final contentBundlesHomeQueryProvider = contentBundlesQueryProvider(
-  pageProps: SortBy.recentlyViewed().copyWith(size: 3),
+  pageProps: SortBy.recentlyViewed(),
 );
 
 @riverpod

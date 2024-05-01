@@ -4,16 +4,15 @@ import 'package:codeblurb_mobile/pages/home/home_provider.dart';
 import 'package:codeblurb_mobile/pages/home/purchased_course_item.dart';
 import 'package:codeblurb_mobile/pages/home/scrollable_view.dart';
 import 'package:codeblurb_mobile/pages/home/shopping_course_item.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/utils/sort_by.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
+import 'package:codeblurb_mobile/widgets/cart_bottom_call_to_action.dart';
 import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 //TODO remove list duplications
-
-final highestRatedProps = SortBy.highestRated();
-final mostPopularProps = SortBy.mostPopular();
 
 @RoutePage()
 class HomePage extends HookConsumerWidget {
@@ -21,7 +20,7 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final topPadding = context.topPadding;
+    final bottomPadding = context.bottomPadding;
     final topRatedQuery = ref.watch(
       topRatedQueryProvider,
     );
@@ -57,16 +56,15 @@ class HomePage extends HookConsumerWidget {
                         )
                       : Column(
                           children: [
-                            SizedBox(
-                              height: topPadding,
-                            ),
-                            const SizedBox(height: 10),
                             purchasedCoursesQuery.maybeWhen(
                               orElse: SizedBox.new,
                               data: (data) => ScrollableView(
                                 items: data.content,
                                 title: 'Continue Learning',
                                 ctor: PurchasedCourseItem.new,
+                                onViewAll: () => context.router.replaceAll([
+                                  const MyCoursesRoute(),
+                                ]),
                               ),
                             ),
                             const SizedBox(height: 36),
@@ -76,6 +74,11 @@ class HomePage extends HookConsumerWidget {
                                 items: data.content,
                                 title: 'Most Popular Courses',
                                 ctor: ShoppingCourseItem.new,
+                                onViewAll: () => context.router.push(
+                                  ExploreRoute(
+                                    filterProps: SortBy.mostPopular(),
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 36),
@@ -85,12 +88,18 @@ class HomePage extends HookConsumerWidget {
                                 items: data.content,
                                 title: 'Top Rated Courses',
                                 ctor: ShoppingCourseItem.new,
+                                onViewAll: () => context.router.push(
+                                  ExploreRoute(
+                                    filterProps: SortBy.highestRated(),
+                                  ),
+                                ),
                               ),
                             ),
-                            const SizedBox(height: 36),
+                            SizedBox(height: bottomPadding + 100),
                           ],
                         ),
             ),
+            const CartBottomCallToAction(),
           ],
         ),
       ),

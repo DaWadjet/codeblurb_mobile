@@ -17,6 +17,7 @@ class Tappable extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: Material(
+        color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
           child: child,

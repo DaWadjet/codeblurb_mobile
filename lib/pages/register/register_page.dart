@@ -92,6 +92,7 @@ class RegisterPage extends HookConsumerWidget {
                 isSecureField: true,
                 label: 'Password',
                 validator: Validators.password,
+                textInputAction: TextInputAction.next,
                 onChanged: (value) => passwordValue.value = value ?? '',
                 autofillHints: const [
                   AutofillHints.password,
@@ -103,7 +104,6 @@ class RegisterPage extends HookConsumerWidget {
                 controller: confirmPasswordController,
                 isSecureField: true,
                 label: 'Confirm Password',
-                textInputAction: TextInputAction.next,
                 validator: Validators.confirmPassword(
                   passwordValue.value,
                 ),

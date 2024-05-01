@@ -4,7 +4,7 @@ import 'package:codeblurb_mobile/pages/change_password/change_password_page.dart
 import 'package:codeblurb_mobile/pages/course_details/course_details_page.dart';
 import 'package:codeblurb_mobile/pages/course_ratings/course_ratings_page.dart';
 import 'package:codeblurb_mobile/pages/drag_and_drop_content_page.dart';
-import 'package:codeblurb_mobile/pages/explore_page.dart';
+import 'package:codeblurb_mobile/pages/explore/explore_page.dart';
 import 'package:codeblurb_mobile/pages/fill_the_gaps_content_page.dart';
 import 'package:codeblurb_mobile/pages/home/home_page.dart';
 import 'package:codeblurb_mobile/pages/logged_in/logged_in_page.dart';

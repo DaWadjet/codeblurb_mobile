@@ -214,6 +214,8 @@ Future<PagedShoppingItemsResponse> availableShoppingItemsQuery(
   PageProps? pageProps,
 }) {
   loggedInGuard(ref);
+  ref.cacheFor(const Duration(minutes: 1));
+
   return ref
       .watch(
         shoppingRepositoryProvider,
@@ -262,7 +264,7 @@ Future<PagedMinimalContentBundleResponse> contentBundlesQuery(
       .watch(
         contentRepositoryProvider,
       )
-      .getContentBundles((pageProps ?? SortBy.none()).copyWith(size: 2));
+      .getContentBundles(pageProps ?? SortBy.none());
 }
 
 @Riverpod(keepAlive: true)

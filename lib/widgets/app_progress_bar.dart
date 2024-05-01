@@ -36,7 +36,7 @@ class AppProgressBar extends HookWidget {
               ),
             ),
             if (withText) ...[
-              const SizedBox(height: 4),
+              const SizedBox(height: 6),
               Text(
                 percentage == 0
                     ? 'Start learning'

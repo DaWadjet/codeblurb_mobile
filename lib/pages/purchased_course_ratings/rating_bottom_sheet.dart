@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
+import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/purchased_course_ratings/purchased_course_ratings_provider.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
@@ -17,6 +18,7 @@ class RatingBottomSheet extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
+    final colors = useColors();
     final rating = useState(0.toDouble());
     final ratingMutationState = ref.watch(courseRatingsNotifierProvider);
     final bottomPadding = context.bottomPadding;
@@ -30,7 +32,7 @@ class RatingBottomSheet extends HookConsumerWidget {
           height: 4,
           margin: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: colors.border,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -38,7 +40,7 @@ class RatingBottomSheet extends HookConsumerWidget {
           height: 16,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             children: [
               const Text(
