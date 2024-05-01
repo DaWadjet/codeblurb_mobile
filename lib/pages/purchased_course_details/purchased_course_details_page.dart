@@ -8,6 +8,7 @@ import 'package:codeblurb_mobile/hooks/use_content_type.dart';
 import 'package:codeblurb_mobile/network/models/seen_status.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/providers.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
 import 'package:codeblurb_mobile/widgets/course_section_item.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
@@ -190,12 +191,27 @@ class PurchasedCourseDetailsPage extends HookConsumerWidget {
                             ],
                           ),
                           const Spacer(),
-                          Text(
-                            '${course.numberOfPurchases} enrolled',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: colors.mutedForeground,
-                            ),
+                          Column(
+                            children: [
+                              Text(
+                                '${course.numberOfPurchases} enrolled',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: colors.mutedForeground,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              TextButton(
+                                onPressed: () => context.router.push(
+                                  PurchasedCourseDetailsRoute(
+                                    courseId: courseId,
+                                  ),
+                                ),
+                                child: const Text('See Reviews'),
+                              ),
+                            ],
                           ),
                         ],
                       ),

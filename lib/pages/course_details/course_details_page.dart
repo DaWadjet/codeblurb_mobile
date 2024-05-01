@@ -139,7 +139,9 @@ class CourseDetailsPage extends HookConsumerWidget {
                                 height: 4,
                               ),
                               Text(
-                                'out of ${course.ratings.numberOfRatings} ratings',
+                                course.ratings.numberOfRatings > 0
+                                    ? 'out of ${course.ratings.numberOfRatings} ratings'
+                                    : 'No ratings yet',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: colors.mutedForeground,
@@ -148,12 +150,29 @@ class CourseDetailsPage extends HookConsumerWidget {
                             ],
                           ),
                           const Spacer(),
-                          Text(
-                            '${course.numberOfPurchases} enrolled',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: colors.mutedForeground,
-                            ),
+                          Column(
+                            children: [
+                              Text(
+                                '${course.numberOfPurchases} enrolled',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: colors.mutedForeground,
+                                ),
+                              ),
+                              if (course.ratings.numberOfRatings > 0) ...[
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                TextButton(
+                                  onPressed: () => context.router.push(
+                                    CourseRatingsRoute(
+                                      courseId: courseId,
+                                    ),
+                                  ),
+                                  child: const Text('See Reviews'),
+                                ),
+                              ],
+                            ],
                           ),
                         ],
                       ),

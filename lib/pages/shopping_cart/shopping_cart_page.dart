@@ -118,11 +118,20 @@ class ShoppingCartPage extends HookConsumerWidget {
                                     ],
                                   ),
                                   const Spacer(),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      //TODO: Implement checkout
-                                    },
-                                    child: const Text('Checkout'),
+                                  SizedBox(
+                                    height: 48,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        //TODO: Implement checkout
+                                      },
+                                      child: const Text(
+                                        'Checkout',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),

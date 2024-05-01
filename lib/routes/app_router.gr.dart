@@ -40,9 +40,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CourseRatingsRoute.name: (routeData) {
+      final args = routeData.argsAs<CourseRatingsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CourseRatingsPage(),
+        child: CourseRatingsPage(
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     DragAndDropContentRoute.name: (routeData) {
@@ -105,6 +109,16 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: PurchasedCourseDetailsPage(
+          courseId: args.courseId,
+          key: args.key,
+        ),
+      );
+    },
+    PurchasedCourseRatingsRoute.name: (routeData) {
+      final args = routeData.argsAs<PurchasedCourseRatingsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PurchasedCourseRatingsPage(
           courseId: args.courseId,
           key: args.key,
         ),
@@ -254,16 +268,40 @@ class CourseDetailsRouteArgs {
 
 /// generated route for
 /// [CourseRatingsPage]
-class CourseRatingsRoute extends PageRouteInfo<void> {
-  const CourseRatingsRoute({List<PageRouteInfo>? children})
-      : super(
+class CourseRatingsRoute extends PageRouteInfo<CourseRatingsRouteArgs> {
+  CourseRatingsRoute({
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           CourseRatingsRoute.name,
+          args: CourseRatingsRouteArgs(
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CourseRatingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CourseRatingsRouteArgs> page =
+      PageInfo<CourseRatingsRouteArgs>(name);
+}
+
+class CourseRatingsRouteArgs {
+  const CourseRatingsRouteArgs({
+    required this.courseId,
+    this.key,
+  });
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CourseRatingsRouteArgs{courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -452,6 +490,45 @@ class PurchasedCourseDetailsRouteArgs {
   @override
   String toString() {
     return 'PurchasedCourseDetailsRouteArgs{courseId: $courseId, key: $key}';
+  }
+}
+
+/// generated route for
+/// [PurchasedCourseRatingsPage]
+class PurchasedCourseRatingsRoute
+    extends PageRouteInfo<PurchasedCourseRatingsRouteArgs> {
+  PurchasedCourseRatingsRoute({
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PurchasedCourseRatingsRoute.name,
+          args: PurchasedCourseRatingsRouteArgs(
+            courseId: courseId,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'PurchasedCourseRatingsRoute';
+
+  static const PageInfo<PurchasedCourseRatingsRouteArgs> page =
+      PageInfo<PurchasedCourseRatingsRouteArgs>(name);
+}
+
+class PurchasedCourseRatingsRouteArgs {
+  const PurchasedCourseRatingsRouteArgs({
+    required this.courseId,
+    this.key,
+  });
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PurchasedCourseRatingsRouteArgs{courseId: $courseId, key: $key}';
   }
 }
 
