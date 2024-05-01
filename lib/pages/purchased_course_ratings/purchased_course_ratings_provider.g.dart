@@ -7,7 +7,7 @@ part of 'purchased_course_ratings_provider.dart';
 // **************************************************************************
 
 String _$courseRatingsNotifierHash() =>
-    r'3cc33605c04e7e564bad1ec5cd549c1023fea317';
+    r'8f3f4ccb34578a721e46fecee3fb760e8beb82d4';
 
 /// See also [CourseRatingsNotifier].
 @ProviderFor(CourseRatingsNotifier)

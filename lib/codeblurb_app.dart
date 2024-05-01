@@ -4,6 +4,7 @@ import 'package:codeblurb_mobile/theme/app_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,22 +15,25 @@ class CodeblurbApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
 
-    return MaterialApp.router(
-      routerConfig: router.config(),
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      builder: (context, child) => Overlay(
-        initialEntries: [
-          if (child != null) ...[
-            OverlayEntry(
-              builder: (context) => _Unfocus(child: child),
-            ),
+    return ScreenUtilInit(
+      minTextAdapt: true,
+      child: MaterialApp.router(
+        routerConfig: router.config(),
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        builder: (context, child) => Overlay(
+          initialEntries: [
+            if (child != null) ...[
+              OverlayEntry(
+                builder: (context) => _Unfocus(child: child),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -73,19 +77,19 @@ class _Toaster extends HookConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: colors.background,
+            color: colors.foreground,
             border: Border.all(color: colors.border),
           ),
           child: Text(
             next,
             style: TextStyle(
-              color: colors.foreground,
+              color: colors.background,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
-        gravity: ToastGravity.BOTTOM,
+        gravity: ToastGravity.TOP,
       );
     });
     return child;

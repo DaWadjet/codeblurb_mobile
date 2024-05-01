@@ -110,8 +110,8 @@ class ShoppingCartPage extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 16,
+                          SizedBox(
+                            height: bottomPadding,
                           ),
                         ],
                       ),

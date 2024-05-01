@@ -43,6 +43,7 @@ class RatingDistribution extends HookWidget {
         }
         return (initialRatingDistribution, initialPercentages);
       },
+      [ratings.numberOfRatings],
     );
 
     return Column(

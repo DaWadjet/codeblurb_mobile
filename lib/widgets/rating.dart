@@ -8,15 +8,15 @@ class Rating extends HookWidget {
   const Rating({
     super.key,
     this.initialRating,
-    this.canRate = false,
     this.itemSize = 10,
     this.itemPadding = 0,
+    this.onRatingUpdate,
   });
 
   final double? initialRating;
-  final bool canRate;
   final double itemSize;
   final double itemPadding;
+  final ValueChanged<double>? onRatingUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,10 @@ class Rating extends HookWidget {
               // ignore: deprecated_member_use_from_same_package
               color: colors.mutedForeground,
             ),
-      ignoreGestures: canRate,
-      onRatingUpdate: (rating) {},
+      ignoreGestures: onRatingUpdate == null,
+      onRatingUpdate: (rating) {
+        onRatingUpdate?.call(rating);
+      },
     );
   }
 }

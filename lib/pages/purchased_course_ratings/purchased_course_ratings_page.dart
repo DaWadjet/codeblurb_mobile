@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
+import 'package:codeblurb_mobile/hooks/use_colors.dart';
+import 'package:codeblurb_mobile/pages/purchased_course_ratings/rating_bottom_sheet.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
 import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
@@ -18,7 +20,7 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final courseQuery = ref.watch(contentBundleQueryProvider(courseId));
     final bottomPadding = context.bottomPadding;
-
+    final colors = useColors();
     final username = ref.watch(isLoggedInProvider.notifier).getUsername();
 
     return Scaffold(
@@ -40,6 +42,7 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
               .firstOrNull;
 
           return Stack(
+            fit: StackFit.expand,
             children: [
               SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
@@ -51,15 +54,54 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
                     ...course.ratings.ratings.map(
                       (e) => RatingItem(rating: e),
                     ),
-                    SizedBox(height: bottomPadding),
+                    SizedBox(height: bottomPadding + 70),
                   ],
                 ),
               ),
               if (ratingOfUser == null)
                 BottomCallToAction(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Rate this course'),
+                  child: Column(
+                    children: [
+                      const Divider(),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          children: [
+                            const Text(
+                              'Rate this course',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const Spacer(),
+                            SizedBox(
+                              height: 48,
+                              child: ElevatedButton(
+                                onPressed: () => context.showBottomSheet<void>(
+                                  backgroundColor: colors.background,
+                                  content: RatingBottomSheet(
+                                    courseId: courseId,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Rate',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: bottomPadding,
+                      ),
+                    ],
                   ),
                 ),
             ],

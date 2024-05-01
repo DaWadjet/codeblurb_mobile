@@ -9,6 +9,7 @@ import 'package:codeblurb_mobile/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -26,8 +27,8 @@ class RegisterPage extends HookConsumerWidget {
     final confirmPasswordController = useTextEditingController();
     final emailController = useTextEditingController();
 
-    final bottomPadding = context.bottomPadding;
-    final topPadding = context.topPadding;
+    final bottomPadding = context.bottomPadding.h;
+    final topPadding = context.topPadding.h;
 
     final onRegister = useMemoized(
       () => () {
@@ -52,9 +53,9 @@ class RegisterPage extends HookConsumerWidget {
           SizedBox(
             height: topPadding,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 32),
-            child: CodeblurbLogo(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 32.h),
+            child: const CodeblurbLogo(),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +72,7 @@ class RegisterPage extends HookConsumerWidget {
                   AutofillHints.username,
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               InputField(
                 key: const Key('input_email'),
                 controller: emailController,
@@ -84,7 +85,7 @@ class RegisterPage extends HookConsumerWidget {
                   AutofillHints.email,
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               InputField(
                 key: const Key('input_password'),
                 controller: passwordController,
@@ -96,7 +97,7 @@ class RegisterPage extends HookConsumerWidget {
                   AutofillHints.password,
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               InputField(
                 key: const Key('input_confirm_password'),
                 controller: confirmPasswordController,
@@ -111,14 +112,14 @@ class RegisterPage extends HookConsumerWidget {
                 ],
                 onSubmit: onRegister,
               ),
-              const SizedBox(height: 36),
+              SizedBox(height: 44.h),
             ],
           ),
           Column(
             children: [
               SizedBox(
                 width: double.infinity,
-                height: 44,
+                height: 44.h,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
@@ -126,32 +127,34 @@ class RegisterPage extends HookConsumerWidget {
                   child: ElevatedButton(
                     onPressed: onRegister,
                     child: state.isLoading
-                        ? const Loader(
-                            size: 32,
+                        ? Loader(
+                            size: 32.h,
                             withBackgroundColor: true,
                           )
-                        : const Text(
+                        : Text(
                             'Register',
                             style: TextStyle(
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               SizedBox(
                 width: double.infinity,
-                height: 44,
+                height: 44.h,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                   ),
                   child: OutlinedButton(
                     onPressed: context.router.maybePop,
-                    child: const Text(
+                    child: Text(
                       'Already a member?',
                       style: TextStyle(
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -160,7 +163,7 @@ class RegisterPage extends HookConsumerWidget {
               ),
             ],
           ),
-          SizedBox(height: bottomPadding + 10),
+          SizedBox(height: bottomPadding + 10.h),
         ],
       ),
     );

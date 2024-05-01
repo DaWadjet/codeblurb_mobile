@@ -13,14 +13,22 @@ class LoggedInPage extends ConsumerWidget {
     ref
       ..watch(paymentsQueryProvider)
       ..listen(sessionErrorProvider, (previous, next) {
-        showDialog<void>(
-          context: context,
-          builder: (_) => PlatformDialog(
-            title: 'Session expired',
-            onTap: () =>
-                ref.read(isLoggedInProvider.notifier).setLoggedIn(value: false),
-          ),
-        );
+        if (context.mounted && next) {
+          showDialog<void>(
+            context: context,
+            builder: (_) => PlatformDialog(
+              title: 'Session expired',
+              onTap: () {
+                if (ref.context.mounted) {
+                  ref.read(sessionErrorProvider.notifier).clearError();
+                  ref
+                      .read(isLoggedInProvider.notifier)
+                      .setLoggedIn(value: false);
+                }
+              },
+            ),
+          );
+        }
       })
       ..listen(alertDialogNotifierProvider, (previous, next) {
         showDialog<void>(

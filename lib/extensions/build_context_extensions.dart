@@ -23,7 +23,7 @@ extension BuildContextX on BuildContext {
       useRootNavigator: true,
       backgroundColor: backgroundColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       builder: (_) => content,
     );

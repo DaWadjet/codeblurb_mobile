@@ -31,7 +31,7 @@ class FullPageError extends StatelessWidget {
       padding: EdgeInsets.only(top: fullHeight / 3 + kToolbarHeight),
       child: const Center(
         key: ValueKey('error'),
-        child: Text('An error occurred\nPlease try again later'),
+        child: Text('An error occurred'),
       ),
     );
   }
@@ -50,7 +50,7 @@ class FullPageMessage extends StatelessWidget {
     final fullHeight = MediaQuery.of(context).size.height;
 
     return Padding(
-      padding: EdgeInsets.only(top: fullHeight / 3 + kToolbarHeight),
+      padding: EdgeInsets.only(top: fullHeight / 3),
       child: Center(
         key: const ValueKey('message'),
         child: Text(message),
