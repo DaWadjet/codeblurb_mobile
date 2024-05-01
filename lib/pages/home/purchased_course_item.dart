@@ -34,8 +34,8 @@ class PurchasedCourseItem extends HookConsumerWidget {
       },
       [content.ratings.ratings, username],
     );
-
     final colors = useColors();
+
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Tappable(

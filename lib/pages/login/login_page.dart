@@ -49,11 +49,11 @@ class LoginPage extends HookConsumerWidget {
             height: topPadding,
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 48),
+            padding: EdgeInsets.symmetric(vertical: 32),
             child: CodeblurbLogo(),
           ),
           const Padding(
-            padding: EdgeInsets.only(bottom: 60),
+            padding: EdgeInsets.only(bottom: 36),
             child: Text(
               'Welcome back!',
               style: TextStyle(
@@ -89,10 +89,9 @@ class LoginPage extends HookConsumerWidget {
                 ],
                 onSubmit: onLogin,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 84),
             ],
           ),
-          const Spacer(),
           Column(
             children: [
               SizedBox(
@@ -112,7 +111,6 @@ class LoginPage extends HookConsumerWidget {
                         : const Text(
                             'Login',
                             style: TextStyle(
-                              fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -131,7 +129,6 @@ class LoginPage extends HookConsumerWidget {
                     child: const Text(
                       "Don't have an account?",
                       style: TextStyle(
-                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -152,7 +149,7 @@ class LoginPage extends HookConsumerWidget {
               ),
             ],
           ),
-          SizedBox(height: bottomPadding + 20),
+          SizedBox(height: bottomPadding + 10),
         ],
       ),
     );

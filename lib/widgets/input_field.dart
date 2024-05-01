@@ -26,7 +26,7 @@ class InputField extends HookWidget {
     this.autofillHints,
     this.hintStyle,
     this.labelStyle = const TextStyle(
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: FontWeight.w500,
     ),
     this.onSubmit,
@@ -66,7 +66,7 @@ class InputField extends HookWidget {
             label!,
             style: labelStyle,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
         ],
         Focus(
           focusNode: focusNode,

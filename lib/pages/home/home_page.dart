@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/home/home_provider.dart';
 import 'package:codeblurb_mobile/pages/home/purchased_course_item.dart';
 import 'package:codeblurb_mobile/pages/home/scrollable_view.dart';
@@ -21,6 +22,7 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final topPadding = context.topPadding;
     final topRatedQuery = ref.watch(
       topRatedQueryProvider,
     );
@@ -56,6 +58,9 @@ class HomePage extends HookConsumerWidget {
                         )
                       : Column(
                           children: [
+                            SizedBox(
+                              height: topPadding,
+                            ),
                             const SizedBox(height: 10),
                             purchasedCoursesQuery.maybeWhen(
                               orElse: SizedBox.new,
