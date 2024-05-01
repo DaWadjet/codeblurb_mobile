@@ -5,7 +5,8 @@ import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/profile/profile_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
-import 'package:codeblurb_mobile/widgets/loader.dart';
+import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
+import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,18 +20,13 @@ class ProfilePage extends HookConsumerWidget {
     final profileQuery = ref.watch(profileQueryProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
+      appBar: const CBAppBar(
+        title: 'Profile',
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 300),
         child: profileQuery.when(
-          loading: () => const Center(
-            key: ValueKey('loading'),
-            child: Loader(
-              size: 48,
-            ),
-          ),
+          loading: FullPageLoader.new,
           data: (data) => Padding(
             padding: const EdgeInsets.all(16),
             child: Column(

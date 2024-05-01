@@ -1,30 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/hooks/use_content_type.dart';
-import 'package:codeblurb_mobile/network/models/coding_content_type.dart';
-import 'package:codeblurb_mobile/network/models/content_type.dart';
 import 'package:codeblurb_mobile/network/models/seen_status.dart';
+import 'package:codeblurb_mobile/types.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-class Section {
-  Section({
-    required this.name,
-    required this.shortDescription,
-    required this.estimatedTime,
-    required this.contentType,
-    required this.status,
-    this.order = 0,
-    this.codingContentType,
-  });
-  final String name;
-  final String shortDescription;
-  final int estimatedTime;
-  final ContentType contentType;
-  final SeenStatus status;
-  final CodingContentType? codingContentType;
-  final int order;
-}
 
 class CourseSectionItem extends HookConsumerWidget {
   const CourseSectionItem({

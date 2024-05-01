@@ -7,6 +7,7 @@ import 'package:codeblurb_mobile/pages/my_courses/my_courses_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/utils/sort_by.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
+import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -42,13 +43,11 @@ class MyCoursesPage extends HookConsumerWidget {
       [filter.value, skillLevels.value, debouncedSearchValue],
     );
 
-    final fullHeight = MediaQuery.of(context).size.height;
     final colors = useColors();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Courses'),
-        forceMaterialTransparency: true,
+      appBar: const CBAppBar(
+        title: 'My Courses',
       ),
       body: AdaptivePullToRefresh(
         onRefresh: () =>

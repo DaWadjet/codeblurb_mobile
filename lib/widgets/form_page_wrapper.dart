@@ -1,4 +1,5 @@
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
+import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -22,10 +23,7 @@ class FormPageWrapper extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: title == null,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        title: title != null ? Text(title!) : const SizedBox.shrink(),
-      ),
+      appBar: CBAppBar(title: title),
       extendBody: true,
       body: SafeArea(
         top: title != null,
