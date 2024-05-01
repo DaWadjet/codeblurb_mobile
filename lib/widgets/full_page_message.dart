@@ -2,14 +2,17 @@ import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:flutter/material.dart';
 
 class FullPageLoader extends StatelessWidget {
-  const FullPageLoader({super.key});
+  const FullPageLoader({super.key, this.withoutToolbarHeight = false});
+
+  final bool withoutToolbarHeight;
 
   @override
   Widget build(BuildContext context) {
     final fullHeight = MediaQuery.of(context).size.height;
 
     return Padding(
-      padding: EdgeInsets.only(top: fullHeight / 3 + kToolbarHeight),
+      padding: EdgeInsets.only(
+          top: fullHeight / 3 + (withoutToolbarHeight ? 0 : kToolbarHeight)),
       child: const Center(
         key: ValueKey('loading'),
         child: Loader(

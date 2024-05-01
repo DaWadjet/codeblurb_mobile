@@ -12,6 +12,11 @@ abstract class AppTheme {
   ) =>
       ThemeData(
         brightness: brightness,
+        bottomSheetTheme: BottomSheetThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: colorPalette.background,
           elevation: 0,

@@ -9,7 +9,7 @@ abstract class SortBy {
     return PageProps(
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'None',
     );
   }
@@ -23,7 +23,7 @@ abstract class SortBy {
       sort: Sort(property: 'popularity', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Most Popular',
     );
   }
@@ -37,7 +37,7 @@ abstract class SortBy {
       sort: Sort(property: 'releaseDate', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Freshly Released',
     );
   }
@@ -51,7 +51,7 @@ abstract class SortBy {
       sort: Sort(property: 'price', ascending: true),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Price Ascending',
     );
   }
@@ -65,7 +65,7 @@ abstract class SortBy {
       sort: Sort(property: 'price', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Price Descending',
     );
   }
@@ -79,7 +79,7 @@ abstract class SortBy {
       sort: Sort(property: 'rating', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Highest Rated',
     );
   }
@@ -93,7 +93,7 @@ abstract class SortBy {
       sort: Sort(property: 'title', ascending: true),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Title A to Z',
     );
   }
@@ -107,7 +107,7 @@ abstract class SortBy {
       sort: Sort(property: 'title', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Title Z to A',
     );
   }
@@ -121,7 +121,7 @@ abstract class SortBy {
       sort: Sort(property: 'lastInteractedAt', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Recently Viewed',
     );
   }
@@ -135,7 +135,7 @@ abstract class SortBy {
       sort: Sort(property: 'enrolledAt', ascending: false),
       title: title,
       page: page,
-      skills: skills,
+      skills: skills ?? [],
       label: 'Recently Enrolled',
     );
   }

@@ -300,7 +300,7 @@ final profileQueryProvider =
 
 typedef ProfileQueryRef = AutoDisposeFutureProviderRef<ProfileResponse>;
 String _$availableShoppingItemsQueryHash() =>
-    r'17364f7815b68fb8658738a2d2c637907f615113';
+    r'16be891afba2975a73c8d34378fbbcdb065e69b9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -729,7 +729,7 @@ class _ShoppingItemDetailsQueryProviderElement
 }
 
 String _$contentBundlesQueryHash() =>
-    r'45c2efe157e22ed5bcac9de80966cf0765ad70ad';
+    r'4d8508b044eadf689a48d313133a554b33b6efa7';
 
 /// See also [contentBundlesQuery].
 @ProviderFor(contentBundlesQuery)

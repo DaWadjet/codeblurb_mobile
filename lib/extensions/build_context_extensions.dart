@@ -21,10 +21,6 @@ extension BuildContextX on BuildContext {
       context: this,
       isScrollControlled: true,
       useRootNavigator: true,
-      backgroundColor: backgroundColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-      ),
       builder: (_) => content,
     );
   }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
+import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
 import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
@@ -36,7 +37,7 @@ class ShoppingCartPage extends HookConsumerWidget {
                   }
                   return Column(
                     children: [
-                      ...[...data.shoppingItems, ...data.shoppingItems].map(
+                      ...data.shoppingItems.map(
                         (item) => ShoppingCartItem(item: item),
                       ),
                       SizedBox(height: 100 + bottomPadding),
@@ -93,10 +94,14 @@ class ShoppingCartPage extends HookConsumerWidget {
                                 ),
                                 const Spacer(),
                                 SizedBox(
-                                  height: 48,
+                                  height: 44,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      //TODO: Implement checkout
+                                      ref
+                                          .read(toastNotifierProvider.notifier)
+                                          .showToast(
+                                            'Ez csak weben fog menni (:',
+                                          );
                                     },
                                     child: const Text(
                                       'Checkout',
