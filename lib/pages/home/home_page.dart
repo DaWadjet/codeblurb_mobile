@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/pages/home/home_provider.dart';
 import 'package:codeblurb_mobile/pages/home/purchased_course_item.dart';
+import 'package:codeblurb_mobile/pages/home/scrollable_view.dart';
 import 'package:codeblurb_mobile/pages/home/shopping_course_item.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/utils/sort_by.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
-import 'package:codeblurb_mobile/widgets/loader.dart';
+import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -20,8 +21,6 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final fullHeight = MediaQuery.of(context).size.height;
-
     final topRatedQuery = ref.watch(
       topRatedQueryProvider,
     );
@@ -49,172 +48,40 @@ class HomePage extends HookConsumerWidget {
             AdaptivePullToRefresh(
               onRefresh: ref.watch(homeNotifierProvider.notifier).onRefresh,
               child: isLoading
-                  ? Padding(
-                      padding:
-                          EdgeInsets.only(top: fullHeight / 3 + kToolbarHeight),
-                      child: const Center(
-                        key: ValueKey('loading'),
-                        child: Loader(
-                          size: 48,
-                        ),
-                      ),
-                    )
+                  ? const FullPageLoader()
                   : hasError
-                      ? Padding(
-                          padding: EdgeInsets.only(
-                              top: fullHeight / 3 + kToolbarHeight),
-                          child: const Center(
-                            key: ValueKey('error'),
-                            child: Text(
-                              'An error occurred\nPlease try again later',
-                            ),
-                          ),
+                      ? const FullPageError(
+                          null,
+                          null,
                         )
                       : Column(
                           children: [
                             const SizedBox(height: 10),
                             purchasedCoursesQuery.maybeWhen(
-                              orElse: () => const SizedBox(),
-                              data: (data) {
-                                if (data.content.isEmpty) {
-                                  return const SizedBox();
-                                } else {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 16,
-                                        ),
-                                        child: Text(
-                                          'Continue Learning',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 6,
-                                      ),
-                                      SizedBox(
-                                        height: 244,
-                                        child: ListView(
-                                          scrollDirection: Axis.horizontal,
-                                          children: [
-                                            ...[
-                                              ...data.content,
-                                              ...data.content,
-                                            ].map(
-                                              PurchasedCourseItem.new,
-                                            ),
-                                            const SizedBox(
-                                              width: 16,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              },
+                              orElse: SizedBox.new,
+                              data: (data) => ScrollableView(
+                                items: data.content,
+                                title: 'Continue Learning',
+                                ctor: PurchasedCourseItem.new,
+                              ),
                             ),
                             const SizedBox(height: 36),
                             mostPopularQuery.maybeWhen(
-                              orElse: () => const SizedBox(),
-                              data: (data) {
-                                if (data.content.isEmpty) {
-                                  return const SizedBox();
-                                } else {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 16,
-                                        ),
-                                        child: Text(
-                                          'Most Popular Courses',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 6,
-                                      ),
-                                      SizedBox(
-                                        height: 244,
-                                        child: ListView(
-                                          scrollDirection: Axis.horizontal,
-                                          children: [
-                                            ...[
-                                              ...data.content,
-                                              ...data.content,
-                                            ].map(
-                                              ShoppingCourseItem.new,
-                                            ),
-                                            const SizedBox(
-                                              width: 16,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              },
+                              orElse: SizedBox.new,
+                              data: (data) => ScrollableView(
+                                items: data.content,
+                                title: 'Most Popular Courses',
+                                ctor: ShoppingCourseItem.new,
+                              ),
                             ),
                             const SizedBox(height: 36),
                             topRatedQuery.maybeWhen(
-                              orElse: () => const SizedBox(),
-                              data: (data) {
-                                if (data.content.isEmpty) {
-                                  return const SizedBox();
-                                } else {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 16,
-                                        ),
-                                        child: Text(
-                                          'Top Rated Courses',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 6,
-                                      ),
-                                      SizedBox(
-                                        height: 244,
-                                        child: ListView(
-                                          scrollDirection: Axis.horizontal,
-                                          children: [
-                                            ...[
-                                              ...data.content,
-                                              ...data.content,
-                                            ].map(
-                                              ShoppingCourseItem.new,
-                                            ),
-                                            const SizedBox(
-                                              width: 16,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              },
+                              orElse: SizedBox.new,
+                              data: (data) => ScrollableView(
+                                items: data.content,
+                                title: 'Top Rated Courses',
+                                ctor: ShoppingCourseItem.new,
+                              ),
                             ),
                             const SizedBox(height: 36),
                           ],

@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
-import 'package:codeblurb_mobile/widgets/loader.dart';
+import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
+import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
+import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -15,12 +15,10 @@ class ShoppingCartPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(shoppingCartQueryProvider);
-    final fullHeight = MediaQuery.of(context).size.height;
-    final colors = useColors();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shopping Cart'),
-        forceMaterialTransparency: true,
+      appBar: const CBAppBar(
+        title: 'Shopping Cart',
       ),
       body: Stack(
         children: [
@@ -31,13 +29,7 @@ class ShoppingCartPage extends HookConsumerWidget {
               child: cart.when(
                 data: (data) {
                   if (data.shoppingItems.isEmpty) {
-                    return Padding(
-                      padding: EdgeInsets.only(top: fullHeight / 3),
-                      key: const ValueKey('empty'),
-                      child: const Center(
-                        child: Text('Your cart is empty'),
-                      ),
-                    );
+                    return const FullPageMessage(message: 'Your cart is empty');
                   }
                   return Column(
                     children: [
@@ -48,29 +40,12 @@ class ShoppingCartPage extends HookConsumerWidget {
                     ],
                   );
                 },
-                error: (e, stackTrace) => Padding(
-                  padding: EdgeInsets.only(top: fullHeight / 3),
-                  child: const Center(
-                    key: ValueKey('error'),
-                    child: Text('An error occurred\nPlease try again later'),
-                  ),
-                ),
-                loading: () => Padding(
-                  padding: EdgeInsets.only(top: fullHeight / 3),
-                  child: const Center(
-                    key: ValueKey('loading'),
-                    child: Loader(
-                      size: 48,
-                    ),
-                  ),
-                ),
+                error: FullPageError.new,
+                loading: FullPageLoader.new,
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
+          BottomCallToAction(
             child: cart.maybeWhen(
               orElse: () => const SizedBox(),
               data: (data) => AnimatedSwitcher(
@@ -79,76 +54,64 @@ class ShoppingCartPage extends HookConsumerWidget {
                     ? const SizedBox(
                         key: ValueKey('empty'),
                       )
-                    : ColoredBox(
+                    : Column(
                         key: const ValueKey('total'),
-                        color: colors.background,
-                        child: Column(
-                          children: [
-                            const Divider(),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        'Total price',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16,
-                                        ),
+                        children: [
+                          const Divider(),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Total price',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
                                       ),
-                                      Text(
-                                        '\$${data.shoppingItems.fold(
-                                              0.toDouble(),
-                                              (previousValue, element) =>
-                                                  previousValue + element.price,
-                                            ).toStringAsFixed(2)}',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 22,
-                                        ),
+                                    ),
+                                    Text(
+                                      '\$${data.shoppingItems.fold(
+                                            0.toDouble(),
+                                            (previousValue, element) =>
+                                                previousValue + element.price,
+                                          ).toStringAsFixed(2)}',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 22,
                                       ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  SizedBox(
-                                    height: 48,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        //TODO: Implement checkout
-                                      },
-                                      child: const Text(
-                                        'Checkout',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                SizedBox(
+                                  height: 48,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      //TODO: Implement checkout
+                                    },
+                                    child: const Text(
+                                      'Checkout',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                          ],
-                        ),
-                      )
-                        .animate()
-                        .slideY(
-                          curve: Curves.easeInOut,
-                          begin: 1,
-                          end: 0,
-                        )
-                        .fadeIn(),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                        ],
+                      ),
               ),
             ),
           ),

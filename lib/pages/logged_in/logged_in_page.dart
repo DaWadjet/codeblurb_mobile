@@ -10,9 +10,8 @@ class LoggedInPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final payments = ref.watch(paymentsQueryProvider);
-
     ref
+      ..watch(paymentsQueryProvider)
       ..listen(sessionErrorProvider, (previous, next) {
         showDialog<void>(
           context: context,

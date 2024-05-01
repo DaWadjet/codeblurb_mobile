@@ -154,7 +154,6 @@ class LoginPage extends HookConsumerWidget {
           ),
           SizedBox(height: bottomPadding + 20),
         ],
-        // .animate(interval: 100.ms).fadeIn(duration: 200.ms),
       ),
     );
   }
