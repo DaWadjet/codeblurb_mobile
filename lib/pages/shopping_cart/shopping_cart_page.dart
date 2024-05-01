@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
@@ -15,6 +16,8 @@ class ShoppingCartPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(shoppingCartQueryProvider);
+
+    final bottomPadding = context.bottomPadding;
 
     return Scaffold(
       appBar: const CBAppBar(
@@ -33,10 +36,10 @@ class ShoppingCartPage extends HookConsumerWidget {
                   }
                   return Column(
                     children: [
-                      ...data.shoppingItems.map(
+                      ...[...data.shoppingItems, ...data.shoppingItems].map(
                         (item) => ShoppingCartItem(item: item),
                       ),
-                      const SizedBox(height: 100),
+                      SizedBox(height: 100 + bottomPadding),
                     ],
                   );
                 },

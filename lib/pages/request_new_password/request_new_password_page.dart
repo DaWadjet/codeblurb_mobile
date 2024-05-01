@@ -24,6 +24,7 @@ class RequestNewPasswordPage extends HookConsumerWidget {
 
     final bottomPadding = context.bottomPadding;
     final topPadding = context.topPadding;
+    final maxHeight = MediaQuery.of(context).size.height;
 
     final onSendRequest = useMemoized(
       () => () {
@@ -41,88 +42,88 @@ class RequestNewPasswordPage extends HookConsumerWidget {
 
     return FormPageWrapper(
       formKey: _formKey,
-      child: Column(
-        children: [
-          SizedBox(
-            height: topPadding,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 48),
-            child: CodeblurbLogo(),
-          ),
-          const Text(
-            'Enter your username below to receive a password reset email!',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+      child: SizedBox(
+        height: maxHeight - topPadding - bottomPadding,
+        child: Column(
+          children: [
+            SizedBox(
+              height: topPadding,
             ),
-          ),
-          const SizedBox(height: 10),
-          InputField(
-            key: const Key('input_username'),
-            controller: usernameController,
-            hint: 'Username',
-            keyboardType: TextInputType.name,
-            textCapitalization: TextCapitalization.none,
-            validator: Validators.required,
-            onSubmit: onSendRequest,
-            autofillHints: const [
-              AutofillHints.username,
-            ],
-          ),
-          const SizedBox(height: 10),
-          const Spacer(),
-          Column(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: onSendRequest,
-                    child: state.isLoading
-                        ? const Loader(
-                            size: 32,
-                            withBackgroundColor: true,
-                          )
-                        : const Text(
-                            'Send Reset Email',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                  ),
-                ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 32),
+              child: CodeblurbLogo(),
+            ),
+            const Text(
+              'Enter your username below to receive a password reset email!',
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                  ),
-                  child: OutlinedButton(
-                    child: const Text(
-                      'Back',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
+            ),
+            const SizedBox(height: 16),
+            InputField(
+              key: const Key('input_username'),
+              controller: usernameController,
+              hint: 'Username',
+              keyboardType: TextInputType.name,
+              textCapitalization: TextCapitalization.none,
+              validator: Validators.required,
+              onSubmit: onSendRequest,
+              autofillHints: const [
+                AutofillHints.username,
+              ],
+            ),
+            const SizedBox(height: 16),
+            const Spacer(),
+            Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
                     ),
-                    onPressed: () => context.router.maybePop(),
+                    child: ElevatedButton(
+                      onPressed: onSendRequest,
+                      child: state.isLoading
+                          ? const Loader(
+                              size: 32,
+                              withBackgroundColor: true,
+                            )
+                          : const Text(
+                              'Send Reset Email',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: bottomPadding + 20),
-        ],
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                    ),
+                    child: OutlinedButton(
+                      child: const Text(
+                        'Back',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onPressed: () => context.router.maybePop(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: bottomPadding + 20),
+          ],
+        ),
       ),
     );
   }

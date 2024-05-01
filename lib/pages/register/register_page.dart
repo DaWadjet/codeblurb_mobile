@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/register/register_provider.dart';
-import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:codeblurb_mobile/widgets/form_page_wrapper.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
@@ -54,7 +53,7 @@ class RegisterPage extends HookConsumerWidget {
             height: topPadding,
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 48),
+            padding: EdgeInsets.symmetric(vertical: 32),
             child: CodeblurbLogo(),
           ),
           Column(
@@ -112,15 +111,14 @@ class RegisterPage extends HookConsumerWidget {
                 ],
                 onSubmit: onRegister,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 36),
             ],
           ),
-          const Spacer(),
           Column(
             children: [
               SizedBox(
                 width: double.infinity,
-                height: 48,
+                height: 44,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
@@ -135,7 +133,6 @@ class RegisterPage extends HookConsumerWidget {
                         : const Text(
                             'Register',
                             style: TextStyle(
-                              fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -145,26 +142,25 @@ class RegisterPage extends HookConsumerWidget {
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
-                height: 48,
+                height: 44,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                   ),
                   child: OutlinedButton(
+                    onPressed: context.router.maybePop,
                     child: const Text(
                       'Already a member?',
                       style: TextStyle(
-                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onPressed: () => context.router.push(LoginRoute()),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: bottomPadding + 20),
+          SizedBox(height: bottomPadding + 10),
         ],
       ),
     );
