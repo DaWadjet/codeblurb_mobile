@@ -62,8 +62,10 @@ class PurchaseIncentiveSection extends HookConsumerWidget {
                       onPressed: () async {
                         if (cartProviderState.isLoading) return;
                         if (isItemInCart) {
-                          await context.router.push(
-                            const ShoppingCartRoute(),
+                          await context.router.replaceAll(
+                            [
+                              const ShoppingCartRoute(),
+                            ],
                           );
                         } else {
                           unawaited(
