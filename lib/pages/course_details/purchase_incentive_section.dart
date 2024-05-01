@@ -118,7 +118,7 @@ class PurchaseIncentiveSection extends HookConsumerWidget {
           ),
         ),
         SizedBox(
-          height: bottomPadding + 16,
+          height: bottomPadding,
         ),
       ],
     );

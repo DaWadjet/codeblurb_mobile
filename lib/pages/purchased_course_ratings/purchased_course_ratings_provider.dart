@@ -1,3 +1,4 @@
+import 'package:codeblurb_mobile/pages/home/home_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,11 +14,33 @@ class CourseRatingsNotifier extends _$CourseRatingsNotifier {
   Future<void> rateCourse({
     required int courseId,
     required int rating,
-    required String? review,
+    required String review,
   }) async {
-    ref.read(ratingsRepositoryProvider).rateCourse(
-        courseId: courseId,
-        rating: rating,
-        review: review ?? 'Note: No review was provided by the user.');
+    state = AsyncData(courseId);
+    try {
+      ref.invalidate(
+        contentBundlesQueryProvider,
+      );
+      await ref.read(ratingsRepositoryProvider).rateCourse(
+            courseId: courseId,
+            rating: rating,
+            review: review.isEmpty
+                ? 'Note: No review was provided by the user.'
+                : review,
+          );
+      await Future.wait([
+        ref.refresh(contentBundleQueryProvider(courseId).future),
+        ref.refresh(contentBundlesHomeQueryProvider.future),
+      ]);
+      ref.read(toastNotifierProvider.notifier).showToast(
+            'Course rated successfully',
+          );
+    } catch (e) {
+      ref.read(toastNotifierProvider.notifier).showToast(
+            'Failed to rate course',
+          );
+    } finally {
+      state = const AsyncValue.data(null);
+    }
   }
 }

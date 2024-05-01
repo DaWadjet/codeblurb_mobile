@@ -9,6 +9,7 @@ import 'package:codeblurb_mobile/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -22,9 +23,8 @@ class RequestNewPasswordPage extends HookConsumerWidget {
     final state = ref.watch(requestNewPasswordNotifierProvider);
     final usernameController = useTextEditingController();
 
-    final bottomPadding = context.bottomPadding;
-    final topPadding = context.topPadding;
-    final maxHeight = MediaQuery.of(context).size.height;
+    final bottomPadding = context.bottomPadding.h;
+    final topPadding = context.topPadding.h;
 
     final onSendRequest = useMemoized(
       () => () {
@@ -43,43 +43,46 @@ class RequestNewPasswordPage extends HookConsumerWidget {
     return FormPageWrapper(
       formKey: _formKey,
       child: SizedBox(
-        height: maxHeight - topPadding - bottomPadding,
+        height: 690.h - bottomPadding,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              height: topPadding,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32),
-              child: CodeblurbLogo(),
-            ),
-            const Text(
-              'Enter your username below to receive a password reset email!',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 16),
-            InputField(
-              key: const Key('input_username'),
-              controller: usernameController,
-              hint: 'Username',
-              keyboardType: TextInputType.name,
-              textCapitalization: TextCapitalization.none,
-              validator: Validators.required,
-              onSubmit: onSendRequest,
-              autofillHints: const [
-                AutofillHints.username,
+            Column(
+              children: [
+                SizedBox(
+                  height: topPadding,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 32.h),
+                  child: const CodeblurbLogo(),
+                ),
+                const Text(
+                  'Enter your username below to receive a password reset email!',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                InputField(
+                  key: const Key('input_username'),
+                  controller: usernameController,
+                  hint: 'Username',
+                  keyboardType: TextInputType.name,
+                  textCapitalization: TextCapitalization.none,
+                  validator: Validators.required,
+                  onSubmit: onSendRequest,
+                  autofillHints: const [
+                    AutofillHints.username,
+                  ],
+                ),
               ],
             ),
-            const SizedBox(height: 16),
-            const Spacer(),
             Column(
               children: [
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
+                  height: 44.h,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -91,27 +94,29 @@ class RequestNewPasswordPage extends HookConsumerWidget {
                               size: 32,
                               withBackgroundColor: true,
                             )
-                          : const Text(
+                          : Text(
                               'Send Reset Email',
                               style: TextStyle(
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
+                  height: 44.h,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
                     ),
                     child: OutlinedButton(
-                      child: const Text(
+                      child: Text(
                         'Back',
                         style: TextStyle(
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -119,9 +124,9 @@ class RequestNewPasswordPage extends HookConsumerWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: bottomPadding + 10.h),
               ],
             ),
-            SizedBox(height: bottomPadding + 20),
           ],
         ),
       ),

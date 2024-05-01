@@ -4,7 +4,6 @@ import 'package:codeblurb_mobile/pages/home/home_provider.dart';
 import 'package:codeblurb_mobile/pages/home/purchased_course_item.dart';
 import 'package:codeblurb_mobile/pages/home/scrollable_view.dart';
 import 'package:codeblurb_mobile/pages/home/shopping_course_item.dart';
-import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/utils/sort_by.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
 import 'package:codeblurb_mobile/widgets/full_page_message.dart';
@@ -32,7 +31,7 @@ class HomePage extends HookConsumerWidget {
     );
 
     final purchasedCoursesQuery = ref.watch(
-      contentBundlesQueryProvider(pageProps: SortBy.none().copyWith(size: 3)),
+      contentBundlesHomeQueryProvider,
     );
 
     final hasError = topRatedQuery.hasError ||

@@ -53,14 +53,17 @@ SharedPreferences sharedPrefs(SharedPrefsRef ref) {
 @Riverpod(keepAlive: true)
 class SessionError extends _$SessionError {
   @override
-  void build() {}
-
-  void onError() {
-    state = null;
+  bool build() {
+    return false;
   }
 
-  @override
-  bool updateShouldNotify(void previous, void next) => true;
+  void clearError() {
+    state = false;
+  }
+
+  void onError() {
+    state = true;
+  }
 }
 
 @Riverpod(keepAlive: true)

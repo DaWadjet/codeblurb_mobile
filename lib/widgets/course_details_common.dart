@@ -132,6 +132,7 @@ class CourseDetailsCommon extends HookWidget {
             ),
             const Spacer(),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   '$numberOfPurchases enrolled',
@@ -145,6 +146,9 @@ class CourseDetailsCommon extends HookWidget {
                     height: 4,
                   ),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
                     onPressed: () {
                       if (isPurchased) {
                         context.router.push(
@@ -203,7 +207,7 @@ class CourseDetailsCommon extends HookWidget {
               .toList(),
         ),
         SizedBox(
-          height: bottomPadding + 100,
+          height: bottomPadding + 70,
         ),
       ],
     );

@@ -8,6 +8,7 @@ import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -24,7 +25,8 @@ class ChangePasswordPage extends HookConsumerWidget {
     final newPasswordController = useTextEditingController();
     final confirmNewPasswordController = useTextEditingController();
 
-    final bottomPadding = context.bottomPadding;
+    final bottomPadding = context.bottomPadding.h;
+    final topPadding = context.topPadding.h;
 
     final onPasswordChanged = useMemoized(
       () => () {
@@ -45,85 +47,89 @@ class ChangePasswordPage extends HookConsumerWidget {
     return FormPageWrapper(
       formKey: _formKey,
       title: 'Change Password',
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 16,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InputField(
-                key: const Key('input_old_password'),
-                controller: oldPasswordController,
-                label: 'Old Password',
-                textCapitalization: TextCapitalization.none,
-                validator: Validators.password,
-                textInputAction: TextInputAction.next,
-                onChanged: (value) => oldPasswordValue.value = value ?? '',
-                autofillHints: const [
-                  AutofillHints.password,
-                ],
-                isSecureField: true,
-              ),
-              const SizedBox(height: 16),
-              InputField(
-                key: const Key('input_new_password'),
-                controller: newPasswordController,
-                isSecureField: true,
-                label: 'New Password',
-                validator: Validators.differentPassword(oldPasswordValue.value),
-                onChanged: (value) => newPasswordValue.value = value ?? '',
-                textInputAction: TextInputAction.next,
-                autofillHints: const [
-                  AutofillHints.password,
-                ],
-              ),
-              const SizedBox(height: 16),
-              InputField(
-                key: const Key('input_confirm_new_password'),
-                controller: confirmNewPasswordController,
-                isSecureField: true,
-                label: 'Confirm New Password',
-                textInputAction: TextInputAction.next,
-                validator: Validators.confirmPassword(
-                  newPasswordValue.value,
+      child: SizedBox(
+        height: 690.h - bottomPadding - kToolbarHeight.h - topPadding,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InputField(
+                  key: const Key('input_old_password'),
+                  controller: oldPasswordController,
+                  label: 'Old Password',
+                  textCapitalization: TextCapitalization.none,
+                  validator: Validators.password,
+                  textInputAction: TextInputAction.next,
+                  onChanged: (value) => oldPasswordValue.value = value ?? '',
+                  autofillHints: const [
+                    AutofillHints.password,
+                  ],
+                  isSecureField: true,
                 ),
-                autofillHints: const [
-                  AutofillHints.password,
-                ],
-                onSubmit: onPasswordChanged,
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-          const Spacer(),
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-              ),
-              child: ElevatedButton(
-                onPressed: onPasswordChanged,
-                child: state.isLoading
-                    ? const Loader(
-                        size: 32,
-                        withBackgroundColor: true,
-                      )
-                    : const Text(
-                        'Change Password',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-              ),
+                SizedBox(height: 16.h),
+                InputField(
+                  key: const Key('input_new_password'),
+                  controller: newPasswordController,
+                  isSecureField: true,
+                  label: 'New Password',
+                  validator:
+                      Validators.differentPassword(oldPasswordValue.value),
+                  onChanged: (value) => newPasswordValue.value = value ?? '',
+                  textInputAction: TextInputAction.next,
+                  autofillHints: const [
+                    AutofillHints.password,
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                InputField(
+                  key: const Key('input_confirm_new_password'),
+                  controller: confirmNewPasswordController,
+                  isSecureField: true,
+                  label: 'Confirm New Password',
+                  textInputAction: TextInputAction.next,
+                  validator: Validators.confirmPassword(
+                    newPasswordValue.value,
+                  ),
+                  autofillHints: const [
+                    AutofillHints.password,
+                  ],
+                  onSubmit: onPasswordChanged,
+                ),
+              ],
             ),
-          ),
-          SizedBox(height: bottomPadding),
-        ],
+            Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 44.h,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: onPasswordChanged,
+                      child: state.isLoading
+                          ? const Loader(
+                              size: 32,
+                              withBackgroundColor: true,
+                            )
+                          : Text(
+                              'Change Password',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16.h),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

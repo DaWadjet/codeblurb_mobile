@@ -864,11 +864,11 @@ class _ContentBundlesQueryProviderElement
   PageProps? get pageProps => (origin as ContentBundlesQueryProvider).pageProps;
 }
 
-String _$sessionErrorHash() => r'b1dada6da232e62fef5a10e1e084d64cd04f3e2a';
+String _$sessionErrorHash() => r'1e4fdb84a3d0521b08c0f5350bf260e3dc3d0827';
 
 /// See also [SessionError].
 @ProviderFor(SessionError)
-final sessionErrorProvider = NotifierProvider<SessionError, void>.internal(
+final sessionErrorProvider = NotifierProvider<SessionError, bool>.internal(
   SessionError.new,
   name: r'sessionErrorProvider',
   debugGetCreateSourceHash:
@@ -877,7 +877,7 @@ final sessionErrorProvider = NotifierProvider<SessionError, void>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$SessionError = Notifier<void>;
+typedef _$SessionError = Notifier<bool>;
 String _$toastNotifierHash() => r'050a75030d990403c5d8645a106b3d760362862a';
 
 /// See also [ToastNotifier].

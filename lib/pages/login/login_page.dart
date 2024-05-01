@@ -11,6 +11,7 @@ import 'package:codeblurb_mobile/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -25,8 +26,8 @@ class LoginPage extends HookConsumerWidget {
     final usernameController = useTextEditingController();
     final passwordController = useTextEditingController();
 
-    final bottomPadding = context.bottomPadding;
-    final topPadding = context.topPadding;
+    final bottomPadding = context.bottomPadding.h;
+    final topPadding = context.topPadding.h;
 
     final onLogin = useMemoized(
       () => () {
@@ -43,114 +44,125 @@ class LoginPage extends HookConsumerWidget {
 
     return FormPageWrapper(
       formKey: _formKey,
-      child: Column(
-        children: [
-          SizedBox(
-            height: topPadding,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 32),
-            child: CodeblurbLogo(),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 36),
-            child: Text(
-              'Welcome back!',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InputField(
-                key: const Key('input_username'),
-                controller: usernameController,
-                label: 'Username',
-                keyboardType: TextInputType.name,
-                textCapitalization: TextCapitalization.none,
-                validator: Validators.required,
-                textInputAction: TextInputAction.next,
-                autofillHints: const [
-                  AutofillHints.username,
-                ],
-              ),
-              const SizedBox(height: 16),
-              InputField(
-                key: const Key('input_password'),
-                controller: passwordController,
-                isSecureField: true,
-                label: 'Password',
-                validator: Validators.password,
-                autofillHints: const [
-                  AutofillHints.password,
-                ],
-                onSubmit: onLogin,
-              ),
-              const SizedBox(height: 84),
-            ],
-          ),
-          Column(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: onLogin,
-                    child: state.isLoading
-                        ? const Loader(
-                            size: 32,
-                            withBackgroundColor: true,
-                          )
-                        : const Text(
-                            'Login',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                  ),
+      child: SizedBox(
+        height: 690.h - bottomPadding,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                SizedBox(
+                  height: topPadding,
                 ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                  ),
-                  child: OutlinedButton(
-                    child: const Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 32.h),
+                  child: const CodeblurbLogo(),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 36.h),
+                  child: const Text(
+                    'Welcome back!',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600,
                     ),
-                    onPressed: () => context.router.push(RegisterRoute()),
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () => context.router.push(RequestNewPasswordRoute()),
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                    color: colors.mutedForeground,
-                    decoration: TextDecoration.underline,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InputField(
+                      key: const Key('input_username'),
+                      controller: usernameController,
+                      label: 'Username',
+                      keyboardType: TextInputType.name,
+                      textCapitalization: TextCapitalization.none,
+                      validator: Validators.required,
+                      textInputAction: TextInputAction.next,
+                      autofillHints: const [
+                        AutofillHints.username,
+                      ],
+                    ),
+                    SizedBox(height: 16.h),
+                    InputField(
+                      key: const Key('input_password'),
+                      controller: passwordController,
+                      isSecureField: true,
+                      label: 'Password',
+                      validator: Validators.required,
+                      autofillHints: const [
+                        AutofillHints.password,
+                      ],
+                      onSubmit: onLogin,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 44.h,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: onLogin,
+                      child: state.isLoading
+                          ? Loader(
+                              size: 32.h,
+                              withBackgroundColor: true,
+                            )
+                          : Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: bottomPadding + 10),
-        ],
+                SizedBox(height: 16.h),
+                SizedBox(
+                  width: double.infinity,
+                  height: 44.h,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                    ),
+                    child: OutlinedButton(
+                      child: Text(
+                        "Don't have an account?",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onPressed: () => context.router.push(RegisterRoute()),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                TextButton(
+                  onPressed: () =>
+                      context.router.push(RequestNewPasswordRoute()),
+                  child: Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: colors.mutedForeground,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+                SizedBox(height: bottomPadding + 10.h),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
