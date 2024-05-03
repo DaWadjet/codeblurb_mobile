@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+7
+version: 1.0.0+8
 
 environment:
   sdk: ">=3.1.1 <4.0.0"
@@ -54,6 +54,8 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
+  flutter_native_splash: ^2.4.0
+  flutter_launcher_icons: "^0.13.1"
 
 flutter_gen:
   output: lib/generated/
@@ -61,6 +63,16 @@ flutter_gen:
 
   integrations:
     flutter_svg: true
+
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#000000"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo_padded.png"
 
 flutter:
   uses-material-design: true
