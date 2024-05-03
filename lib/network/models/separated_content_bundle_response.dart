@@ -55,6 +55,8 @@ class SeparatedContentBundleResponse {
           codingContentType: e.codingContentType,
           status: e.status,
           order: e.order ?? 0,
+          content: e,
+          courseId: id,
         ),
       ),
       ...includedQuizzes.map(
@@ -65,6 +67,8 @@ class SeparatedContentBundleResponse {
           contentType: e.contentType,
           status: e.status,
           order: e.order ?? 0,
+          content: e,
+          courseId: id,
         ),
       ),
       ...includedVideos.map(
@@ -75,6 +79,8 @@ class SeparatedContentBundleResponse {
           contentType: e.contentType,
           status: e.status,
           order: e.order ?? 0,
+          content: e,
+          courseId: id,
         ),
       ),
       ...includedArticles.map(
@@ -85,6 +91,8 @@ class SeparatedContentBundleResponse {
           contentType: e.contentType,
           status: e.status,
           order: e.order ?? 0,
+          content: e,
+          courseId: id,
         ),
       ),
     ]..sort((a, b) => a.order.compareTo(b.order));

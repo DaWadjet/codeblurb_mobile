@@ -16,9 +16,14 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     ArticleContentRoute.name: (routeData) {
+      final args = routeData.argsAs<ArticleContentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ArticleContentPage(),
+        child: ArticleContentPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     ChangePasswordRoute.name: (routeData) {
@@ -50,9 +55,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     DragAndDropContentRoute.name: (routeData) {
+      final args = routeData.argsAs<DragAndDropContentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DragAndDropContentPage(),
+        child: DragAndDropContentPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     ExploreRoute.name: (routeData) {
@@ -67,9 +77,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     FillTheGapsContentRoute.name: (routeData) {
+      final args = routeData.argsAs<FillTheGapsContentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const FillTheGapsContentPage(),
+        child: FillTheGapsContentPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -125,9 +140,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     QuizContentRoute.name: (routeData) {
+      final args = routeData.argsAs<QuizContentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const QuizContentPage(),
+        child: QuizContentPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     QuizContentResultsRoute.name: (routeData) {
@@ -153,9 +173,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ScratchContentRoute.name: (routeData) {
+      final args = routeData.argsAs<ScratchContentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ScratchContentPage(),
+        child: ScratchContentPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     ShoppingCartRoute.name: (routeData) {
@@ -177,9 +202,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     VideoContentRoute.name: (routeData) {
+      final args = routeData.argsAs<VideoContentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const VideoContentPage(),
+        child: VideoContentPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
   };
@@ -187,16 +217,45 @@ abstract class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [ArticleContentPage]
-class ArticleContentRoute extends PageRouteInfo<void> {
-  const ArticleContentRoute({List<PageRouteInfo>? children})
-      : super(
+class ArticleContentRoute extends PageRouteInfo<ArticleContentRouteArgs> {
+  ArticleContentRoute({
+    required ArticleContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           ArticleContentRoute.name,
+          args: ArticleContentRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ArticleContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ArticleContentRouteArgs> page =
+      PageInfo<ArticleContentRouteArgs>(name);
+}
+
+class ArticleContentRouteArgs {
+  const ArticleContentRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final ArticleContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ArticleContentRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -306,16 +365,46 @@ class CourseRatingsRouteArgs {
 
 /// generated route for
 /// [DragAndDropContentPage]
-class DragAndDropContentRoute extends PageRouteInfo<void> {
-  const DragAndDropContentRoute({List<PageRouteInfo>? children})
-      : super(
+class DragAndDropContentRoute
+    extends PageRouteInfo<DragAndDropContentRouteArgs> {
+  DragAndDropContentRoute({
+    required CodingContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           DragAndDropContentRoute.name,
+          args: DragAndDropContentRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'DragAndDropContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<DragAndDropContentRouteArgs> page =
+      PageInfo<DragAndDropContentRouteArgs>(name);
+}
+
+class DragAndDropContentRouteArgs {
+  const DragAndDropContentRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final CodingContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DragAndDropContentRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -358,16 +447,46 @@ class ExploreRouteArgs {
 
 /// generated route for
 /// [FillTheGapsContentPage]
-class FillTheGapsContentRoute extends PageRouteInfo<void> {
-  const FillTheGapsContentRoute({List<PageRouteInfo>? children})
-      : super(
+class FillTheGapsContentRoute
+    extends PageRouteInfo<FillTheGapsContentRouteArgs> {
+  FillTheGapsContentRoute({
+    required CodingContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           FillTheGapsContentRoute.name,
+          args: FillTheGapsContentRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'FillTheGapsContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<FillTheGapsContentRouteArgs> page =
+      PageInfo<FillTheGapsContentRouteArgs>(name);
+}
+
+class FillTheGapsContentRouteArgs {
+  const FillTheGapsContentRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final CodingContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'FillTheGapsContentRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -534,16 +653,45 @@ class PurchasedCourseRatingsRouteArgs {
 
 /// generated route for
 /// [QuizContentPage]
-class QuizContentRoute extends PageRouteInfo<void> {
-  const QuizContentRoute({List<PageRouteInfo>? children})
-      : super(
+class QuizContentRoute extends PageRouteInfo<QuizContentRouteArgs> {
+  QuizContentRoute({
+    required QuizContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           QuizContentRoute.name,
+          args: QuizContentRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'QuizContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<QuizContentRouteArgs> page =
+      PageInfo<QuizContentRouteArgs>(name);
+}
+
+class QuizContentRouteArgs {
+  const QuizContentRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final QuizContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'QuizContentRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -621,16 +769,45 @@ class RequestNewPasswordRouteArgs {
 
 /// generated route for
 /// [ScratchContentPage]
-class ScratchContentRoute extends PageRouteInfo<void> {
-  const ScratchContentRoute({List<PageRouteInfo>? children})
-      : super(
+class ScratchContentRoute extends PageRouteInfo<ScratchContentRouteArgs> {
+  ScratchContentRoute({
+    required CodingContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           ScratchContentRoute.name,
+          args: ScratchContentRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ScratchContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ScratchContentRouteArgs> page =
+      PageInfo<ScratchContentRouteArgs>(name);
+}
+
+class ScratchContentRouteArgs {
+  const ScratchContentRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final CodingContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ScratchContentRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -677,14 +854,43 @@ class TabsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [VideoContentPage]
-class VideoContentRoute extends PageRouteInfo<void> {
-  const VideoContentRoute({List<PageRouteInfo>? children})
-      : super(
+class VideoContentRoute extends PageRouteInfo<VideoContentRouteArgs> {
+  VideoContentRoute({
+    required VideoContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           VideoContentRoute.name,
+          args: VideoContentRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'VideoContentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<VideoContentRouteArgs> page =
+      PageInfo<VideoContentRouteArgs>(name);
+}
+
+class VideoContentRouteArgs {
+  const VideoContentRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final VideoContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VideoContentRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
