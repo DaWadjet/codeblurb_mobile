@@ -19,7 +19,7 @@ class CourseSectionItem extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = useColors();
-    final (route, icon) = useContentType(
+    final (routeBuilder, icon) = useContentType(
       contentType: section.contentType,
       codingContentType: section.codingContentType,
     );
@@ -85,7 +85,7 @@ class CourseSectionItem extends HookConsumerWidget {
                   ],
                 ),
               ),
-              if (canNavigate && route != null) ...[
+              if (canNavigate) ...[
                 const SizedBox(
                   height: 16,
                 ),
@@ -94,7 +94,9 @@ class CourseSectionItem extends HookConsumerWidget {
                     const Spacer(),
                     OutlinedButton(
                       onPressed: () {
-                        context.router.push(route);
+                        if (routeBuilder != null) {
+                          context.router.push(routeBuilder(section));
+                        }
                       },
                       child: const Text('Start'),
                     ),

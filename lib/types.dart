@@ -12,6 +12,8 @@ class Section {
     required this.estimatedTime,
     required this.contentType,
     required this.status,
+    required this.content,
+    required this.courseId,
     this.order = 0,
     this.codingContentType,
   });
@@ -22,4 +24,6 @@ class Section {
   final SeenStatus status;
   final CodingContentType? codingContentType;
   final int order;
+  final Object content;
+  final int courseId;
 }

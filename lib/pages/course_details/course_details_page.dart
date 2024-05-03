@@ -68,6 +68,8 @@ class CourseDetailsPage extends ConsumerWidget {
                             estimatedTime: e.estimatedTime,
                             contentType: e.contentType,
                             status: e.status,
+                            content: e,
+                            courseId: courseId,
                           ),
                         )
                         .toList(),

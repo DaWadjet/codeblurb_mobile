@@ -15,7 +15,7 @@ class NextUpSection extends HookConsumerWidget {
     final bottomPadding = context.bottomPadding;
     final colors = useColors();
 
-    final (route, _) = useContentType(
+    final (routeBuilder, _) = useContentType(
       contentType: nextUp.contentType,
       codingContentType: nextUp.codingContentType,
     );
@@ -55,8 +55,12 @@ class NextUpSection extends HookConsumerWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (route != null) {
-                      context.router.push(route);
+                    if (routeBuilder != null) {
+                      context.router.push(
+                        routeBuilder(
+                          nextUp,
+                        ),
+                      );
                     }
                   },
                   child: const Text(
