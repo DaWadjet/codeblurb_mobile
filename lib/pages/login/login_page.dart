@@ -152,7 +152,7 @@ class LoginPage extends HookConsumerWidget {
                   child: Text(
                     'Forgot Password?',
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       color: colors.mutedForeground,
                       decoration: TextDecoration.underline,
                     ),

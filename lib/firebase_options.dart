@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '757505501074',
     projectId: 'codeblurb-492f1',
     storageBucket: 'codeblurb-492f1.appspot.com',
-    iosBundleId: 'com.wadjet.codeblurb',
+    iosBundleId: 'hu.wadjet.codeblurb',
   );
 }

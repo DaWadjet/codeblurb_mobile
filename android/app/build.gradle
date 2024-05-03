@@ -1,5 +1,8 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -29,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
    }
 
 android {
-    namespace "com.wadjet.codeblurb"
+    namespace "hu.wadjet.codeblurb"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -47,7 +50,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.wadjet.codeblurb"
+        applicationId "hu.wadjet.codeblurb"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

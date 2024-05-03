@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:757505501074:android:1935877e7ad0cc48c5434b",
+        "mobilesdk_app_id": "1:757505501074:android:3aab84ac3be4f03fc5434b",
         "android_client_info": {
-          "package_name": "com.wadjet.codeblurb"
+          "package_name": "hu.wadjet.codeblurb"
         }
       },
       "oauth_client": [],
