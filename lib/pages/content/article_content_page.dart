@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
-import 'package:codeblurb_mobile/hooks/use_content_type.dart';
 import 'package:codeblurb_mobile/network/models/article_content_response.dart';
 import 'package:codeblurb_mobile/network/models/seen_status.dart';
+import 'package:codeblurb_mobile/pages/content/components/next_section_button.dart';
 import 'package:codeblurb_mobile/pages/content/content_provider.dart';
 import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -25,30 +25,22 @@ class ArticleContentPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nextSection = ref.watch(
-      nextSectionProvider(
-        courseId: courseId,
-        currentContentId: viewedContent.id,
-      ),
-    );
-
-    final (nextSectionRoute, _) = useContentType(
-      contentType: nextSection?.contentType,
-      codingContentType: nextSection?.codingContentType,
-    );
-
     final isSeen = useState(viewedContent.status != SeenStatus.notSeen);
     final isCompleted = useState(viewedContent.status == SeenStatus.completed);
 
-    useEffect(() {
-      if (!isSeen.value) {
-        ref.read(contentNotifierProvider.notifier).markAsSeen(
-              courseId: courseId,
-              contentId: viewedContent.id,
-            );
-      }
-      return null;
-    });
+    useEffect(
+      () {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (!isSeen.value) {
+            ref.read(contentNotifierProvider.notifier).markAsSeen(
+                  courseId: courseId,
+                  contentId: viewedContent.id,
+                );
+          }
+        });
+        return null;
+      },
+    );
 
     final bottomPadding = context.bottomPadding;
     return Scaffold(
@@ -73,16 +65,20 @@ class ArticleContentPage extends HookConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                //TODO FINISH THIS
+            const SizedBox(height: 36),
+            NextSectionButton(
+              onNextContent: () {
+                if (!isCompleted.value) {
+                  ref.read(contentNotifierProvider.notifier).markAsCompleted(
+                        courseId: courseId,
+                        contentId: viewedContent.id,
+                      );
+                }
               },
-              child: Text(
-                nextSectionRoute != null ? 'Next Section' : 'Back To Course',
-              ),
+              courseId: courseId,
+              viewedContentId: viewedContent.id,
             ),
-            SizedBox(height: bottomPadding),
+            SizedBox(height: bottomPadding + 10),
           ],
         ),
       ),
