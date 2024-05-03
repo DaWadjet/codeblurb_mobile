@@ -52,7 +52,7 @@ class NextUpSection extends HookConsumerWidget {
               ),
               const Spacer(),
               SizedBox(
-                height: 48,
+                height: 44,
                 child: ElevatedButton(
                   onPressed: () {
                     if (routeBuilder != null) {

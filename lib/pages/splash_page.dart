@@ -55,7 +55,7 @@ class SplashPage extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CodeblurbLogo(
-              scale: 1.25,
+              scale: 1.2,
             )
                 .animate(controller: animationController)
                 .fadeIn(

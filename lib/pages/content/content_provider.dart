@@ -55,7 +55,7 @@ class ContentNotifier extends _$ContentNotifier {
           .markAsSeen(
             contentId,
           );
-      unawaited(ref.refresh(contentBundleQueryProvider(contentId).future));
+      unawaited(ref.refresh(contentBundleQueryProvider(courseId).future));
       ref.invalidate(contentBundlesQueryProvider);
     } catch (e) {
       ref
@@ -79,7 +79,7 @@ class ContentNotifier extends _$ContentNotifier {
           .markAsCompleted(
             contentId,
           );
-      unawaited(ref.refresh(contentBundleQueryProvider(contentId).future));
+      unawaited(ref.refresh(contentBundleQueryProvider(courseId).future));
     } catch (e) {
       ref
           .read(toastNotifierProvider.notifier)

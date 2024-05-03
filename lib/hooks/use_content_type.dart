@@ -88,6 +88,6 @@ typedef ContentTypeRouteBuilder = PageRouteInfo Function(Section);
           return (null, Assets.images.code);
       }
     default:
-      throw ArgumentError('Unsupported content type');
+      return (null, Assets.images.code);
   }
 }

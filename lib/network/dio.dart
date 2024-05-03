@@ -16,7 +16,9 @@ part 'dio.g.dart';
 @Riverpod(keepAlive: true)
 Dio dio(DioRef ref) {
   final dio = Dio(
-    BaseOptions(baseUrl: AppConstants.baseUrl),
+    BaseOptions(
+      baseUrl: AppConstants.baseUrl,
+    ),
   )
     ..interceptors.addAll([
       if (!kReleaseMode) PrettyDioLogger(requestBody: true),
@@ -28,7 +30,7 @@ Dio dio(DioRef ref) {
         onError: (e, handler) {
           ref
               .read(toastNotifierProvider.notifier)
-              .showToast((e.error! as ErrorResponse).errorMessage);
+              .showToast((e.response!.data as ErrorResponse).errorMessage);
           FirebaseCrashlytics.instance.recordError(e.error, e.stackTrace);
           return handler.reject(e);
         },
