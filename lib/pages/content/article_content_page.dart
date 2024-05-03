@@ -25,6 +25,7 @@ class ArticleContentPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bottomPadding = context.bottomPadding;
     final isSeen = useState(viewedContent.status != SeenStatus.notSeen);
     final isCompleted = useState(viewedContent.status == SeenStatus.completed);
 
@@ -42,7 +43,6 @@ class ArticleContentPage extends HookConsumerWidget {
       },
     );
 
-    final bottomPadding = context.bottomPadding;
     return Scaffold(
       appBar: CBAppBar(
         title: viewedContent.name,

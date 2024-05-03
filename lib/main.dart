@@ -17,7 +17,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPrefs = await SharedPreferences.getInstance();
   await Future.wait([
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]),
     EasyLocalization.ensureInitialized(),
     _initFirebase(DefaultFirebaseOptions.currentPlatform),
   ]);

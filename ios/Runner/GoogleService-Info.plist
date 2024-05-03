@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.wadjet.codeblurb</string>
+	<string>hu.wadjet.codeblurb</string>
 	<key>PROJECT_ID</key>
 	<string>codeblurb-492f1</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:757505501074:ios:498ab1c7eba597cec5434b</string>
+	<string>1:757505501074:ios:9fada610026b87d6c5434b</string>
 </dict>
 </plist>
