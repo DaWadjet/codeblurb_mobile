@@ -151,9 +151,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     QuizContentResultsRoute.name: (routeData) {
+      final args = routeData.argsAs<QuizContentResultsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const QuizContentResultsPage(),
+        child: QuizContentResultsPage(
+          viewedContent: args.viewedContent,
+          courseId: args.courseId,
+          key: args.key,
+        ),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -696,16 +701,46 @@ class QuizContentRouteArgs {
 
 /// generated route for
 /// [QuizContentResultsPage]
-class QuizContentResultsRoute extends PageRouteInfo<void> {
-  const QuizContentResultsRoute({List<PageRouteInfo>? children})
-      : super(
+class QuizContentResultsRoute
+    extends PageRouteInfo<QuizContentResultsRouteArgs> {
+  QuizContentResultsRoute({
+    required QuizContentResponse viewedContent,
+    required int courseId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           QuizContentResultsRoute.name,
+          args: QuizContentResultsRouteArgs(
+            viewedContent: viewedContent,
+            courseId: courseId,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'QuizContentResultsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<QuizContentResultsRouteArgs> page =
+      PageInfo<QuizContentResultsRouteArgs>(name);
+}
+
+class QuizContentResultsRouteArgs {
+  const QuizContentResultsRouteArgs({
+    required this.viewedContent,
+    required this.courseId,
+    this.key,
+  });
+
+  final QuizContentResponse viewedContent;
+
+  final int courseId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'QuizContentResultsRouteArgs{viewedContent: $viewedContent, courseId: $courseId, key: $key}';
+  }
 }
 
 /// generated route for

@@ -7,12 +7,12 @@ part of 'quiz_provider.dart';
 // **************************************************************************
 
 String _$quizContentNotifierHash() =>
-    r'1e6d171a4f69d5e3788fe0c96a195761a55fd3aa';
+    r'62faaddaf7efdb1a72be685581a6b367ecef0a1d';
 
 /// See also [QuizContentNotifier].
 @ProviderFor(QuizContentNotifier)
 final quizContentNotifierProvider =
-    AutoDisposeNotifierProvider<QuizContentNotifier, AsyncValue<bool>>.internal(
+    AutoDisposeNotifierProvider<QuizContentNotifier, QuizContentState>.internal(
   QuizContentNotifier.new,
   name: r'quizContentNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final quizContentNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$QuizContentNotifier = AutoDisposeNotifier<AsyncValue<bool>>;
+typedef _$QuizContentNotifier = AutoDisposeNotifier<QuizContentState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
