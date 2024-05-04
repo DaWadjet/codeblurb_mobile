@@ -38,9 +38,9 @@ class AppProgressBar extends HookWidget {
             if (withText) ...[
               const SizedBox(height: 6),
               Text(
-                percentage == 0
+                progress == 0.0
                     ? 'Start learning'
-                    : percentage < 100
+                    : progress < 1
                         ? '${percentage.toStringAsFixed(0)}% completed'
                         : 'Completed',
                 style: TextStyle(

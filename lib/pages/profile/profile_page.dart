@@ -28,9 +28,7 @@ class ProfilePage extends HookConsumerWidget {
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           child: profileQuery.when(
-            loading: () => const FullPageLoader(
-              withoutToolbarHeight: true,
-            ),
+            loading: FullPageLoader.new,
             data: (data) => Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

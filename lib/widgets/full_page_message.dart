@@ -2,17 +2,17 @@ import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:flutter/material.dart';
 
 class FullPageLoader extends StatelessWidget {
-  const FullPageLoader({super.key, this.withoutToolbarHeight = false});
-
-  final bool withoutToolbarHeight;
+  const FullPageLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
     final fullHeight = MediaQuery.of(context).size.height;
+    final hasAppBar = Scaffold.of(context).hasAppBar;
 
     return Padding(
       padding: EdgeInsets.only(
-          top: fullHeight / 3 + (withoutToolbarHeight ? 0 : kToolbarHeight)),
+        top: fullHeight / 3 + (hasAppBar ? 0 : kToolbarHeight),
+      ),
       child: const Center(
         key: ValueKey('loading'),
         child: Loader(
@@ -29,9 +29,12 @@ class FullPageError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fullHeight = MediaQuery.of(context).size.height;
+    final hasAppBar = Scaffold.of(context).hasAppBar;
 
     return Padding(
-      padding: EdgeInsets.only(top: fullHeight / 3 + kToolbarHeight),
+      padding: EdgeInsets.only(
+        top: fullHeight / 3 + (hasAppBar ? 0 : kToolbarHeight),
+      ),
       child: const Center(
         key: ValueKey('error'),
         child: Text('An error occurred'),
@@ -51,9 +54,12 @@ class FullPageMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fullHeight = MediaQuery.of(context).size.height;
+    final hasAppBar = Scaffold.of(context).hasAppBar;
 
     return Padding(
-      padding: EdgeInsets.only(top: fullHeight / 3),
+      padding: EdgeInsets.only(
+        top: fullHeight / 3 + (hasAppBar ? 0 : kToolbarHeight),
+      ),
       child: Center(
         key: const ValueKey('message'),
         child: Text(message),

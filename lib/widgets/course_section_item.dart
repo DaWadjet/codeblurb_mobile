@@ -30,7 +30,6 @@ class CourseSectionItem extends HookConsumerWidget {
         data: Theme.of(context).copyWith(
           dividerColor: Colors.transparent,
         ),
-        //TODO might need to change these
         child: Card(
           color: section.status == SeenStatus.seen
               ? colors.mutedForeground.withOpacity(0.05)
@@ -47,14 +46,16 @@ class CourseSectionItem extends HookConsumerWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  section.name,
-                  maxLines: 2,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                Expanded(
+                  child: Text(
+                    section.name,
+                    maxLines: 2,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
                 icon.svg(
                   width: 24,

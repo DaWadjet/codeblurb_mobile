@@ -129,7 +129,6 @@ class ExplorePage extends HookConsumerWidget {
                                 if (page == 0) {
                                   return const FullPageLoader(
                                     key: ValueKey('loader'),
-                                    withoutToolbarHeight: true,
                                   );
                                 }
                               } else {

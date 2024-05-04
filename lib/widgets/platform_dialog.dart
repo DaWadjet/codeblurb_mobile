@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PlatformDialog extends StatelessWidget {
+class PlatformDialog<T> extends StatelessWidget {
   const PlatformDialog({
     required this.title,
     super.key,
@@ -16,7 +16,7 @@ class PlatformDialog extends StatelessWidget {
 
   final String title;
   final String? subtitle;
-  final VoidCallback? onTap;
+  final T Function()? onTap;
   final String? secondaryActionTitle;
   final VoidCallback? secondaryAction;
 
@@ -29,8 +29,8 @@ class PlatformDialog extends StatelessWidget {
             actions: [
               CupertinoDialogAction(
                 onPressed: () {
-                  onTap?.call();
-                  context.router.maybePop();
+                  final result = onTap?.call();
+                  context.router.maybePop(result);
                 },
                 child: const Text('Ok'),
               ),
@@ -47,8 +47,8 @@ class PlatformDialog extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  onTap?.call();
-                  context.router.maybePop();
+                  final result = onTap?.call();
+                  context.router.maybePop(result);
                 },
                 child: const Text('Ok'),
               ),
