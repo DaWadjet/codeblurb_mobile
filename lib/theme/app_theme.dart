@@ -17,6 +17,19 @@ abstract class AppTheme {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
+        tabBarTheme: TabBarTheme(
+          labelColor: colorPalette.foreground,
+          unselectedLabelColor: colorPalette.foreground.withOpacity(0.5),
+          indicatorSize: TabBarIndicatorSize.label,
+          indicator: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: colorPalette.primary,
+                width: 2,
+              ),
+            ),
+          ),
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: colorPalette.background,
           elevation: 0,

@@ -17,6 +17,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/article.svg
   SvgGenImage get article => const SvgGenImage('assets/images/article.svg');
 
+  /// File path: assets/images/assignment.svg
+  SvgGenImage get assignment =>
+      const SvgGenImage('assets/images/assignment.svg');
+
   /// File path: assets/images/badge-info.svg
   SvgGenImage get badgeInfo =>
       const SvgGenImage('assets/images/badge-info.svg');
@@ -34,6 +38,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/code.svg
   SvgGenImage get code => const SvgGenImage('assets/images/code.svg');
+
+  /// File path: assets/images/exercise.svg
+  SvgGenImage get exercise => const SvgGenImage('assets/images/exercise.svg');
 
   /// File path: assets/images/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/eye.svg');
@@ -116,11 +123,13 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
         article,
+        assignment,
         badgeInfo,
         chevronDown,
         circleCheck,
         circleX,
         code,
+        exercise,
         eye,
         eyeoff,
         filter,

@@ -24,11 +24,6 @@ class LoginNotifier extends _$LoginNotifier {
           .login(username: username, password: password);
       ref.read(isLoggedInProvider.notifier).setLoggedIn(value: true);
       unawaited(ref.read(routerProvider).replaceAll([const LoggedInRoute()]));
-    } catch (e) {
-      ref.read(toastNotifierProvider.notifier).showToast(
-            (e as dynamic)?.response?.data?['errorMessage']?.toString() ??
-                'An error occurred',
-          );
     } finally {
       state = const AsyncData(null);
     }

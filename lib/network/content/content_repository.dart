@@ -40,7 +40,7 @@ class ContentRepository {
     return CodeSolutionResponse.fromJson(response.data!);
   }
 
-  Future<CodeQuizSolutionResponse> getCodeQuizSolutionResultFor({
+  Future<CodeQuizSolutionResponse> sendCodeQuizSolutionResultFor({
     required int contentId,
     required List<String> solutions,
   }) async {
