@@ -110,7 +110,7 @@ class VideoContentPage extends HookConsumerWidget {
                 NextSectionButton(
                   courseId: courseId,
                   viewedContentId: viewedContent.id,
-                  isOutlined: !isCompleted.value,
+                  isTextButton: !isCompleted.value,
                 ),
                 SizedBox(height: bottomPadding + 10),
               ],
