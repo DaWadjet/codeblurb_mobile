@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_provider.dart';
+part of 'scratch_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginNotifierHash() => r'29b9cd6a3b960517d49a60642d14e06f69a4692e';
+String _$scratchNotifierHash() => r'aae71f356fda8f38269bfbf1a0f58d0855fcc387';
 
-/// See also [LoginNotifier].
-@ProviderFor(LoginNotifier)
-final loginNotifierProvider =
-    AutoDisposeNotifierProvider<LoginNotifier, AsyncValue<bool?>>.internal(
-  LoginNotifier.new,
-  name: r'loginNotifierProvider',
+/// See also [ScratchNotifier].
+@ProviderFor(ScratchNotifier)
+final scratchNotifierProvider =
+    AutoDisposeNotifierProvider<ScratchNotifier, ScratchState>.internal(
+  ScratchNotifier.new,
+  name: r'scratchNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$loginNotifierHash,
+      : _$scratchNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LoginNotifier = AutoDisposeNotifier<AsyncValue<bool?>>;
+typedef _$ScratchNotifier = AutoDisposeNotifier<ScratchState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

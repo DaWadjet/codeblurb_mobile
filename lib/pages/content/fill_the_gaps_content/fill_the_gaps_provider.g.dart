@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_provider.dart';
+part of 'fill_the_gaps_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginNotifierHash() => r'29b9cd6a3b960517d49a60642d14e06f69a4692e';
+String _$fillTheGapsNotifierHash() =>
+    r'5dae5870648ec080a0d41a15a795bc2730e90489';
 
-/// See also [LoginNotifier].
-@ProviderFor(LoginNotifier)
-final loginNotifierProvider =
-    AutoDisposeNotifierProvider<LoginNotifier, AsyncValue<bool?>>.internal(
-  LoginNotifier.new,
-  name: r'loginNotifierProvider',
+/// See also [FillTheGapsNotifier].
+@ProviderFor(FillTheGapsNotifier)
+final fillTheGapsNotifierProvider =
+    AutoDisposeNotifierProvider<FillTheGapsNotifier, FillTheGapsState>.internal(
+  FillTheGapsNotifier.new,
+  name: r'fillTheGapsNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$loginNotifierHash,
+      : _$fillTheGapsNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LoginNotifier = AutoDisposeNotifier<AsyncValue<bool?>>;
+typedef _$FillTheGapsNotifier = AutoDisposeNotifier<FillTheGapsState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

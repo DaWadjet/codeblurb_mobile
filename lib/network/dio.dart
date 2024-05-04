@@ -1,5 +1,4 @@
 import 'package:codeblurb_mobile/app_constants.dart';
-import 'package:codeblurb_mobile/network/models/error_response.dart';
 import 'package:codeblurb_mobile/network/models/login_response.dart';
 import 'package:codeblurb_mobile/network/models/refresh_token_request.dart';
 import 'package:codeblurb_mobile/providers.dart';
@@ -28,9 +27,19 @@ Dio dio(DioRef ref) {
       ),
       QueuedInterceptorsWrapper(
         onError: (e, handler) {
-          ref
-              .read(toastNotifierProvider.notifier)
-              .showToast((e.response!.data as ErrorResponse).errorMessage);
+          if (e.response?.data is Map<String, dynamic> &&
+              (e.response!.data as Map<String, dynamic>)
+                  .containsKey('errorMessage')) {
+            ref.read(toastNotifierProvider.notifier).showToast(
+                  (e.response!.data as Map<String, dynamic>)['errorMessage']
+                          ?.toString() ??
+                      'An error occurred',
+                );
+          } else {
+            ref
+                .read(toastNotifierProvider.notifier)
+                .showToast('An error occurred');
+          }
           FirebaseCrashlytics.instance.recordError(e.error, e.stackTrace);
           return handler.reject(e);
         },
