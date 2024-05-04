@@ -7,8 +7,8 @@ import 'package:codeblurb_mobile/pages/change_password/change_password_page.dart
 import 'package:codeblurb_mobile/pages/content/article_content_page.dart';
 import 'package:codeblurb_mobile/pages/content/drag_and_drop_content_page.dart';
 import 'package:codeblurb_mobile/pages/content/fill_the_gaps_content_page.dart';
-import 'package:codeblurb_mobile/pages/content/quiz_content_page.dart';
-import 'package:codeblurb_mobile/pages/content/quiz_content_results_page.dart';
+import 'package:codeblurb_mobile/pages/content/quiz_content/quiz_content_page.dart';
+import 'package:codeblurb_mobile/pages/content/quiz_content/quiz_content_results_page.dart';
 import 'package:codeblurb_mobile/pages/content/scratch_content_page.dart';
 import 'package:codeblurb_mobile/pages/course_details/course_details_page.dart';
 import 'package:codeblurb_mobile/pages/course_ratings/course_ratings_page.dart';

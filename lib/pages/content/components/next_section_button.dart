@@ -10,14 +10,14 @@ class NextSectionButton extends HookConsumerWidget {
     required this.courseId,
     required this.viewedContentId,
     this.onNextContent,
-    this.isOutlined = false,
+    this.isTextButton = false,
     super.key,
   });
 
   final int courseId;
   final int viewedContentId;
   final VoidCallback? onNextContent;
-  final bool isOutlined;
+  final bool isTextButton;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,13 +45,13 @@ class NextSectionButton extends HookConsumerWidget {
     );
     final child = Text(
       nextSectionRoute != null ? 'Next Section' : 'Back To Course',
-      style: const TextStyle(
-        fontSize: 18,
+      style: TextStyle(
+        fontSize: isTextButton ? 16 : 18,
         fontWeight: FontWeight.w500,
       ),
     );
-    return isOutlined
-        ? OutlinedButton(
+    return isTextButton
+        ? TextButton(
             onPressed: onPressed,
             child: child,
           )

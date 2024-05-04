@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+8
+version: 1.0.0+9
 
 environment:
   sdk: ">=3.1.1 <4.0.0"
@@ -69,10 +69,10 @@ flutter_native_splash:
   color_dark: "#000000"
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/images/logo_padded.png"
+  image_path: "assets/images/logo.png"
 
 flutter:
   uses-material-design: true

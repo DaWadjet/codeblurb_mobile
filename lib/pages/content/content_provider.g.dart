@@ -172,7 +172,7 @@ class _NextSectionProviderElement extends AutoDisposeProviderElement<Section?>
   int get currentContentId => (origin as NextSectionProvider).currentContentId;
 }
 
-String _$contentNotifierHash() => r'bc5f0c41117471bed8a0b482bc20f9c72a07a35f';
+String _$contentNotifierHash() => r'0c1a0d2fe70d7ccd2a67ec4860e30fa99be0c48d';
 
 /// See also [ContentNotifier].
 @ProviderFor(ContentNotifier)
