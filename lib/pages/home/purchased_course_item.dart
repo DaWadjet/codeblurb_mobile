@@ -25,14 +25,15 @@ class PurchasedCourseItem extends HookConsumerWidget {
     final ratingOfUser = useMemoized(
       () {
         try {
-          return content.ratings.ratings
-              .firstWhere((r) => r.username == username)
-              .rating;
+          return content.ratings?.ratings
+                  .firstWhere((r) => r.username == username)
+                  .rating ??
+              0;
         } catch (e) {
           return 0;
         }
       },
-      [content.ratings.ratings, username],
+      [content.ratings?.ratings, username],
     );
     final colors = useColors();
 

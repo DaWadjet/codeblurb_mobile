@@ -16,7 +16,6 @@ class CourseDetailsCommon extends HookWidget {
   const CourseDetailsCommon({
     required this.imageUrl,
     required this.title,
-    required this.ratings,
     required this.numberOfPurchases,
     required this.totalHours,
     required this.courseId,
@@ -25,12 +24,13 @@ class CourseDetailsCommon extends HookWidget {
     required this.releaseDate,
     required this.skillLevel,
     required this.sections,
+    this.ratings,
     super.key,
   });
 
   final String? imageUrl;
   final String title;
-  final RatingsResponse ratings;
+  final RatingsResponse? ratings;
   final int numberOfPurchases;
   final int totalHours;
   final int courseId;
@@ -101,14 +101,14 @@ class CourseDetailsCommon extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Rating(
-                      initialRating: ratings.averageRating,
+                      initialRating: ratings?.averageRating ?? 0,
                       itemSize: 22,
                     ),
                     const SizedBox(
                       width: 8,
                     ),
                     Text(
-                      ratings.averageRating.toStringAsFixed(1),
+                      (ratings?.averageRating ?? 0).toStringAsFixed(1),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -120,8 +120,8 @@ class CourseDetailsCommon extends HookWidget {
                   height: 4,
                 ),
                 Text(
-                  ratings.numberOfRatings > 0
-                      ? 'out of ${ratings.numberOfRatings} ratings'
+                  (ratings?.numberOfRatings ?? 0) > 0
+                      ? 'out of ${ratings?.numberOfRatings ?? 0} ratings'
                       : 'No ratings yet',
                   style: TextStyle(
                     fontSize: 14,
@@ -141,7 +141,7 @@ class CourseDetailsCommon extends HookWidget {
                     color: colors.mutedForeground,
                   ),
                 ),
-                if (ratings.numberOfRatings > 0) ...[
+                if ((ratings?.numberOfRatings ?? 0) > 0 || isPurchased) ...[
                   const SizedBox(
                     height: 4,
                   ),
@@ -164,7 +164,7 @@ class CourseDetailsCommon extends HookWidget {
                         );
                       }
                     },
-                    child: const Text('See Reviews'),
+                    child: const Text('See ratings'),
                   ),
                 ],
               ],

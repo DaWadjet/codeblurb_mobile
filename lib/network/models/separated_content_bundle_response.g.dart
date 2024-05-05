@@ -16,7 +16,9 @@ SeparatedContentBundleResponse _$SeparatedContentBundleResponseFromJson(
       $enumDecode(_$SkillLevelEnumMap, json['skillLevel']),
       (json['progress'] as num).toDouble(),
       DateTime.parse(json['releaseDate'] as String),
-      RatingsResponse.fromJson(json['ratings'] as Map<String, dynamic>),
+      json['ratings'] == null
+          ? null
+          : RatingsResponse.fromJson(json['ratings'] as Map<String, dynamic>),
       json['numberOfPurchases'] as int,
       (json['includedCodings'] as List<dynamic>)
           .map((e) => CodingContentResponse.fromJson(e as Map<String, dynamic>))

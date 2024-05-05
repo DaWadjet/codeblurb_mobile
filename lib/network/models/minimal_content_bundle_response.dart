@@ -30,5 +30,5 @@ class MinimalContentBundleResponse {
   final SkillLevel skillLevel;
   final double? progress;
   final DateTime releaseDate;
-  final RatingsResponse ratings;
+  final RatingsResponse? ratings;
 }

@@ -30,14 +30,14 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
       body: courseQuery.maybeWhen(
         orElse: () => const SizedBox(),
         data: (course) {
-          if (course.ratings.numberOfRatings == 0) {
+          if ((course.ratings?.numberOfRatings ?? 0) == 0) {
             //should not happen
             return const Center(
               child: Text('No ratings yet'),
             );
           }
 
-          final ratingOfUser = course.ratings.ratings
+          final ratingOfUser = course.ratings?.ratings
               .where((r) => r.username == username)
               .firstOrNull;
 
@@ -49,9 +49,9 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 8),
-                    RatingDistribution(ratings: course.ratings),
+                    RatingDistribution(ratings: course.ratings!),
                     const Divider(),
-                    ...course.ratings.ratings.map(
+                    ...course.ratings!.ratings.map(
                       (e) => RatingItem(rating: e),
                     ),
                     SizedBox(height: bottomPadding + 70),

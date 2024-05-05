@@ -21,6 +21,6 @@ class ShoppingItemResponse {
   final String title;
   final double price;
   final int numberOfPurchases;
-  final RatingsResponse ratings;
+  final RatingsResponse? ratings;
   final MinimalContentBundleResponse contentBundle;
 }

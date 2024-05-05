@@ -41,7 +41,7 @@ class SeparatedContentBundleResponse {
   final SkillLevel skillLevel;
   final double progress;
   final DateTime releaseDate;
-  final RatingsResponse ratings;
+  final RatingsResponse? ratings;
   final int numberOfPurchases;
 
   List<Section> get sections {

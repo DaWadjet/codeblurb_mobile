@@ -15,5 +15,7 @@ ShoppingItemResponse _$ShoppingItemResponseFromJson(
       MinimalContentBundleResponse.fromJson(
           json['contentBundle'] as Map<String, dynamic>),
       json['numberOfPurchases'] as int,
-      RatingsResponse.fromJson(json['ratings'] as Map<String, dynamic>),
+      json['ratings'] == null
+          ? null
+          : RatingsResponse.fromJson(json['ratings'] as Map<String, dynamic>),
     );

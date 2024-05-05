@@ -1,6 +1,7 @@
 import 'package:codeblurb_mobile/network/models/coding_content_type.dart';
 import 'package:codeblurb_mobile/network/models/content_type.dart';
 import 'package:codeblurb_mobile/network/models/seen_status.dart';
+import 'package:codeblurb_mobile/network/models/test_case_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'coding_content_response.g.dart';
@@ -20,6 +21,7 @@ class CodingContentResponse {
     this.codeSnippets,
     this.codeSkeleton,
     this.testCases,
+    this.hints,
   );
 
   factory CodingContentResponse.fromJson(Map<String, dynamic> json) =>
@@ -36,6 +38,6 @@ class CodingContentResponse {
   final CodingContentType codingContentType;
   final List<String> codeSnippets;
   final List<String> codeSkeleton;
-  //TODO define proper types if this is fix from the backend side
-  final List<dynamic> testCases;
+  final List<TestCaseResponse>? testCases;
+  final List<String> hints;
 }
