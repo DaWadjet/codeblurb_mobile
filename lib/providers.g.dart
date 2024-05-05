@@ -284,7 +284,7 @@ final paymentsQueryProvider =
 
 typedef PaymentsQueryRef
     = AutoDisposeFutureProviderRef<PreviousPaymentsResponse>;
-String _$profileQueryHash() => r'4b35ca66c6df5b3a54b3e51ce9270102ace47987';
+String _$profileQueryHash() => r'ff3254e76f9361073d7f924b9287c7f8abeceff6';
 
 /// See also [profileQuery].
 @ProviderFor(profileQuery)

@@ -20,7 +20,10 @@ CodingContentResponse _$CodingContentResponseFromJson(
       $enumDecode(_$CodingContentTypeEnumMap, json['codingContentType']),
       (json['codeSnippets'] as List<dynamic>).map((e) => e as String).toList(),
       (json['codeSkeleton'] as List<dynamic>).map((e) => e as String).toList(),
-      json['testCases'] as List<dynamic>,
+      (json['testCases'] as List<dynamic>?)
+          ?.map((e) => TestCaseResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['hints'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 const _$ContentTypeEnumMap = {

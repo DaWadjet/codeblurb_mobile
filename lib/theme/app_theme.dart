@@ -20,7 +20,7 @@ abstract class AppTheme {
         tabBarTheme: TabBarTheme(
           labelColor: colorPalette.foreground,
           unselectedLabelColor: colorPalette.foreground.withOpacity(0.5),
-          indicatorSize: TabBarIndicatorSize.label,
+          indicatorSize: TabBarIndicatorSize.tab,
           indicator: BoxDecoration(
             border: Border(
               bottom: BorderSide(

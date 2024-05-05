@@ -11,6 +11,8 @@ part 'fill_the_gaps_provider.g.dart';
 class FillTheGapsState with _$FillTheGapsState {
   const factory FillTheGapsState({
     required bool isLoading,
+    @Default(0) int shownHints,
+    @Default(0) int tabControllerIndex,
   }) = _FillTheGapsState;
 }
 
@@ -53,5 +55,13 @@ class FillTheGapsNotifier extends _$FillTheGapsNotifier {
           .showToast('Failed to submit solution');
       return false;
     }
+  }
+
+  void setTabControllerIndex(int index) {
+    state = state.copyWith(tabControllerIndex: index);
+  }
+
+  void showHint() {
+    state = state.copyWith(shownHints: state.shownHints + 1);
   }
 }
