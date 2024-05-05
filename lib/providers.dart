@@ -205,6 +205,8 @@ Future<PreviousPaymentsResponse> paymentsQuery(PaymentsQueryRef ref) {
 @riverpod
 Future<ProfileResponse> profileQuery(ProfileQueryRef ref) {
   loggedInGuard(ref);
+  ref.cacheFor(const Duration(minutes: 1));
+
   return ref.watch(profileRepositoryProvider).getProfile();
 }
 

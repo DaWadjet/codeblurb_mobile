@@ -165,10 +165,7 @@ class ProfilePage extends HookConsumerWidget {
                 ],
               ),
             ),
-            error: (error, stackTrace) => const Center(
-              key: ValueKey('error'),
-              child: Text('An error occurred. Please try again later.'),
-            ),
+            error: FullPageError.new,
           ),
         ),
       ),
