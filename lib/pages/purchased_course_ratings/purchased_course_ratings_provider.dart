@@ -28,10 +28,9 @@ class CourseRatingsNotifier extends _$CourseRatingsNotifier {
                 ? 'Note: No review was provided by the user.'
                 : review,
           );
-      await Future.wait([
-        ref.refresh(contentBundleQueryProvider(courseId).future),
-        ref.refresh(contentBundlesHomeQueryProvider.future),
-      ]);
+
+      final _ = await ref.refresh(contentBundleQueryProvider(courseId).future);
+      ref.invalidate(contentBundlesHomeQueryProvider);
       ref.read(toastNotifierProvider.notifier).showToast(
             'Course rated successfully',
           );
