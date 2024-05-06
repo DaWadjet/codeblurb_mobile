@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:codeblurb_mobile/network/models/code_solution_response.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,6 +16,7 @@ class ScratchState with _$ScratchState {
     required String code,
     @Default(0) int shownHints,
     @Default(0) int tabControllerIndex,
+    CodeSolutionResponse? solution,
   }) = _ScratchState;
 }
 
@@ -35,33 +37,37 @@ class ScratchNotifier extends _$ScratchNotifier {
     );
   }
 
-  Future<bool> submitScratchSolution({
+  Future<void> submitScratchSolution({
     required int contentId,
     required int courseId,
   }) async {
     state = state.copyWith(isLoading: true);
     try {
-      await ref.read(contentRepositoryProvider).sendCodeSolution(
-            contentId: contentId,
-            code: state.code,
-          );
+      final response =
+          await ref.read(contentRepositoryProvider).sendCodeSolution(
+                contentId: contentId,
+                code: state.code,
+              );
       unawaited(ref.refresh(contentBundleQueryProvider(courseId).future));
       ref.invalidate(contentBundlesQueryProvider);
       state = state.copyWith(
         isLoading: false,
+        solution: response,
       );
-      return true;
     } catch (e) {
       state = state.copyWith(isLoading: false);
       ref
           .read(toastNotifierProvider.notifier)
           .showToast('Failed to submit solution');
-      return false;
     }
   }
 
   void setTabControllerIndex(int index) {
     state = state.copyWith(tabControllerIndex: index);
+  }
+
+  void setCode(String code) {
+    state = state.copyWith(code: code);
   }
 
   void showHint() {

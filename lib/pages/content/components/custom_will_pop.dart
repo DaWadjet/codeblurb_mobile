@@ -17,7 +17,8 @@ class CustomWillPop extends StatelessWidget {
           builder: (_) => PlatformDialog(
             secondaryActionTitle: 'Cancel',
             title: 'Are you sure you want to leave?',
-            subtitle: 'Submit your solution first to save your progress',
+            subtitle:
+                "If you haven't submitted your answers yet, they will be lost.",
             onTap: () => true,
           ),
         );

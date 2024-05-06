@@ -20,6 +20,7 @@ mixin _$ScratchState {
   String get code => throw _privateConstructorUsedError;
   int get shownHints => throw _privateConstructorUsedError;
   int get tabControllerIndex => throw _privateConstructorUsedError;
+  CodeSolutionResponse? get solution => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ScratchStateCopyWith<ScratchState> get copyWith =>
@@ -33,7 +34,11 @@ abstract class $ScratchStateCopyWith<$Res> {
       _$ScratchStateCopyWithImpl<$Res, ScratchState>;
   @useResult
   $Res call(
-      {bool isLoading, String code, int shownHints, int tabControllerIndex});
+      {bool isLoading,
+      String code,
+      int shownHints,
+      int tabControllerIndex,
+      CodeSolutionResponse? solution});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$ScratchStateCopyWithImpl<$Res, $Val extends ScratchState>
     Object? code = null,
     Object? shownHints = null,
     Object? tabControllerIndex = null,
+    Object? solution = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -71,6 +77,10 @@ class _$ScratchStateCopyWithImpl<$Res, $Val extends ScratchState>
           ? _value.tabControllerIndex
           : tabControllerIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      solution: freezed == solution
+          ? _value.solution
+          : solution // ignore: cast_nullable_to_non_nullable
+              as CodeSolutionResponse?,
     ) as $Val);
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$ScratchStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, String code, int shownHints, int tabControllerIndex});
+      {bool isLoading,
+      String code,
+      int shownHints,
+      int tabControllerIndex,
+      CodeSolutionResponse? solution});
 }
 
 /// @nodoc
@@ -102,6 +116,7 @@ class __$$ScratchStateImplCopyWithImpl<$Res>
     Object? code = null,
     Object? shownHints = null,
     Object? tabControllerIndex = null,
+    Object? solution = freezed,
   }) {
     return _then(_$ScratchStateImpl(
       isLoading: null == isLoading
@@ -120,6 +135,10 @@ class __$$ScratchStateImplCopyWithImpl<$Res>
           ? _value.tabControllerIndex
           : tabControllerIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      solution: freezed == solution
+          ? _value.solution
+          : solution // ignore: cast_nullable_to_non_nullable
+              as CodeSolutionResponse?,
     ));
   }
 }
@@ -131,7 +150,8 @@ class _$ScratchStateImpl implements _ScratchState {
       {required this.isLoading,
       required this.code,
       this.shownHints = 0,
-      this.tabControllerIndex = 0});
+      this.tabControllerIndex = 0,
+      this.solution});
 
   @override
   final bool isLoading;
@@ -143,10 +163,12 @@ class _$ScratchStateImpl implements _ScratchState {
   @override
   @JsonKey()
   final int tabControllerIndex;
+  @override
+  final CodeSolutionResponse? solution;
 
   @override
   String toString() {
-    return 'ScratchState(isLoading: $isLoading, code: $code, shownHints: $shownHints, tabControllerIndex: $tabControllerIndex)';
+    return 'ScratchState(isLoading: $isLoading, code: $code, shownHints: $shownHints, tabControllerIndex: $tabControllerIndex, solution: $solution)';
   }
 
   @override
@@ -160,12 +182,14 @@ class _$ScratchStateImpl implements _ScratchState {
             (identical(other.shownHints, shownHints) ||
                 other.shownHints == shownHints) &&
             (identical(other.tabControllerIndex, tabControllerIndex) ||
-                other.tabControllerIndex == tabControllerIndex));
+                other.tabControllerIndex == tabControllerIndex) &&
+            (identical(other.solution, solution) ||
+                other.solution == solution));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, code, shownHints, tabControllerIndex);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, code, shownHints, tabControllerIndex, solution);
 
   @JsonKey(ignore: true)
   @override
@@ -179,7 +203,8 @@ abstract class _ScratchState implements ScratchState {
       {required final bool isLoading,
       required final String code,
       final int shownHints,
-      final int tabControllerIndex}) = _$ScratchStateImpl;
+      final int tabControllerIndex,
+      final CodeSolutionResponse? solution}) = _$ScratchStateImpl;
 
   @override
   bool get isLoading;
@@ -189,6 +214,8 @@ abstract class _ScratchState implements ScratchState {
   int get shownHints;
   @override
   int get tabControllerIndex;
+  @override
+  CodeSolutionResponse? get solution;
   @override
   @JsonKey(ignore: true)
   _$$ScratchStateImplCopyWith<_$ScratchStateImpl> get copyWith =>

@@ -1,7 +1,7 @@
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
-import 'package:codeblurb_mobile/pages/content/components/character_insertion_button.dart';
+import 'package:codeblurb_mobile/pages/content/scratch_content/character_insertion_button.dart';
 import 'package:codeblurb_mobile/pages/content/scratch_content/scratch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
