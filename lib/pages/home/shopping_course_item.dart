@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/shopping_item_response.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/brief_info.dart';
 import 'package:codeblurb_mobile/widgets/cart_button.dart';
+import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/price_tag.dart';
 import 'package:codeblurb_mobile/widgets/small_rating_view.dart';
 import 'package:codeblurb_mobile/widgets/tappable.dart';
@@ -42,9 +41,9 @@ class ShoppingCourseItem extends HookConsumerWidget {
                 ),
                 child: Column(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: content.contentBundle.imageUrl ?? dummyUrl,
-                      fit: BoxFit.cover,
+                    CourseImage(
+                      imageUrl: content.contentBundle.imageUrl,
+                      withBorderRadius: false,
                       width: double.infinity,
                       height: 122,
                     ),

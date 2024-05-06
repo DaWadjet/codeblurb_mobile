@@ -11,6 +11,6 @@ RatingsResponse _$RatingsResponseFromJson(Map<String, dynamic> json) =>
       (json['ratings'] as List<dynamic>)
           .map((e) => RatingResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['averageRating'] as num).toDouble(),
+      (json['averageRating'] as num?)?.toDouble(),
       json['numberOfRatings'] as int,
     );

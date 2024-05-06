@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:codeblurb_mobile/network/models/minimal_content_bundle_response.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/app_progress_bar.dart';
 import 'package:codeblurb_mobile/widgets/brief_info.dart';
+import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/tappable.dart';
 import 'package:flutter/material.dart';
 
@@ -27,14 +26,9 @@ class MyCoursesListItem extends StatelessWidget {
           height: 122,
           child: Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: content.imageUrl ?? dummyUrl,
-                  fit: BoxFit.cover,
-                  height: 122,
-                  width: 122,
-                ),
+              CourseImage(
+                imageUrl: content.imageUrl,
+                height: 122,
               ),
               const SizedBox(
                 width: 16,

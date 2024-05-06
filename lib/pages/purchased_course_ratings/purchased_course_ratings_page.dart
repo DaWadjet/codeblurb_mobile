@@ -5,6 +5,7 @@ import 'package:codeblurb_mobile/pages/purchased_course_ratings/rating_bottom_sh
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
 import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
+import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:codeblurb_mobile/widgets/rating_distribution.dart';
 import 'package:codeblurb_mobile/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +31,6 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
       body: courseQuery.maybeWhen(
         orElse: () => const SizedBox(),
         data: (course) {
-          if ((course.ratings?.numberOfRatings ?? 0) == 0) {
-            //should not happen
-            return const Center(
-              child: Text('No ratings yet'),
-            );
-          }
-
           final ratingOfUser = course.ratings?.ratings
               .where((r) => r.username == username)
               .firstOrNull;
@@ -49,12 +43,18 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 8),
-                    RatingDistribution(ratings: course.ratings!),
-                    const Divider(),
-                    ...course.ratings!.ratings.map(
-                      (e) => RatingItem(rating: e),
-                    ),
-                    SizedBox(height: bottomPadding + 70),
+                    if ((course.ratings?.numberOfRatings ?? 0) == 0)
+                      const FullPageMessage(
+                        message: 'No ratings yet',
+                      )
+                    else ...[
+                      RatingDistribution(ratings: course.ratings!),
+                      const Divider(),
+                      ...course.ratings!.ratings.map(
+                        (e) => RatingItem(rating: e),
+                      ),
+                      SizedBox(height: bottomPadding + 70),
+                    ],
                   ],
                 ),
               ),

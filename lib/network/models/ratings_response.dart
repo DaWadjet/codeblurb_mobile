@@ -11,6 +11,6 @@ class RatingsResponse {
       _$RatingsResponseFromJson(json);
 
   final List<RatingResponse> ratings;
-  final double averageRating;
+  final double? averageRating;
   final int numberOfRatings;
 }

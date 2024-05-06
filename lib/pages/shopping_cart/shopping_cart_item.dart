@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/shopping_item_response.dart';
@@ -7,15 +6,13 @@ import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/brief_info.dart';
+import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:codeblurb_mobile/widgets/price_tag.dart';
 import 'package:codeblurb_mobile/widgets/small_rating_view.dart';
 import 'package:codeblurb_mobile/widgets/tappable.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-//TODO replace
-const dummyUrl = 'https://fireship.io/courses/js/img/featured.webp';
 
 class ShoppingCartItem extends HookConsumerWidget {
   const ShoppingCartItem({required this.item, super.key});
@@ -50,14 +47,10 @@ class ShoppingCartItem extends HookConsumerWidget {
             children: [
               Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: item.contentBundle.imageUrl ?? dummyUrl,
-                      fit: BoxFit.cover,
-                      height: 112,
-                      width: fullWidth * 0.3,
-                    ),
+                  CourseImage(
+                    imageUrl: item.contentBundle.imageUrl,
+                    height: 112,
+                    width: fullWidth * 0.3,
                   ),
                   Expanded(
                     child: Padding(

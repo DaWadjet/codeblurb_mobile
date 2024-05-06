@@ -12,7 +12,7 @@ class SmallRatingView extends HookWidget {
   Widget build(BuildContext context) {
     final colors = useColors();
 
-    if (ratings == null) {
+    if (ratings == null || ratings!.numberOfRatings == 0) {
       return Text(
         'No ratings yet',
         style: TextStyle(
@@ -25,7 +25,7 @@ class SmallRatingView extends HookWidget {
     return Row(
       children: [
         Text(
-          ratings!.averageRating.toStringAsFixed(1),
+          (ratings?.averageRating ?? 0).toStringAsFixed(1),
           style: const TextStyle(
             fontSize: 18,
             height: 1,

@@ -62,6 +62,9 @@ class FillTheGapsNotifier extends _$FillTheGapsNotifier {
   }
 
   void showHint() {
-    state = state.copyWith(shownHints: state.shownHints + 1);
+    state = state.copyWith(
+      shownHints: state.shownHints + 1,
+      tabControllerIndex: 0,
+    );
   }
 }

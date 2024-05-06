@@ -12,6 +12,8 @@ class ScratchState with _$ScratchState {
   const factory ScratchState({
     required bool isLoading,
     required String code,
+    @Default(0) int shownHints,
+    @Default(0) int tabControllerIndex,
   }) = _ScratchState;
 }
 
@@ -55,5 +57,16 @@ class ScratchNotifier extends _$ScratchNotifier {
           .showToast('Failed to submit solution');
       return false;
     }
+  }
+
+  void setTabControllerIndex(int index) {
+    state = state.copyWith(tabControllerIndex: index);
+  }
+
+  void showHint() {
+    state = state.copyWith(
+      shownHints: state.shownHints + 1,
+      tabControllerIndex: 0,
+    );
   }
 }
