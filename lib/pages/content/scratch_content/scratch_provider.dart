@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:codeblurb_mobile/providers.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -68,5 +69,69 @@ class ScratchNotifier extends _$ScratchNotifier {
       shownHints: state.shownHints + 1,
       tabControllerIndex: 0,
     );
+  }
+
+  void insertCurlyBraces(TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: '{}',
+        controller: controller,
+      );
+  void insertParentheses(TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: '()',
+        controller: controller,
+      );
+
+  void insertQuotes(TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: '""',
+        controller: controller,
+      );
+
+  void insertCode(String code, TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: code,
+        controller: controller,
+      );
+
+  void insertSquareBrackets(TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: '[]',
+        controller: controller,
+      );
+
+  void insertTab(TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: '\t',
+        controller: controller,
+      );
+
+  void insertEqualSign(TextEditingController controller) =>
+      _insertCodeToCurrentPosition(
+        code: ' = ',
+        cursorOffsetFromInsertionPoint: 3,
+        controller: controller,
+      );
+
+  void _insertCodeToCurrentPosition({
+    required String code,
+    required TextEditingController controller,
+    int cursorOffsetFromInsertionPoint = 1,
+  }) {
+    final cursorPosition = controller.selection.extent;
+    final currentCode = controller.text;
+
+    final newCode = currentCode.replaceRange(
+      cursorPosition.offset,
+      cursorPosition.offset,
+      code,
+    );
+    controller
+      ..text = newCode
+      ..selection = TextSelection.collapsed(
+        offset: cursorPosition.offset + cursorOffsetFromInsertionPoint,
+      );
+
+    state = state.copyWith(code: controller.text);
   }
 }
