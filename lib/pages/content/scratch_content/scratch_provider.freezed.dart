@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ScratchState {
   bool get isLoading => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
+  int get shownHints => throw _privateConstructorUsedError;
+  int get tabControllerIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ScratchStateCopyWith<ScratchState> get copyWith =>
@@ -30,7 +32,8 @@ abstract class $ScratchStateCopyWith<$Res> {
           ScratchState value, $Res Function(ScratchState) then) =
       _$ScratchStateCopyWithImpl<$Res, ScratchState>;
   @useResult
-  $Res call({bool isLoading, String code});
+  $Res call(
+      {bool isLoading, String code, int shownHints, int tabControllerIndex});
 }
 
 /// @nodoc
@@ -48,6 +51,8 @@ class _$ScratchStateCopyWithImpl<$Res, $Val extends ScratchState>
   $Res call({
     Object? isLoading = null,
     Object? code = null,
+    Object? shownHints = null,
+    Object? tabControllerIndex = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +63,14 @@ class _$ScratchStateCopyWithImpl<$Res, $Val extends ScratchState>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      shownHints: null == shownHints
+          ? _value.shownHints
+          : shownHints // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabControllerIndex: null == tabControllerIndex
+          ? _value.tabControllerIndex
+          : tabControllerIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -70,7 +83,8 @@ abstract class _$$ScratchStateImplCopyWith<$Res>
       __$$ScratchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String code});
+  $Res call(
+      {bool isLoading, String code, int shownHints, int tabControllerIndex});
 }
 
 /// @nodoc
@@ -86,6 +100,8 @@ class __$$ScratchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? code = null,
+    Object? shownHints = null,
+    Object? tabControllerIndex = null,
   }) {
     return _then(_$ScratchStateImpl(
       isLoading: null == isLoading
@@ -96,6 +112,14 @@ class __$$ScratchStateImplCopyWithImpl<$Res>
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
+      shownHints: null == shownHints
+          ? _value.shownHints
+          : shownHints // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabControllerIndex: null == tabControllerIndex
+          ? _value.tabControllerIndex
+          : tabControllerIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -103,16 +127,26 @@ class __$$ScratchStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ScratchStateImpl implements _ScratchState {
-  const _$ScratchStateImpl({required this.isLoading, required this.code});
+  const _$ScratchStateImpl(
+      {required this.isLoading,
+      required this.code,
+      this.shownHints = 0,
+      this.tabControllerIndex = 0});
 
   @override
   final bool isLoading;
   @override
   final String code;
+  @override
+  @JsonKey()
+  final int shownHints;
+  @override
+  @JsonKey()
+  final int tabControllerIndex;
 
   @override
   String toString() {
-    return 'ScratchState(isLoading: $isLoading, code: $code)';
+    return 'ScratchState(isLoading: $isLoading, code: $code, shownHints: $shownHints, tabControllerIndex: $tabControllerIndex)';
   }
 
   @override
@@ -122,11 +156,16 @@ class _$ScratchStateImpl implements _ScratchState {
             other is _$ScratchStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.code, code) || other.code == code));
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.shownHints, shownHints) ||
+                other.shownHints == shownHints) &&
+            (identical(other.tabControllerIndex, tabControllerIndex) ||
+                other.tabControllerIndex == tabControllerIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, code);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, code, shownHints, tabControllerIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -138,12 +177,18 @@ class _$ScratchStateImpl implements _ScratchState {
 abstract class _ScratchState implements ScratchState {
   const factory _ScratchState(
       {required final bool isLoading,
-      required final String code}) = _$ScratchStateImpl;
+      required final String code,
+      final int shownHints,
+      final int tabControllerIndex}) = _$ScratchStateImpl;
 
   @override
   bool get isLoading;
   @override
   String get code;
+  @override
+  int get shownHints;
+  @override
+  int get tabControllerIndex;
   @override
   @JsonKey(ignore: true)
   _$$ScratchStateImplCopyWith<_$ScratchStateImpl> get copyWith =>

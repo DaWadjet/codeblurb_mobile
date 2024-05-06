@@ -33,7 +33,7 @@ class CourseDetailsPage extends ConsumerWidget {
         children: [
           AdaptivePullToRefresh(
             onRefresh: () =>
-                ref.read(shoppingItemDetailsQueryProvider(courseId).future),
+                ref.refresh(shoppingItemDetailsQueryProvider(courseId).future),
             child: Padding(
               padding: const EdgeInsets.only(
                 bottom: 16,

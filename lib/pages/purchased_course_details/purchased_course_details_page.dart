@@ -34,7 +34,7 @@ class PurchasedCourseDetailsPage extends HookConsumerWidget {
         children: [
           AdaptivePullToRefresh(
             onRefresh: () =>
-                ref.read(contentBundleQueryProvider(courseId).future),
+                ref.refresh(contentBundleQueryProvider(courseId).future),
             child: Padding(
               padding: const EdgeInsets.only(
                 bottom: 16,

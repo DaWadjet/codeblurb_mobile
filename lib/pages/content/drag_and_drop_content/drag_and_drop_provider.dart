@@ -11,6 +11,8 @@ part 'drag_and_drop_provider.g.dart';
 class DragAndDropState with _$DragAndDropState {
   const factory DragAndDropState({
     required bool isLoading,
+    @Default(0) int shownHints,
+    @Default(0) int tabControllerIndex,
   }) = _DragAndDropState;
 }
 
@@ -53,5 +55,16 @@ class DragAndDropNotifier extends _$DragAndDropNotifier {
           .showToast('Failed to submit solution');
       return false;
     }
+  }
+
+  void setTabControllerIndex(int index) {
+    state = state.copyWith(tabControllerIndex: index);
+  }
+
+  void showHint() {
+    state = state.copyWith(
+      shownHints: state.shownHints + 1,
+      tabControllerIndex: 0,
+    );
   }
 }

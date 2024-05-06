@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:codeblurb_mobile/network/models/shopping_item_response.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/brief_info.dart';
 import 'package:codeblurb_mobile/widgets/cart_button.dart';
+import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/price_tag.dart';
 import 'package:codeblurb_mobile/widgets/small_rating_view.dart';
 import 'package:codeblurb_mobile/widgets/tappable.dart';
@@ -31,14 +30,9 @@ class ExploreCourseItem extends StatelessWidget {
               height: 122,
               child: Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: content.contentBundle.imageUrl ?? dummyUrl,
-                      fit: BoxFit.cover,
-                      height: 122,
-                      width: 122,
-                    ),
+                  CourseImage(
+                    imageUrl: content.contentBundle.imageUrl,
+                    height: 122,
                   ),
                   const SizedBox(
                     width: 16,

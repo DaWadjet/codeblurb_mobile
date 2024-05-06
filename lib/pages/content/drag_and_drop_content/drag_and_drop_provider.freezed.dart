@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DragAndDropState {
   bool get isLoading => throw _privateConstructorUsedError;
+  int get shownHints => throw _privateConstructorUsedError;
+  int get tabControllerIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DragAndDropStateCopyWith<DragAndDropState> get copyWith =>
@@ -29,7 +31,7 @@ abstract class $DragAndDropStateCopyWith<$Res> {
           DragAndDropState value, $Res Function(DragAndDropState) then) =
       _$DragAndDropStateCopyWithImpl<$Res, DragAndDropState>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, int shownHints, int tabControllerIndex});
 }
 
 /// @nodoc
@@ -46,12 +48,22 @@ class _$DragAndDropStateCopyWithImpl<$Res, $Val extends DragAndDropState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? shownHints = null,
+    Object? tabControllerIndex = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      shownHints: null == shownHints
+          ? _value.shownHints
+          : shownHints // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabControllerIndex: null == tabControllerIndex
+          ? _value.tabControllerIndex
+          : tabControllerIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -64,7 +76,7 @@ abstract class _$$DragAndDropStateImplCopyWith<$Res>
       __$$DragAndDropStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, int shownHints, int tabControllerIndex});
 }
 
 /// @nodoc
@@ -79,12 +91,22 @@ class __$$DragAndDropStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? shownHints = null,
+    Object? tabControllerIndex = null,
   }) {
     return _then(_$DragAndDropStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      shownHints: null == shownHints
+          ? _value.shownHints
+          : shownHints // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabControllerIndex: null == tabControllerIndex
+          ? _value.tabControllerIndex
+          : tabControllerIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -92,14 +114,23 @@ class __$$DragAndDropStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DragAndDropStateImpl implements _DragAndDropState {
-  const _$DragAndDropStateImpl({required this.isLoading});
+  const _$DragAndDropStateImpl(
+      {required this.isLoading,
+      this.shownHints = 0,
+      this.tabControllerIndex = 0});
 
   @override
   final bool isLoading;
+  @override
+  @JsonKey()
+  final int shownHints;
+  @override
+  @JsonKey()
+  final int tabControllerIndex;
 
   @override
   String toString() {
-    return 'DragAndDropState(isLoading: $isLoading)';
+    return 'DragAndDropState(isLoading: $isLoading, shownHints: $shownHints, tabControllerIndex: $tabControllerIndex)';
   }
 
   @override
@@ -108,11 +139,16 @@ class _$DragAndDropStateImpl implements _DragAndDropState {
         (other.runtimeType == runtimeType &&
             other is _$DragAndDropStateImpl &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.shownHints, shownHints) ||
+                other.shownHints == shownHints) &&
+            (identical(other.tabControllerIndex, tabControllerIndex) ||
+                other.tabControllerIndex == tabControllerIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, shownHints, tabControllerIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +159,17 @@ class _$DragAndDropStateImpl implements _DragAndDropState {
 }
 
 abstract class _DragAndDropState implements DragAndDropState {
-  const factory _DragAndDropState({required final bool isLoading}) =
-      _$DragAndDropStateImpl;
+  const factory _DragAndDropState(
+      {required final bool isLoading,
+      final int shownHints,
+      final int tabControllerIndex}) = _$DragAndDropStateImpl;
 
   @override
   bool get isLoading;
+  @override
+  int get shownHints;
+  @override
+  int get tabControllerIndex;
   @override
   @JsonKey(ignore: true)
   _$$DragAndDropStateImplCopyWith<_$DragAndDropStateImpl> get copyWith =>

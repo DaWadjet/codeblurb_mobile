@@ -51,7 +51,7 @@ class RatingDistribution extends HookWidget {
         Row(
           children: [
             Text(
-              'Course Rating: ${ratings.averageRating.toStringAsFixed(1)}',
+              'Course Rating: ${(ratings.averageRating ?? 0).toStringAsFixed(1)}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,

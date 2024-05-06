@@ -3,10 +3,10 @@ import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/ratings_response.dart';
 import 'package:codeblurb_mobile/network/models/skill_level.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/types.dart';
 import 'package:codeblurb_mobile/widgets/course_icons.dart';
+import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/course_section_item.dart';
 import 'package:codeblurb_mobile/widgets/rating.dart';
 import 'package:flutter/material.dart';
@@ -50,14 +50,10 @@ class CourseDetailsCommon extends HookWidget {
         const SizedBox(
           height: 8,
         ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            imageUrl ?? dummyUrl,
-            fit: BoxFit.cover,
-            height: 200,
-            width: double.infinity,
-          ),
+        CourseImage(
+          imageUrl: imageUrl,
+          height: 200,
+          width: double.infinity,
         ),
         const SizedBox(
           height: 16,

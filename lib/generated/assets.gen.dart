@@ -80,6 +80,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/quiz.svg
   SvgGenImage get quiz => const SvgGenImage('assets/images/quiz.svg');
 
+  /// File path: assets/images/results.svg
+  SvgGenImage get results => const SvgGenImage('assets/images/results.svg');
+
   /// File path: assets/images/send.svg
   SvgGenImage get send => const SvgGenImage('assets/images/send.svg');
 
@@ -142,6 +145,7 @@ class $AssetsImagesGen {
         myCourses,
         play,
         quiz,
+        results,
         send,
         shoppingCart,
         sort,

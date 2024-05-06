@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/minimal_content_bundle_response.dart';
-import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:codeblurb_mobile/widgets/app_progress_bar.dart';
 import 'package:codeblurb_mobile/widgets/brief_info.dart';
+import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/tappable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -57,11 +56,11 @@ class PurchasedCourseItem extends HookConsumerWidget {
             ),
             child: Column(
               children: [
-                CachedNetworkImage(
-                  imageUrl: content.imageUrl ?? dummyUrl,
-                  fit: BoxFit.cover,
+                CourseImage(
+                  imageUrl: content.imageUrl,
                   width: double.infinity,
                   height: 122,
+                  withBorderRadius: false,
                 ),
                 const SizedBox(
                   height: 4,
