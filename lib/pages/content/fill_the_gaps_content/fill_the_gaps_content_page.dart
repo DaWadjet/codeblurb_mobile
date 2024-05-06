@@ -6,7 +6,7 @@ import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/coding_content_response.dart';
 import 'package:codeblurb_mobile/pages/content/components/custom_will_pop.dart';
-import 'package:codeblurb_mobile/pages/content/components/hints_section.dart';
+import 'package:codeblurb_mobile/pages/content/components/task_description_tab.dart';
 import 'package:codeblurb_mobile/pages/content/fill_the_gaps_content/fill_the_gaps_provider.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
 import 'package:flutter/material.dart';
@@ -31,24 +31,19 @@ class FillTheGapsContentPage extends HookConsumerWidget {
     final bottomPadding = context.bottomPadding;
     final tabBarColors = Theme.of(context).tabBarTheme;
 
-    final shownHintCount = ref
-        .watch(fillTheGapsNotifierProvider.select((value) => value.shownHints));
-
     ref.listen(
         fillTheGapsNotifierProvider.select((value) => value.tabControllerIndex),
         (previous, next) {
       tabController.animateTo(next);
     });
 
-    final tabIndex = ref.watch(
-      fillTheGapsNotifierProvider.select((value) => value.tabControllerIndex),
-    );
+    final state = ref.watch(fillTheGapsNotifierProvider);
 
     final tabs = useMemoized(
       () => [
         Tab(
           icon: Assets.images.assignment.svg(
-            color: tabIndex == 0
+            color: state.tabControllerIndex == 0
                 ? tabBarColors.labelColor
                 : tabBarColors.unselectedLabelColor,
           ),
@@ -56,14 +51,14 @@ class FillTheGapsContentPage extends HookConsumerWidget {
         ),
         Tab(
           icon: Assets.images.exercise.svg(
-            color: tabIndex == 1
+            color: state.tabControllerIndex == 1
                 ? tabBarColors.labelColor
                 : tabBarColors.unselectedLabelColor,
           ),
           text: 'Exercise',
         ),
       ],
-      [tabIndex],
+      [state.tabControllerIndex],
     );
 
     useEffect(
@@ -92,94 +87,17 @@ class FillTheGapsContentPage extends HookConsumerWidget {
         body: TabBarView(
           controller: tabController,
           children: [
-            Stack(
-              children: [
-                SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        viewedContent.name,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Card(
-                          margin: const EdgeInsets.symmetric(vertical: 24),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Task Description',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Text(
-                                  viewedContent.shortDescription,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      HintsSecton(
-                        hints: viewedContent.hints,
-                        onShowHints: ref
-                            .read(fillTheGapsNotifierProvider.notifier)
-                            .showHint,
-                        shownHintCount: shownHintCount,
-                      ),
-                      SizedBox(height: 60 + bottomPadding),
-                    ],
-                  ),
-                ),
-                BottomCallToAction(
-                  child: Column(
-                    children: [
-                      const Divider(),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: SizedBox(
-                          height: 44,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            child: const Text(
-                              'Start exercise',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
-                            onPressed: () => ref
-                                .read(fillTheGapsNotifierProvider.notifier)
-                                .setTabControllerIndex(1),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: bottomPadding + 8,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            TaskDescriptionTab(
+              onShowHints: () =>
+                  ref.read(fillTheGapsNotifierProvider.notifier).showHint(),
+              shownHintCount: state.shownHints,
+              onStart: () {
+                ref
+                    .read(fillTheGapsNotifierProvider.notifier)
+                    .setTabControllerIndex(1);
+              },
+              viewedContent: viewedContent,
+              startText: "Let's do it!",
             ),
             Stack(
               children: [
@@ -198,7 +116,7 @@ class FillTheGapsContentPage extends HookConsumerWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      if (shownHintCount < viewedContent.hints.length)
+                      if (state.shownHints < viewedContent.hints.length)
                         SizedBox(
                           height: 40,
                           child: Row(
@@ -242,7 +160,7 @@ class FillTheGapsContentPage extends HookConsumerWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             child: const Text(
-                              'Start exercise',
+                              "Let's do it!",
                               style: TextStyle(
                                 fontSize: 18,
                               ),
