@@ -15,7 +15,6 @@ extension BuildContextX on BuildContext {
 
   Future<T?> showBottomSheet<T>({
     required Widget content,
-    Color? backgroundColor,
   }) {
     return showModalBottomSheet<T>(
       context: this,

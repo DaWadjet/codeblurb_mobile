@@ -82,7 +82,6 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
                               height: 48,
                               child: ElevatedButton(
                                 onPressed: () => context.showBottomSheet<void>(
-                                  backgroundColor: colors.background,
                                   content: RatingBottomSheet(
                                     courseId: courseId,
                                   ),

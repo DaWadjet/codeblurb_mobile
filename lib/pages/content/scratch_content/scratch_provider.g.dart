@@ -6,7 +6,7 @@ part of 'scratch_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scratchNotifierHash() => r'c8c08e7924cbeb93396fce9bd3ec733357b23aea';
+String _$scratchNotifierHash() => r'6d3147d53f15b0d297e79b1dc46b14f0eb3f9804';
 
 /// See also [ScratchNotifier].
 @ProviderFor(ScratchNotifier)

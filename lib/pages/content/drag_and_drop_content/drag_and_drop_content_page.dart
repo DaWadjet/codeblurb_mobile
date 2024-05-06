@@ -67,13 +67,13 @@ class DragAndDropContentPage extends HookConsumerWidget {
       () {
         tabController.addListener(() {
           ref.read(dragAndDropNotifierProvider.notifier).setTabControllerIndex(
-                tabIndex,
+                tabController.index,
               );
           FocusManager.instance.primaryFocus?.unfocus();
         });
         return null;
       },
-      [tabController],
+      [tabController.index],
     );
     return CustomWillPop(
       onPop: ref.read(dragAndDropNotifierProvider.notifier).resetState,

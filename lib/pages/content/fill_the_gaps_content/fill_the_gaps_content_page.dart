@@ -70,13 +70,13 @@ class FillTheGapsContentPage extends HookConsumerWidget {
       () {
         tabController.addListener(() {
           ref.read(fillTheGapsNotifierProvider.notifier).setTabControllerIndex(
-                tabIndex,
+                tabController.index,
               );
           FocusManager.instance.primaryFocus?.unfocus();
         });
         return null;
       },
-      [tabController],
+      [tabController.index],
     );
 
     return CustomWillPop(

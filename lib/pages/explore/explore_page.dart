@@ -64,7 +64,6 @@ class ExplorePage extends HookConsumerWidget {
             onPressed: () async {
               final newSkillFilterValues =
                   await context.showBottomSheet<List<SkillLevel>>(
-                backgroundColor: colors.background,
                 content: SkillLevelSheet(initialValues: skillLevels.value),
               );
 
@@ -84,7 +83,6 @@ class ExplorePage extends HookConsumerWidget {
           IconButton(
             onPressed: () async {
               final newSort = await context.showBottomSheet<PageProps>(
-                backgroundColor: colors.background,
                 content: SortSheet(
                   initialValue: filter.value,
                 ),
