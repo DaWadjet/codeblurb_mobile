@@ -65,6 +65,7 @@ class RatingBottomSheet extends HookConsumerWidget {
               InputField(
                 controller: controller,
                 maxLines: 4,
+                maxLength: 50,
                 hint: 'Write a review',
               ),
               const SizedBox(

@@ -50,7 +50,6 @@ class ScratchNotifier extends _$ScratchNotifier {
                 code: state.code.replaceAll(
                   //replace the incorrect quote
                   RegExp('“|”'),
-
                   '"',
                 ),
               );
@@ -73,7 +72,14 @@ class ScratchNotifier extends _$ScratchNotifier {
   }
 
   void setCode(String code) {
-    state = state.copyWith(code: code);
+    state = state.copyWith(
+      code: code.replaceAll(
+        //replace the incorrect quote
+        RegExp('“|”'),
+
+        '"',
+      ),
+    );
   }
 
   void showHint() {

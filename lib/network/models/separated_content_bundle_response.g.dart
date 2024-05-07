@@ -14,7 +14,7 @@ SeparatedContentBundleResponse _$SeparatedContentBundleResponseFromJson(
       json['title'] as String,
       json['imageUrl'] as String?,
       $enumDecode(_$SkillLevelEnumMap, json['skillLevel']),
-      (json['progress'] as num).toDouble(),
+      (json['progress'] as num?)?.toDouble(),
       DateTime.parse(json['releaseDate'] as String),
       json['ratings'] == null
           ? null

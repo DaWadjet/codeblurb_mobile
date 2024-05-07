@@ -197,7 +197,7 @@ class CourseDetailsCommon extends HookWidget {
                   ),
                   child: CourseSectionItem(
                     section: e,
-                    canNavigate: true,
+                    canNavigate: isPurchased,
                   ),
                 ),
               )

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/hooks/use_content_type.dart';
 import 'package:codeblurb_mobile/pages/content/content_provider.dart';
+import 'package:codeblurb_mobile/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +38,11 @@ class NextSectionButton extends HookConsumerWidget {
       () => () {
         onNextContent?.call();
         if (nextSectionRoute != null) {
-          context.router.replace(nextSectionRoute(nextSection!));
+          context.router.pushAndPopUntil(
+            nextSectionRoute(nextSection!),
+            predicate: (route) =>
+                route.settings.name == PurchasedCourseDetailsRoute.name,
+          );
         } else {
           context.router.maybePop();
         }

@@ -39,7 +39,7 @@ class SeparatedContentBundleResponse {
   final String title;
   final String? imageUrl;
   final SkillLevel skillLevel;
-  final double progress;
+  final double? progress;
   final DateTime releaseDate;
   final RatingsResponse? ratings;
   final int numberOfPurchases;
