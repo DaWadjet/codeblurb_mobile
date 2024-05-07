@@ -41,12 +41,18 @@ class ScratchNotifier extends _$ScratchNotifier {
     required int contentId,
     required int courseId,
   }) async {
-    state = state.copyWith(isLoading: true);
+    state =
+        state.copyWith(isLoading: true, solution: null, tabControllerIndex: 2);
     try {
       final response =
           await ref.read(contentRepositoryProvider).sendCodeSolution(
                 contentId: contentId,
-                code: state.code,
+                code: state.code.replaceAll(
+                  //replace the incorrect quote
+                  RegExp('“|”'),
+
+                  '"',
+                ),
               );
       unawaited(ref.refresh(contentBundleQueryProvider(courseId).future));
       ref.invalidate(contentBundlesQueryProvider);
