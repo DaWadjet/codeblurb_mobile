@@ -36,6 +36,7 @@ class QuizContentResultsPage extends HookConsumerWidget {
     if (solution == null) {
       return const SizedBox();
     }
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         ref.read(quizContentNotifierProvider.notifier).resetState();

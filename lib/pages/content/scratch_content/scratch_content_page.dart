@@ -49,15 +49,15 @@ class ScratchContentPage extends HookConsumerWidget {
 
     useEffect(
       () {
-        Future.delayed(
-          Duration.zero,
-          () => ref
+        textEditingController.addListener(() {
+          ref
               .read(scratchNotifierProvider.notifier)
-              .setCode(textEditingController.text),
-        );
+              .setCode(textEditingController.text);
+        });
+
         return null;
       },
-      [textEditingController.text],
+      [],
     );
 
     useEffect(
@@ -83,6 +83,7 @@ class ScratchContentPage extends HookConsumerWidget {
       },
     );
     return CustomWillPop(
+      skipCheck: state.solution != null,
       onPop: ref.read(scratchNotifierProvider.notifier).resetState,
       child: Scaffold(
         appBar: AppBar(
@@ -134,8 +135,16 @@ class ScratchContentPage extends HookConsumerWidget {
               viewedContent: viewedContent,
               startText: 'Start Coding!',
             ),
-            CodingTab(node: node, textEditingController: textEditingController),
-            const ScratchResultsTab(),
+            CodingTab(
+              node: node,
+              textEditingController: textEditingController,
+              contentId: viewedContent.id,
+              courseId: courseId,
+            ),
+            ScratchResultsTab(
+              viewedContent: viewedContent,
+              courseId: courseId,
+            ),
           ],
         ),
       ),

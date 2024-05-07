@@ -9,13 +9,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class CharacterInsertionRow extends HookConsumerWidget {
   const CharacterInsertionRow({
     required this.onUnfocus,
-    required this.onRunCode,
+    required this.onPlayPressed,
     required this.controller,
     super.key,
   });
 
   final VoidCallback onUnfocus;
-  final VoidCallback onRunCode;
+  final VoidCallback onPlayPressed;
   final TextEditingController controller;
 
   @override
@@ -120,10 +120,10 @@ class CharacterInsertionRow extends HookConsumerWidget {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: Colors.green.shade400,
+                      color: colors.foreground,
                     ),
                     child: IconButton(
-                      onPressed: onRunCode,
+                      onPressed: onPlayPressed,
                       icon: Assets.images.play.svg(
                         // ignore: deprecated_member_use_from_same_package
                         color: colors.background,
