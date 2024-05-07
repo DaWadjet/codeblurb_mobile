@@ -1,14 +1,12 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 
 import 'package:auto_route/auto_route.dart';
-import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/generated/assets.gen.dart';
-import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/coding_content_response.dart';
 import 'package:codeblurb_mobile/pages/content/components/custom_will_pop.dart';
 import 'package:codeblurb_mobile/pages/content/components/task_description_tab.dart';
 import 'package:codeblurb_mobile/pages/content/fill_the_gaps_content/fill_the_gaps_provider.dart';
-import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
+import 'package:codeblurb_mobile/pages/content/fill_the_gaps_content/fill_the_gaps_task_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,8 +25,6 @@ class FillTheGapsContentPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tabController = useTabController(initialLength: 2);
-    final colors = useColors();
-    final bottomPadding = context.bottomPadding;
     final tabBarColors = Theme.of(context).tabBarTheme;
 
     ref.listen(
@@ -63,18 +59,41 @@ class FillTheGapsContentPage extends HookConsumerWidget {
 
     useEffect(
       () {
-        tabController.addListener(() {
-          ref.read(fillTheGapsNotifierProvider.notifier).setTabControllerIndex(
-                tabController.index,
-              );
-          FocusManager.instance.primaryFocus?.unfocus();
-        });
-        return null;
+        void listener() {
+          if (tabController.index !=
+              ref.read(fillTheGapsNotifierProvider).tabControllerIndex) {
+            ref
+                .read(fillTheGapsNotifierProvider.notifier)
+                .setTabControllerIndex(
+                  tabController.index,
+                );
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        }
+
+        tabController.addListener(listener);
+        return () {
+          tabController.removeListener(listener);
+        };
       },
       [tabController.index],
     );
 
+    useEffect(
+      () {
+        Future.delayed(
+          Duration.zero,
+          () => ref
+              .read(fillTheGapsNotifierProvider.notifier)
+              .initEditedSolutions(viewedContent.codeSkeleton.length - 1),
+        );
+        return null;
+      },
+      [],
+    );
+
     return CustomWillPop(
+      skipCheck: state.solution != null,
       onPop: ref.read(fillTheGapsNotifierProvider.notifier).resetState,
       child: Scaffold(
         appBar: AppBar(
@@ -99,85 +118,9 @@ class FillTheGapsContentPage extends HookConsumerWidget {
               viewedContent: viewedContent,
               startText: "Let's do it!",
             ),
-            Stack(
-              children: [
-                SingleChildScrollView(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      const Text(
-                        'Le task itself',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      if (state.shownHints < viewedContent.hints.length)
-                        SizedBox(
-                          height: 40,
-                          child: Row(
-                            children: [
-                              Text(
-                                'Need some help?',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: colors.mutedForeground,
-                                ),
-                              ),
-                              const Spacer(),
-                              TextButton(
-                                onPressed: () {
-                                  ref
-                                      .read(
-                                        fillTheGapsNotifierProvider.notifier,
-                                      )
-                                      .showHint();
-                                },
-                                child: const Text('Show hint'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      SizedBox(height: 60 + bottomPadding),
-                    ],
-                  ),
-                ),
-                BottomCallToAction(
-                  child: Column(
-                    children: [
-                      const Divider(),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: SizedBox(
-                          height: 44,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            child: const Text(
-                              "Let's do it!",
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
-                            onPressed: () => ref
-                                .read(fillTheGapsNotifierProvider.notifier)
-                                .setTabControllerIndex(1),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: bottomPadding + 8,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            FillTheGapsTaskTab(
+              viewedContent: viewedContent,
+              courseId: courseId,
             ),
           ],
         ),

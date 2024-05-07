@@ -26,7 +26,7 @@ class VideoContentPage extends HookConsumerWidget {
     final YoutubePlayerController controller = useMemoized(
       () => YoutubePlayerController(
         initialVideoId: YoutubePlayer.convertUrlToId(
-              'https://www.youtube.com/watch?v=Toar450Gk5Y',
+              viewedContent.resourceUrl,
             ) ??
             '',
       ),

@@ -74,13 +74,21 @@ class ScratchContentPage extends HookConsumerWidget {
 
     useEffect(
       () {
-        tabController.addListener(() {
-          ref.read(scratchNotifierProvider.notifier).setTabControllerIndex(
-                tabController.index,
-              );
-        });
-        return null;
+        void listener() {
+          if (tabController.index !=
+              ref.read(scratchNotifierProvider).tabControllerIndex) {
+            ref.read(scratchNotifierProvider.notifier).setTabControllerIndex(
+                  tabController.index,
+                );
+          }
+        }
+
+        tabController.addListener(listener);
+        return () {
+          tabController.removeListener(listener);
+        };
       },
+      [],
     );
     return CustomWillPop(
       skipCheck: state.solution != null,

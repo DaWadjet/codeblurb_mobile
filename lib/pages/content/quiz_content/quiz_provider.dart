@@ -43,7 +43,7 @@ class QuizContentNotifier extends _$QuizContentNotifier {
   }
 
   void resetState() {
-    state = const QuizContentState(
+    state = state.copyWith(
       isLoading: false,
       answers: [],
       shownQuestionIndex: -1,

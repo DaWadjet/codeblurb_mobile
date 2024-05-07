@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:codeblurb_mobile/generated/assets.gen.dart';
-import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/network/models/quiz_content_response.dart';
 import 'package:codeblurb_mobile/pages/content/components/next_section_button.dart';
 import 'package:codeblurb_mobile/pages/content/quiz_content/quiz_provider.dart';
@@ -11,7 +9,7 @@ import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class QuizBottomActions extends HookConsumerWidget {
+class QuizBottomActions extends ConsumerWidget {
   const QuizBottomActions(this.viewedContent, this.courseId, {super.key});
 
   final QuizContentResponse viewedContent;
@@ -19,7 +17,6 @@ class QuizBottomActions extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = useColors();
     final shownQuestionIndex = ref.watch(
       quizContentNotifierProvider.select((value) => value.shownQuestionIndex),
     );
@@ -81,29 +78,18 @@ class QuizBottomActions extends HookConsumerWidget {
                           .select((value) => value.isLoading),
                     );
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        isLoading
-                            ? const Loader(
-                                withBackgroundColor: true,
-                              )
-                            : Assets.images.send.svg(
-                                width: 24,
-                                height: 24,
-                                // ignore: deprecated_member_use_from_same_package
-                                color: colors.background,
-                              ),
-                        const SizedBox(width: 12),
-                        const Text(
-                          'Submit Answers',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    );
+                    return isLoading
+                        ? const Loader(
+                            withBackgroundColor: true,
+                            size: 32,
+                          )
+                        : const Text(
+                            'Submit Answers',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
                   },
                 ),
               ),

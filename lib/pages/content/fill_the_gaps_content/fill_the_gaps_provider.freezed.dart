@@ -17,8 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$FillTheGapsState {
   bool get isLoading => throw _privateConstructorUsedError;
+  List<String> get editedSolutions => throw _privateConstructorUsedError;
   int get shownHints => throw _privateConstructorUsedError;
   int get tabControllerIndex => throw _privateConstructorUsedError;
+  CodeQuizSolutionResponse? get solution => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FillTheGapsStateCopyWith<FillTheGapsState> get copyWith =>
@@ -31,7 +33,12 @@ abstract class $FillTheGapsStateCopyWith<$Res> {
           FillTheGapsState value, $Res Function(FillTheGapsState) then) =
       _$FillTheGapsStateCopyWithImpl<$Res, FillTheGapsState>;
   @useResult
-  $Res call({bool isLoading, int shownHints, int tabControllerIndex});
+  $Res call(
+      {bool isLoading,
+      List<String> editedSolutions,
+      int shownHints,
+      int tabControllerIndex,
+      CodeQuizSolutionResponse? solution});
 }
 
 /// @nodoc
@@ -48,14 +55,20 @@ class _$FillTheGapsStateCopyWithImpl<$Res, $Val extends FillTheGapsState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? editedSolutions = null,
     Object? shownHints = null,
     Object? tabControllerIndex = null,
+    Object? solution = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      editedSolutions: null == editedSolutions
+          ? _value.editedSolutions
+          : editedSolutions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       shownHints: null == shownHints
           ? _value.shownHints
           : shownHints // ignore: cast_nullable_to_non_nullable
@@ -64,6 +77,10 @@ class _$FillTheGapsStateCopyWithImpl<$Res, $Val extends FillTheGapsState>
           ? _value.tabControllerIndex
           : tabControllerIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      solution: freezed == solution
+          ? _value.solution
+          : solution // ignore: cast_nullable_to_non_nullable
+              as CodeQuizSolutionResponse?,
     ) as $Val);
   }
 }
@@ -76,7 +93,12 @@ abstract class _$$FillTheGapsStateImplCopyWith<$Res>
       __$$FillTheGapsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, int shownHints, int tabControllerIndex});
+  $Res call(
+      {bool isLoading,
+      List<String> editedSolutions,
+      int shownHints,
+      int tabControllerIndex,
+      CodeQuizSolutionResponse? solution});
 }
 
 /// @nodoc
@@ -91,14 +113,20 @@ class __$$FillTheGapsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? editedSolutions = null,
     Object? shownHints = null,
     Object? tabControllerIndex = null,
+    Object? solution = freezed,
   }) {
     return _then(_$FillTheGapsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      editedSolutions: null == editedSolutions
+          ? _value._editedSolutions
+          : editedSolutions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       shownHints: null == shownHints
           ? _value.shownHints
           : shownHints // ignore: cast_nullable_to_non_nullable
@@ -107,6 +135,10 @@ class __$$FillTheGapsStateImplCopyWithImpl<$Res>
           ? _value.tabControllerIndex
           : tabControllerIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      solution: freezed == solution
+          ? _value.solution
+          : solution // ignore: cast_nullable_to_non_nullable
+              as CodeQuizSolutionResponse?,
     ));
   }
 }
@@ -116,21 +148,34 @@ class __$$FillTheGapsStateImplCopyWithImpl<$Res>
 class _$FillTheGapsStateImpl implements _FillTheGapsState {
   const _$FillTheGapsStateImpl(
       {required this.isLoading,
+      required final List<String> editedSolutions,
       this.shownHints = 0,
-      this.tabControllerIndex = 0});
+      this.tabControllerIndex = 0,
+      this.solution})
+      : _editedSolutions = editedSolutions;
 
   @override
   final bool isLoading;
+  final List<String> _editedSolutions;
+  @override
+  List<String> get editedSolutions {
+    if (_editedSolutions is EqualUnmodifiableListView) return _editedSolutions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_editedSolutions);
+  }
+
   @override
   @JsonKey()
   final int shownHints;
   @override
   @JsonKey()
   final int tabControllerIndex;
+  @override
+  final CodeQuizSolutionResponse? solution;
 
   @override
   String toString() {
-    return 'FillTheGapsState(isLoading: $isLoading, shownHints: $shownHints, tabControllerIndex: $tabControllerIndex)';
+    return 'FillTheGapsState(isLoading: $isLoading, editedSolutions: $editedSolutions, shownHints: $shownHints, tabControllerIndex: $tabControllerIndex, solution: $solution)';
   }
 
   @override
@@ -140,15 +185,24 @@ class _$FillTheGapsStateImpl implements _FillTheGapsState {
             other is _$FillTheGapsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._editedSolutions, _editedSolutions) &&
             (identical(other.shownHints, shownHints) ||
                 other.shownHints == shownHints) &&
             (identical(other.tabControllerIndex, tabControllerIndex) ||
-                other.tabControllerIndex == tabControllerIndex));
+                other.tabControllerIndex == tabControllerIndex) &&
+            (identical(other.solution, solution) ||
+                other.solution == solution));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, shownHints, tabControllerIndex);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      const DeepCollectionEquality().hash(_editedSolutions),
+      shownHints,
+      tabControllerIndex,
+      solution);
 
   @JsonKey(ignore: true)
   @override
@@ -161,15 +215,21 @@ class _$FillTheGapsStateImpl implements _FillTheGapsState {
 abstract class _FillTheGapsState implements FillTheGapsState {
   const factory _FillTheGapsState(
       {required final bool isLoading,
+      required final List<String> editedSolutions,
       final int shownHints,
-      final int tabControllerIndex}) = _$FillTheGapsStateImpl;
+      final int tabControllerIndex,
+      final CodeQuizSolutionResponse? solution}) = _$FillTheGapsStateImpl;
 
   @override
   bool get isLoading;
   @override
+  List<String> get editedSolutions;
+  @override
   int get shownHints;
   @override
   int get tabControllerIndex;
+  @override
+  CodeQuizSolutionResponse? get solution;
   @override
   @JsonKey(ignore: true)
   _$$FillTheGapsStateImplCopyWith<_$FillTheGapsStateImpl> get copyWith =>

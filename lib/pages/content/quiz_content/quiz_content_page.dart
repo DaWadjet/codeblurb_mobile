@@ -29,8 +29,12 @@ class QuizContentPage extends HookConsumerWidget {
     final shownQuestionIndex = ref.watch(
       quizContentNotifierProvider.select((value) => value.shownQuestionIndex),
     );
+    final hasSolution = ref.watch(
+      quizContentNotifierProvider.select((value) => value.solution != null),
+    );
 
     return CustomWillPop(
+      skipCheck: hasSolution,
       onPop: ref.read(quizContentNotifierProvider.notifier).resetState,
       child: Scaffold(
         appBar: CBAppBar(

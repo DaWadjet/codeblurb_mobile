@@ -37,6 +37,7 @@ class ScratchResultsTab extends HookConsumerWidget {
           child: Column(
             children: [
               SizedBox(
+                key: ValueKey(state.code),
                 height: maxHeight / 3,
                 child: SyntaxView(
                   code: state.code,

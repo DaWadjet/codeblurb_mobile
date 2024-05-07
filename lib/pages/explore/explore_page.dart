@@ -64,7 +64,9 @@ class ExplorePage extends HookConsumerWidget {
             onPressed: () async {
               final newSkillFilterValues =
                   await context.showBottomSheet<List<SkillLevel>>(
-                content: SkillLevelSheet(initialValues: skillLevels.value),
+                content: SkillLevelSheet(
+                  initialValues: skillLevels.value,
+                ),
               );
 
               if (newSkillFilterValues != null) {
@@ -85,6 +87,7 @@ class ExplorePage extends HookConsumerWidget {
               final newSort = await context.showBottomSheet<PageProps>(
                 content: SortSheet(
                   initialValue: filter.value,
+                  isMyCourses: false,
                 ),
               );
               filter.value = newSort ?? filter.value;
