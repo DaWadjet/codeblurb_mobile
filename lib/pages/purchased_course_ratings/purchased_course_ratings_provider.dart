@@ -1,4 +1,3 @@
-import 'package:codeblurb_mobile/pages/home/home_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -29,8 +28,8 @@ class CourseRatingsNotifier extends _$CourseRatingsNotifier {
                 : review,
           );
 
+      ref.invalidate(contentBundleQueryProvider);
       final _ = await ref.refresh(contentBundleQueryProvider(courseId).future);
-      ref.invalidate(contentBundlesHomeQueryProvider);
       ref.read(toastNotifierProvider.notifier).showToast(
             'Course rated successfully',
           );
