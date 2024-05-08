@@ -30,10 +30,13 @@ class FillTheGapsNotifier extends _$FillTheGapsNotifier {
     );
   }
 
-  void resetState() {
-    state = const FillTheGapsState(
+  void resetState({
+    bool withoutPageReset = false,
+  }) {
+    state = FillTheGapsState(
       isLoading: false,
       editedSolutions: [],
+      tabControllerIndex: withoutPageReset ? state.tabControllerIndex : 0,
     );
   }
 
@@ -55,7 +58,9 @@ class FillTheGapsNotifier extends _$FillTheGapsNotifier {
       state.solution!.correctAnswerIndices.remove(index);
     }
 
-    state = state.copyWith(editedSolutions: newEditedSolutions);
+    state = state.copyWith(
+      editedSolutions: newEditedSolutions,
+    );
   }
 
   Future<void> submitFillTheGapsSolution({

@@ -145,7 +145,7 @@ class ScratchResultsTab extends HookConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 48),
               NextSectionButton(
                 isTextButton: state.solution?.outcome != Outcome.passed,
                 courseId: courseId,

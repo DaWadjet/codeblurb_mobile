@@ -41,7 +41,7 @@ class QuizInitialContent extends HookConsumerWidget {
             color: colors.mutedForeground,
           ),
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 36),
       ],
     );
   }

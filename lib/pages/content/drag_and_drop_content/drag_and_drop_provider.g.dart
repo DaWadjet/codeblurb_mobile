@@ -7,7 +7,7 @@ part of 'drag_and_drop_provider.dart';
 // **************************************************************************
 
 String _$dragAndDropNotifierHash() =>
-    r'aa39f2c428e341d974eee0a7eded7a2307a78339';
+    r'2220cfd44ae165ee7b1ed842f40ad08be5b29a01';
 
 /// See also [DragAndDropNotifier].
 @ProviderFor(DragAndDropNotifier)
