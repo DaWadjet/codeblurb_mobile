@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
-import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/purchased_course_ratings/rating_bottom_sheet.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
@@ -21,7 +20,6 @@ class PurchasedCourseRatingsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final courseQuery = ref.watch(contentBundleQueryProvider(courseId));
     final bottomPadding = context.bottomPadding;
-    final colors = useColors();
     final username = ref.watch(isLoggedInProvider.notifier).getUsername();
 
     return Scaffold(
