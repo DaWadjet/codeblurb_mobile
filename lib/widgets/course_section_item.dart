@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/hooks/use_content_type.dart';
 import 'package:codeblurb_mobile/network/models/seen_status.dart';
@@ -31,11 +32,6 @@ class CourseSectionItem extends HookConsumerWidget {
           dividerColor: Colors.transparent,
         ),
         child: Card(
-          color: section.status == SeenStatus.seen
-              ? colors.mutedForeground.withOpacity(0.05)
-              : section.status == SeenStatus.completed
-                  ? colors.mutedForeground.withOpacity(0.15)
-                  : Colors.transparent,
           margin: EdgeInsets.zero,
           child: ExpansionTile(
             childrenPadding: const EdgeInsets.only(
@@ -47,14 +43,35 @@ class CourseSectionItem extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(
-                    section.name,
-                    maxLines: 2,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+                  child: Row(
+                    children: [
+                      Text(
+                        section.name,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      ...[
+                        const SizedBox(width: 8),
+                        if (section.status == SeenStatus.seen)
+                          Assets.images.eye.svg(
+                            width: 24,
+                            height: 24,
+                            // ignore: deprecated_member_use_from_same_package
+                            color: colors.foreground,
+                          )
+                        else if (section.status == SeenStatus.completed)
+                          Assets.images.complete.svg(
+                            width: 24,
+                            height: 24,
+                            // ignore: deprecated_member_use_from_same_package
+                            color: colors.foreground,
+                          ),
+                      ],
+                    ],
                   ),
                 ),
                 icon.svg(
