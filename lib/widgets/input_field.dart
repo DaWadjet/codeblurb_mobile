@@ -95,7 +95,6 @@ class InputField extends HookWidget {
               maxLines: maxLines,
               validator: validator,
               style: style,
-              cursorHeight: 16,
               textCapitalization:
                   isSecureField ? TextCapitalization.none : textCapitalization,
               decoration: InputDecoration(

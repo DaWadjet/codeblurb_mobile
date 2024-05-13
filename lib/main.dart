@@ -4,6 +4,7 @@ import 'package:codeblurb_mobile/l10n/localization_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/utils/logger.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -46,6 +47,7 @@ Future<void> main() async {
 Future<void> _initFirebase(FirebaseOptions options) async {
   await Firebase.initializeApp(options: options);
   final remoteConfig = FirebaseRemoteConfig.instance;
+  await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
   await remoteConfig.setConfigSettings(
     RemoteConfigSettings(
       fetchTimeout: const Duration(minutes: 1),
