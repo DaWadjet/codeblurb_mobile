@@ -26,6 +26,7 @@ class CustomWillPop extends StatelessWidget {
                   secondaryActionTitle: 'Cancel',
                   title: 'Are you sure you want to leave?',
                   subtitle:
+                      // ignore: lines_longer_than_80_chars
                       "If you haven't submitted your answers yet, they will be lost.",
                   onTap: () => true,
                 ),

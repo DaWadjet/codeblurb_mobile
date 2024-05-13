@@ -119,6 +119,7 @@ class ShoppingCartItem extends HookConsumerWidget {
                             .showAreYouSureDialog(
                               title: 'Are you sure?',
                               message:
+                                  // ignore: lines_longer_than_80_chars
                                   'By pressing Ok, you will remove this item from your cart.',
                               onConfirm: () => ref
                                   .read(

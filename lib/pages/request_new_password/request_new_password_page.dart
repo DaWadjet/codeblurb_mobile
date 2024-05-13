@@ -57,6 +57,7 @@ class RequestNewPasswordPage extends HookConsumerWidget {
                   child: const CodeblurbLogo(),
                 ),
                 const Text(
+                  // ignore: lines_longer_than_80_chars
                   'Enter your username below to receive a password reset email!',
                   textAlign: TextAlign.start,
                   style: TextStyle(
