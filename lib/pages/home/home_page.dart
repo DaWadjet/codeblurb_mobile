@@ -12,8 +12,6 @@ import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-//TODO remove list duplications
-
 @RoutePage()
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
