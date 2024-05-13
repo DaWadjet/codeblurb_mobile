@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +17,7 @@ class CartBottomCallToAction extends HookConsumerWidget {
     return cart.maybeWhen(
       orElse: () => const SizedBox(),
       data: (data) => BottomCallToAction(
+        key: Keys.cartCta,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           child: data.shoppingItems.isEmpty
@@ -60,6 +62,7 @@ class CartBottomCallToAction extends HookConsumerWidget {
                           SizedBox(
                             height: 44,
                             child: ElevatedButton(
+                              key: Keys.viewCart,
                               onPressed: () {
                                 context.router.replaceAll(
                                   [

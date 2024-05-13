@@ -2,6 +2,7 @@ import 'package:codeblurb_mobile/generated/assets.gen.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -69,6 +70,7 @@ class CartButton extends HookConsumerWidget {
             } else {
               if (isItemInCart) {
                 return Assets.images.x.svg(
+                  key: Keys.cartRemove,
                   // ignore: deprecated_member_use_from_same_package
                   color: colors.foreground,
                   height: 24,
@@ -76,6 +78,7 @@ class CartButton extends HookConsumerWidget {
                 );
               } else {
                 return Assets.images.shoppingCart.svg(
+                  key: Keys.cartAdd,
                   // ignore: deprecated_member_use_from_same_package
                   color: colors.foreground,
                   height: 24,

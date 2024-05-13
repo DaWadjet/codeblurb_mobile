@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/register/register_provider.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:codeblurb_mobile/widgets/form_page_wrapper.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
@@ -61,7 +62,7 @@ class RegisterPage extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InputField(
-                key: const Key('input_username'),
+                key: Keys.register_usernameField,
                 controller: usernameController,
                 label: 'Username',
                 keyboardType: TextInputType.name,
@@ -74,7 +75,7 @@ class RegisterPage extends HookConsumerWidget {
               ),
               SizedBox(height: 16.h),
               InputField(
-                key: const Key('input_email'),
+                key: Keys.register_emailField,
                 controller: emailController,
                 label: 'Email Address',
                 keyboardType: TextInputType.emailAddress,
@@ -87,7 +88,7 @@ class RegisterPage extends HookConsumerWidget {
               ),
               SizedBox(height: 16.h),
               InputField(
-                key: const Key('input_password'),
+                key: Keys.register_passwordField,
                 controller: passwordController,
                 isSecureField: true,
                 label: 'Password',
@@ -100,7 +101,7 @@ class RegisterPage extends HookConsumerWidget {
               ),
               SizedBox(height: 16.h),
               InputField(
-                key: const Key('input_confirm_password'),
+                key: Keys.register_confirmPasswordField,
                 controller: confirmPasswordController,
                 isSecureField: true,
                 label: 'Confirm Password',
@@ -125,6 +126,7 @@ class RegisterPage extends HookConsumerWidget {
                     horizontal: 24,
                   ),
                   child: ElevatedButton(
+                    key: Keys.register_submit,
                     onPressed: onRegister,
                     child: state.isLoading
                         ? Loader(

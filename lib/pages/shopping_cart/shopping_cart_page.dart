@@ -3,6 +3,7 @@ import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_item.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/widgets/adaptive_pull_to_refresh.dart';
 import 'package:codeblurb_mobile/widgets/bottom_call_to_action.dart';
 import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
@@ -96,6 +97,7 @@ class ShoppingCartPage extends HookConsumerWidget {
                                 SizedBox(
                                   height: 44,
                                   child: ElevatedButton(
+                                    key: Keys.cartCheckout,
                                     onPressed: () {
                                       ref
                                           .read(toastNotifierProvider.notifier)

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,7 @@ class PlatformDialog<T> extends StatelessWidget {
             content: subtitle != null ? Text(subtitle!) : null,
             actions: [
               CupertinoDialogAction(
+                key: Keys.areYouSure_confirm,
                 onPressed: () {
                   final result = onTap?.call();
                   context.router.maybePop(result);
@@ -46,6 +48,7 @@ class PlatformDialog<T> extends StatelessWidget {
             content: subtitle != null ? Text(subtitle!) : null,
             actions: [
               TextButton(
+                key: Keys.areYouSure_confirm,
                 onPressed: () {
                   final result = onTap?.call();
                   context.router.maybePop(result);
