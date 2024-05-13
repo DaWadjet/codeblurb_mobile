@@ -24,148 +24,151 @@ class ProfilePage extends HookConsumerWidget {
       appBar: const CBAppBar(
         title: 'Profile',
       ),
-      body: SingleChildScrollView(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: profileQuery.when(
-            loading: FullPageLoader.new,
-            data: (data) => Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                key: const ValueKey('loaded'),
-                children: [
-                  SizedBox(height: topPadding),
-                  CircleAvatar(
-                    radius: 64,
-                    backgroundColor: colors.mutedForeground.withOpacity(0.2),
-                    child: Text(
-                      getMonogram(data.username),
+      body: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: profileQuery.when(
+              loading: FullPageLoader.new,
+              data: (data) => Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  key: const ValueKey('loaded'),
+                  children: [
+                    SizedBox(height: topPadding),
+                    CircleAvatar(
+                      radius: 64,
+                      backgroundColor: colors.mutedForeground.withOpacity(0.2),
+                      child: Text(
+                        getMonogram(data.username),
+                        style: TextStyle(
+                          color: colors.foreground,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      data.username,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: colors.foreground,
-                        fontSize: 32,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    data.username,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: colors.foreground,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Divider(),
-                  const SizedBox(height: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Email',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        data.email,
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Registered at',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        context.formatDate(
-                          data.registeredAt,
-                        ),
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  const Divider(),
-                  TextButton(
-                    onPressed: () {
-                      context.pushRoute(ChangePasswordRoute());
-                    },
-                    child: Row(
+                    const SizedBox(height: 16),
+                    const Divider(),
+                    const SizedBox(height: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Change Password',
+                          'Email',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const Spacer(),
-                        RotatedBox(
-                          quarterTurns: -1,
-                          child: Assets.images.chevronDown.svg(
-                            width: 24,
-                            height: 24,
-                            // ignore: deprecated_member_use_from_same_package
-                            color: colors.foreground,
+                        const SizedBox(width: 8),
+                        Text(
+                          data.email,
+                          style: const TextStyle(
+                            fontSize: 16,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  Column(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          ref.read(profileNotifierProvider.notifier).logout();
-                        },
-                        child: const Text(
-                          'Logout',
+                    const SizedBox(height: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Registered at',
                           style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          ref
-                              .read(profileNotifierProvider.notifier)
-                              .forceLogout();
-                        },
-                        child: Text(
-                          'Logout from all devices',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: colors.destructive,
+                        const SizedBox(width: 8),
+                        Text(
+                          context.formatDate(
+                            data.registeredAt,
+                          ),
+                          style: const TextStyle(
+                            fontSize: 16,
                           ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const Divider(),
+                    TextButton(
+                      onPressed: () {
+                        context.pushRoute(ChangePasswordRoute());
+                      },
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Change Password',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const Spacer(),
+                          RotatedBox(
+                            quarterTurns: -1,
+                            child: Assets.images.chevronDown.svg(
+                              width: 24,
+                              height: 24,
+                              // ignore: deprecated_member_use_from_same_package
+                              color: colors.foreground,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 40),
+                    Column(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            ref.read(profileNotifierProvider.notifier).logout();
+                          },
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            ref
+                                .read(profileNotifierProvider.notifier)
+                                .forceLogout();
+                          },
+                          child: Text(
+                            'Logout from all devices',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: colors.destructive,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
+              error: FullPageError.new,
             ),
-            error: FullPageError.new,
           ),
         ),
       ),
