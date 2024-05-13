@@ -1,5 +1,6 @@
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/providers.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/theme/app_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,7 @@ class _Toaster extends HookConsumerWidget {
       if (next.isEmpty) return;
       fToast.showToast(
         child: Container(
+          key: Keys.toast,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),

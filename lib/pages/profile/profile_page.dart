@@ -5,6 +5,7 @@ import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/profile/profile_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/widgets/cb_app_bar.dart';
 import 'package:codeblurb_mobile/widgets/full_page_message.dart';
 import 'package:flutter/material.dart';
@@ -136,6 +137,7 @@ class ProfilePage extends HookConsumerWidget {
                     Column(
                       children: [
                         TextButton(
+                          key: Keys.profile_logout,
                           onPressed: () {
                             ref.read(profileNotifierProvider.notifier).logout();
                           },

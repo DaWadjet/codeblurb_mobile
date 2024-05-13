@@ -7,6 +7,7 @@ import 'package:codeblurb_mobile/network/firebase_api.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -54,6 +55,7 @@ class TabsPage extends HookConsumerWidget {
             onTap: tabsRouter.setActiveIndex,
             items: [
               BottomNavigationBarItem(
+                key: Keys.tab_home,
                 label: 'Home',
                 icon: Padding(
                   padding: const EdgeInsets.only(top: 6),
@@ -65,6 +67,7 @@ class TabsPage extends HookConsumerWidget {
                 ),
               ),
               BottomNavigationBarItem(
+                key: Keys.tab_myCourses,
                 label: 'My Courses',
                 icon: Padding(
                   padding: const EdgeInsets.only(top: 6),
@@ -76,6 +79,7 @@ class TabsPage extends HookConsumerWidget {
                 ),
               ),
               BottomNavigationBarItem(
+                key: Keys.tab_cart,
                 label: 'Cart',
                 icon: Stack(
                   clipBehavior: Clip.none,
@@ -94,6 +98,7 @@ class TabsPage extends HookConsumerWidget {
                               return const SizedBox();
                             }
                             return Positioned(
+                              key: Keys.cartItemsCountBadge,
                               right: -8,
                               top: -4,
                               child: Container(
@@ -129,6 +134,7 @@ class TabsPage extends HookConsumerWidget {
                 ),
               ),
               BottomNavigationBarItem(
+                key: Keys.tab_profile,
                 label: 'Profile',
                 icon: Padding(
                   padding: const EdgeInsets.only(top: 6),

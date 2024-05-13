@@ -27,9 +27,9 @@ class RegisterNotifier extends _$RegisterNotifier {
           );
       ref.read(isLoggedInProvider.notifier).setLoggedIn(value: true);
       unawaited(ref.read(routerProvider).replaceAll([const LoggedInRoute()]));
-
       state = const AsyncData(false);
     } catch (e, stackTrace) {
+      ref.read(toastNotifierProvider.notifier).showToast('Registration failed');
       state = AsyncError(e, stackTrace);
     }
   }
