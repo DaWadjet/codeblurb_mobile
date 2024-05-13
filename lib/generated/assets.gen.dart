@@ -39,6 +39,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/code.svg
   SvgGenImage get code => const SvgGenImage('assets/images/code.svg');
 
+  /// File path: assets/images/complete.svg
+  SvgGenImage get complete => const SvgGenImage('assets/images/complete.svg');
+
   /// File path: assets/images/exercise.svg
   SvgGenImage get exercise => const SvgGenImage('assets/images/exercise.svg');
 
@@ -132,6 +135,7 @@ class $AssetsImagesGen {
         circleCheck,
         circleX,
         code,
+        complete,
         exercise,
         eye,
         eyeoff,
