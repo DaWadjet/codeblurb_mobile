@@ -24,11 +24,14 @@ Future<void> main() async {
     EasyLocalization.ensureInitialized(),
     _initFirebase(DefaultFirebaseOptions.currentPlatform),
   ]);
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  if (!kDebugMode) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
+
   final remoteConfig = FirebaseRemoteConfig.instance;
   runApp(
     ProviderScope(

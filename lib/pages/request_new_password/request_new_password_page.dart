@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/pages/request_new_password/request_new_password_provider.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:codeblurb_mobile/widgets/form_page_wrapper.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
@@ -66,7 +67,7 @@ class RequestNewPasswordPage extends HookConsumerWidget {
                 ),
                 SizedBox(height: 16.h),
                 InputField(
-                  key: const Key('input_username'),
+                  key: Keys.requestPassword_input,
                   controller: usernameController,
                   hint: 'Username',
                   keyboardType: TextInputType.name,
@@ -89,6 +90,7 @@ class RequestNewPasswordPage extends HookConsumerWidget {
                       horizontal: 24,
                     ),
                     child: ElevatedButton(
+                      key: Keys.requestPassword_submit,
                       onPressed: onSendRequest,
                       child: state.isLoading
                           ? const Loader(

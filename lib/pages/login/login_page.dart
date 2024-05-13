@@ -3,6 +3,7 @@ import 'package:codeblurb_mobile/extensions/build_context_extensions.dart';
 import 'package:codeblurb_mobile/hooks/use_colors.dart';
 import 'package:codeblurb_mobile/pages/login/login_provider.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/utils/validators.dart';
 import 'package:codeblurb_mobile/widgets/form_page_wrapper.dart';
 import 'package:codeblurb_mobile/widgets/input_field.dart';
@@ -72,7 +73,7 @@ class LoginPage extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InputField(
-                      key: const Key('input_username'),
+                      key: Keys.login_usernameField,
                       controller: usernameController,
                       label: 'Username',
                       keyboardType: TextInputType.name,
@@ -85,7 +86,7 @@ class LoginPage extends HookConsumerWidget {
                     ),
                     SizedBox(height: 16.h),
                     InputField(
-                      key: const Key('input_password'),
+                      key: Keys.login_passwordField,
                       controller: passwordController,
                       isSecureField: true,
                       label: 'Password',
@@ -109,6 +110,7 @@ class LoginPage extends HookConsumerWidget {
                       horizontal: 24,
                     ),
                     child: ElevatedButton(
+                      key: Keys.login_submit,
                       onPressed: onLogin,
                       child: state.isLoading
                           ? Loader(
@@ -134,6 +136,7 @@ class LoginPage extends HookConsumerWidget {
                       horizontal: 24,
                     ),
                     child: OutlinedButton(
+                      key: Keys.login_signUp,
                       child: Text(
                         "Don't have an account?",
                         style: TextStyle(
@@ -147,6 +150,7 @@ class LoginPage extends HookConsumerWidget {
                 ),
                 SizedBox(height: 8.h),
                 TextButton(
+                  key: Keys.login_forgotPassword,
                   onPressed: () =>
                       context.router.push(RequestNewPasswordRoute()),
                   child: Text(

@@ -5,6 +5,7 @@ import 'package:codeblurb_mobile/network/models/shopping_item_response.dart';
 import 'package:codeblurb_mobile/pages/shopping_cart/shopping_cart_provider.dart';
 import 'package:codeblurb_mobile/providers.dart';
 import 'package:codeblurb_mobile/routes/app_router.dart';
+import 'package:codeblurb_mobile/test/keys.dart';
 import 'package:codeblurb_mobile/widgets/brief_info.dart';
 import 'package:codeblurb_mobile/widgets/course_image.dart';
 import 'package:codeblurb_mobile/widgets/loader.dart';
@@ -106,6 +107,7 @@ class ShoppingCartItem extends HookConsumerWidget {
                   orElse: () => const SizedBox.shrink(),
                   data: (data) {
                     return IconButton(
+                      key: Keys.cartRemove,
                       icon: data == item.id
                           ? const Loader()
                           : Assets.images.x.svg(
